@@ -88,6 +88,23 @@
         flex-wrap: wrap;
         justify-content: flex-end;
       }
+      .menu-btn {
+        display: none;
+        width: 44px;
+        height: 44px;
+        border-radius: 14px;
+        border: 1px solid rgba(255, 91, 91, 0.18);
+        background: var(--panel);
+        color: var(--text);
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        position: relative;
+        z-index: 45;
+      }
+      .menu-btn svg {
+        flex-shrink: 0;
+      }
       .discord-btn {
         display: inline-flex;
         align-items: center;
@@ -888,16 +905,16 @@
         display: grid;
         grid-template-columns: 1fr 56px;
         gap: 10px;
-        align-items: end;
+        align-items: center;
       }
       .champ-row.tight {
         max-width: 370px;
-        margin-top: -18px;
       }
       .champ-row.tier-only {
         max-width: 220px;
         grid-template-columns: 1fr;
-        align-items: end;
+        align-items: center;
+        margin-top: 4px;
       }
       .champ-preview {
         width: 56px;
@@ -1050,6 +1067,122 @@
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
+      }
+      .mobile-drawer {
+        position: fixed;
+        inset: 0;
+        z-index: 40;
+        display: none;
+        background: rgba(4, 5, 8, 0.72);
+        backdrop-filter: blur(8px);
+      }
+      .mobile-drawer.open {
+        display: block;
+      }
+      .mobile-sheet {
+        position: absolute;
+        top: 14px;
+        right: 14px;
+        left: 14px;
+        padding: 16px;
+        border-radius: 22px;
+        background: linear-gradient(180deg, #11131a, #0d1018);
+        border: 1px solid rgba(255, 91, 91, 0.14);
+        box-shadow: 0 18px 50px rgba(0, 0, 0, 0.45);
+      }
+      .mobile-sheet-top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        margin-bottom: 14px;
+      }
+      .mobile-sheet-title {
+        font-size: 12px;
+        color: #ff8a8a;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        font-weight: 900;
+      }
+      .mobile-close {
+        width: 38px;
+        height: 38px;
+        border-radius: 12px;
+        border: 1px solid var(--line);
+        background: var(--panel2);
+        color: var(--text);
+        cursor: pointer;
+      }
+      .mobile-profile {
+        display: none;
+        align-items: center;
+        gap: 12px;
+        padding: 12px;
+        border-radius: 18px;
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        margin-bottom: 14px;
+      }
+      .mobile-profile.show {
+        display: flex;
+      }
+      .mobile-profile img {
+        width: 50px;
+        height: 50px;
+        object-fit: contain;
+        filter: drop-shadow(0 2px 10px rgba(255, 77, 77, 0.3));
+      }
+      .mobile-profile strong {
+        display: block;
+        font-size: 18px;
+      }
+      .mobile-profile span {
+        display: block;
+        margin-top: 2px;
+        color: var(--muted);
+        font-size: 12px;
+      }
+      .mobile-drawer-links {
+        display: grid;
+        gap: 10px;
+      }
+      .mobile-drawer-links button,
+      .mobile-drawer-links a {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 14px;
+        border-radius: 16px;
+        text-decoration: none;
+        font-weight: 900;
+        font-size: 14px;
+      }
+      .mobile-drawer-links a {
+        background: linear-gradient(135deg, rgba(143, 16, 24, 0.92), rgba(255, 77, 77, 0.88));
+        color: #fff;
+        border: 1px solid rgba(255, 91, 91, 0.22);
+      }
+      .mobile-nav-btn {
+        background: var(--panel2);
+        color: var(--text);
+        border: 1px solid var(--line);
+        cursor: pointer;
+      }
+      .mobile-nav-btn.active {
+        background: rgba(255, 91, 91, 0.1);
+        border-color: rgba(255, 91, 91, 0.28);
+        color: #ff9d9d;
+      }
+      .mobile-logout {
+        display: none;
+        margin-top: 12px;
+        width: 100%;
+      }
+      .mobile-logout.show {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
       }
       .toast {
         position: fixed;
@@ -1248,26 +1381,46 @@
         }
       }
       @media (max-width: 640px) {
-        .navIn {
-          display: flex;
-          gap: 8px;
-          overflow-x: auto;
-          overflow-y: hidden;
-          padding: 8px 10px calc(10px + env(safe-area-inset-bottom));
-          scrollbar-width: none;
-          -ms-overflow-style: none;
+        body {
+          padding-bottom: 16px;
         }
-        .navIn::-webkit-scrollbar {
+        .header {
+          position: sticky;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          min-height: 76px;
+          padding: 14px 72px 14px 16px;
+        }
+        .brand {
+          min-width: 0;
+          justify-content: center;
+          align-items: center;
+          text-align: center;
+        }
+        .brand-logo {
+          width: 42px;
+          height: 42px;
+          border-radius: 12px;
+        }
+        .brand b {
+          font-size: 13px;
+          line-height: 1.3;
+          letter-spacing: 0.05em;
+        }
+        .header-actions {
           display: none;
         }
-        .nav button {
-          min-width: 82px;
-          flex: 0 0 auto;
-          padding: 10px 8px;
+        .menu-btn {
+          display: inline-flex;
+          position: absolute;
+          right: 16px;
+          top: 50%;
+          transform: translateY(-50%);
+          flex-shrink: 0;
         }
-        .nav span {
-          font-size: 9px;
-          letter-spacing: 0.06em;
+        .nav {
+          display: none;
         }
       }
     </style>
@@ -1283,10 +1436,17 @@
           />
           <div><b>🩸 • SUƤRƐMO SƐRVƐR • 🩸</b><span></span></div>
         </div>
+        <button type="button" class="menu-btn" onclick="toggleMobileMenu(true)" aria-label="Abrir menu" aria-expanded="false">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
+            <line x1="4" y1="7" x2="20" y2="7"></line>
+            <line x1="4" y1="12" x2="20" y2="12"></line>
+            <line x1="4" y1="17" x2="20" y2="17"></line>
+          </svg>
+        </button>
         <div class="header-actions">
           <a
             class="discord-btn"
-            href="https://discord.gg/3YThSbf7eD"
+            href="https://discord.gg/4EQcZPXcNh"
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -1349,6 +1509,29 @@
           </button>
           <button data-tab="matchups"><b>⌘</b><span>Matchups</span></button>
           <button data-tab="tips"><b>✎</b><span>Tips</span></button>
+        </div>
+      </div>
+      <div class="mobile-drawer" id="mobileDrawer" onclick="closeMobileMenu(event)">
+        <div class="mobile-sheet" onclick="event.stopPropagation()">
+          <div class="mobile-sheet-top">
+            <div class="mobile-sheet-title">Menu</div>
+            <button type="button" class="mobile-close" onclick="toggleMobileMenu(false)" aria-label="Cerrar menu">✕</button>
+          </div>
+          <div class="mobile-profile" id="mobileProfile"></div>
+          <div class="mobile-drawer-links">
+            <a href="https://discord.gg/4EQcZPXcNh" target="_blank" rel="noopener noreferrer">
+              <span>◉</span><span>Discord</span>
+            </a>
+            <button class="mobile-nav-btn" data-mobile-tab="inicio"><span>⌂</span><span>Inicio</span></button>
+            <button class="mobile-nav-btn" data-mobile-tab="partida"><span>✦</span><span>Partida</span></button>
+            <button class="mobile-nav-btn" data-mobile-tab="importar"><span>◈</span><span>Cuenta</span></button>
+            <button class="mobile-nav-btn" data-mobile-tab="historial"><span>☰</span><span>Rendimiento</span></button>
+            <button class="mobile-nav-btn" data-mobile-tab="matchups"><span>⌘</span><span>Matchups</span></button>
+            <button class="mobile-nav-btn" data-mobile-tab="tips"><span>✎</span><span>Tips</span></button>
+          </div>
+          <button class="danger mobile-logout" id="mobileLogoutBtn" onclick="logoutProfile()">
+            Cerrar sesion
+          </button>
         </div>
       </div>
       <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
@@ -2125,6 +2308,7 @@
         document
           .querySelector('[data-tab="historial"]')
           ?.classList.toggle('hidden', !active)
+        syncMobileMenu()
       }
       function renderTips() {
         return `<div class="card"><div class="title"><h2>Tips</h2><span>Macro, draft y mentalidad</span></div><div class="tips-wrap">${TIPS.map((phase) => `<div class="tip-phase"><div class="tip-head"><h3>${phase.phase}</h3><div class="tip-count">${phase.items.length} tips</div></div><div class="tip-list">${phase.items.map(([concept, rule, moment]) => `<div class="tip-item"><div class="tip-top"><span class="tag rank">${moment}</span><strong>${concept}</strong></div><div class="tip-copy">${rule}</div></div>`).join('')}</div></div>`).join('')}</div></div>`
@@ -2222,6 +2406,7 @@
             : 'none'
         if ($('accountRankPreview'))
           $('accountRankPreview').src = rankImg(data.profile.rank)
+        syncMobileMenu()
       }
       function renderDashboard() {
         if (!hasActiveProfile()) {
@@ -2324,6 +2509,7 @@
         renderHistory()
         renderAccounts()
         switchTab('inicio')
+        toggleMobileMenu(false)
         toast('Sesión cerrada')
       }
       function openOpgg(id) {
@@ -3121,9 +3307,51 @@
         document
           .querySelectorAll('.nav button')
           .forEach((b) => b.classList.toggle('active', b.dataset.tab === tab))
+        document
+          .querySelectorAll('.mobile-nav-btn')
+          .forEach((b) =>
+            b.classList.toggle('active', b.dataset.mobileTab === tab)
+          )
+        toggleMobileMenu(false)
         if (tab === 'historial') renderHistory()
         if (tab === 'importar') renderImported()
         if (tab === 'matchups') renderMatchups()
+      }
+      function toggleMobileMenu(force) {
+        const drawer = $('mobileDrawer')
+        const trigger = document.querySelector('.menu-btn')
+        if (!drawer) return
+        const next =
+          typeof force === 'boolean'
+            ? force
+            : !drawer.classList.contains('open')
+        drawer.classList.toggle('open', next)
+        if (trigger) trigger.setAttribute('aria-expanded', next ? 'true' : 'false')
+      }
+      function closeMobileMenu(event) {
+        if (event?.target?.id === 'mobileDrawer') toggleMobileMenu(false)
+      }
+      function syncMobileMenu() {
+        const profileBox = $('mobileProfile')
+        const logoutBtn = $('mobileLogoutBtn')
+        if (profileBox) {
+          if (hasActiveProfile()) {
+            profileBox.classList.add('show')
+            profileBox.innerHTML = `<img src="${rankImg(data.profile.rank)}" alt=""><div><strong>${data.profile.gameName}#${data.profile.tagLine}</strong><span>${RANK_LABEL[data.profile.rank]}</span></div>`
+          } else {
+            profileBox.classList.remove('show')
+            profileBox.innerHTML = ''
+          }
+        }
+        if (logoutBtn)
+          logoutBtn.classList.toggle('show', hasActiveProfile())
+        document.querySelectorAll('.mobile-nav-btn').forEach((btn) => {
+          const blocked =
+            !hasActiveProfile() &&
+            (btn.dataset.mobileTab === 'partida' ||
+              btn.dataset.mobileTab === 'historial')
+          btn.style.display = blocked ? 'none' : 'flex'
+        })
       }
       function init() {
         load()
@@ -3141,6 +3369,10 @@
         document
           .querySelectorAll('.nav button')
           .forEach((b) => (b.onclick = () => switchTab(b.dataset.tab)))
+        document
+          .querySelectorAll('.mobile-nav-btn')
+          .forEach((b) => (b.onclick = () => switchTab(b.dataset.mobileTab)))
+        syncMobileMenu()
       }
       init()
     </script>
