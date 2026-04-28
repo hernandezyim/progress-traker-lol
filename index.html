@@ -1358,6 +1358,96 @@
       .account.active:hover {
         border-color: rgba(255, 91, 91, 0.65) !important;
       }
+      /* BOOL BOXES */
+      .bool-boxes {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(82px, 1fr));
+        gap: 6px;
+        margin-top: 8px;
+      }
+      .bool-box {
+        padding: 10px 6px;
+        border-radius: 10px;
+        text-align: center;
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        background: rgba(255, 255, 255, 0.03);
+      }
+      .bb-icon {
+        display: block;
+        font-size: 18px;
+        margin-bottom: 5px;
+      }
+      .bb-label {
+        display: block;
+        font-size: 10px;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.07em;
+        line-height: 1.3;
+      }
+      .bb-good {
+        background: rgba(74, 222, 128, 0.13);
+        border-color: rgba(74, 222, 128, 0.28);
+      }
+      .bb-good .bb-label {
+        color: #57f287;
+      }
+      .bb-bad {
+        background: rgba(248, 113, 113, 0.12);
+        border-color: rgba(248, 113, 113, 0.26);
+      }
+      .bb-bad .bb-label {
+        color: #ff5b5b;
+      }
+      /* STAT COLOR CELLS */
+      .stat-cells {
+        display: grid;
+        grid-template-columns: repeat(6, minmax(0, 1fr));
+        gap: 6px;
+        margin-top: 10px;
+      }
+      .stat-cell {
+        padding: 8px 4px;
+        border-radius: 10px;
+        text-align: center;
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        background: rgba(255, 255, 255, 0.03);
+      }
+      .sc-label {
+        display: block;
+        font-size: 9px;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: rgba(255, 255, 255, 0.4);
+        margin-bottom: 4px;
+      }
+      .sc-val {
+        display: block;
+        font-size: 17px;
+        font-weight: 900;
+        line-height: 1;
+      }
+      .sc-good {
+        background: rgba(74, 222, 128, 0.13);
+        border-color: rgba(74, 222, 128, 0.28);
+      }
+      .sc-good .sc-val {
+        color: #57f287;
+      }
+      .sc-mid {
+        background: rgba(255, 138, 76, 0.11);
+        border-color: rgba(255, 138, 76, 0.24);
+      }
+      .sc-mid .sc-val {
+        color: #ff8a4c;
+      }
+      .sc-bad {
+        background: rgba(248, 113, 113, 0.12);
+        border-color: rgba(248, 113, 113, 0.26);
+      }
+      .sc-bad .sc-val {
+        color: #ff5b5b;
+      }
       @media (max-width: 900px) {
         .g4,
         .g3,
@@ -1834,307 +1924,123 @@
         {
           phase: '1. Antes de Rankear',
           items: [
-            [
-              'Campeón',
-              'No probar campeones: ir a lo seguro siempre',
-              'Pre-partida',
-            ],
+            ['Campeón', 'No probar campeones — ir a lo seguro siempre', 'Pre-partida'],
             ['Rol', 'No cambiar de rol a último minuto', 'Pre-partida'],
-            [
-              'Mentalidad base',
-              'Juega como si todos fueran Challenger: sin autopilot, cada acción tiene propósito',
-              'Pre-partida',
-            ],
-            [
-              'Modo focus',
-              'Modo streamer: deja de ver rangos enemigos, foco total en lo propio',
-              'Pre-partida',
-            ],
+            ['Mentalidad base', 'Juega como si todos fueran Challenger — sin autopilot, cada acción tiene propósito', 'Pre-partida'],
+            ['Modo focus', 'Modo streamer: deja de ver rangos enemigos, foco total en lo propio', 'Pre-partida'],
           ],
         },
         {
           phase: '2. Draft',
           items: [
-            [
-              'Orden de picks',
-              'Usualmente: 1 JG -> 2 ADC -> 3 SUPP -> 4 MID -> 5 TOP',
-              'Draft',
-            ],
-            [
-              'Composición tanque',
-              'Si top no es tanque -> JG debe ser tanque; si JG no es tanque -> SUPP debe serlo',
-              'Draft',
-            ],
-            ['Daño mixto', 'Asegura daño dividido entre AP y AD', 'Draft'],
-            ['Hechizos', 'Si hay mucho CC -> ADC lleva Limpiar', 'Draft'],
-            [
-              'Flex picks',
-              'Si un champ puede ir 2-3 roles y encaja en la comp -> úsalo para confundir',
-              'Draft',
-            ],
+            ['Orden de picks', 'Usualmente: 1 JG → 2 ADC → 3 SUPP → 4 MID → 5 TOP (ajusta según lado y si el enemigo ya pickó)', 'Draft'],
+            ['Composición tanque', 'Si top no es tanque → JG debe ser tanque. Si JG no es tanque → SUPP debe serlo', 'Draft'],
+            ['Daño mixto', '¿Está el daño dividido entre AP y AD?', 'Draft'],
+            ['Hechizos', 'Si llevan mucho CC → ADC lleva Limpiar', 'Draft'],
+            ['Flex picks', 'Si un champ puede ir 2-3 roles y encaja en la comp → pickéalo para confundir', 'Draft'],
           ],
         },
         {
-          phase: '3. Pantalla de Carga',
+          phase: '3. Loading Screen',
           items: [
-            [
-              'Win conditions',
-              'Define WIN CONDITION aliada y enemiga',
-              'Loading',
-            ],
+            ['Win conditions', 'Definir WIN CONDITION aliada Y enemiga', 'Loading'],
             ['Escala', '¿Quién gana late? ¿Aceleramos o esperamos?', 'Loading'],
             ['Amenazas', '¿Quién puede borrar a nuestros carries?', 'Loading'],
-            [
-              'Prioridad de líneas',
-              '¿Qué líneas tienen prio? ¿Dónde habrá ganks o dives?',
-              'Loading',
-            ],
-            [
-              'Comp enemiga',
-              'Engage / Disengage / CC / Burst: identifica el patrón',
-              'Loading',
-            ],
-            [
-              'Plan de jungla',
-              '¿Invade o farmea? ¿Start? ¿Path? ¿Posición a 3:15?',
-              'Loading',
-            ],
+            ['Prioridad de líneas', '¿Qué líneas tienen prio? ¿Dónde habrá ganks o dives?', 'Loading'],
+            ['Comp enemiga', 'Engage / Disengage / CC / Burst — identificar el patrón', 'Loading'],
+            ['Plan de jungla', '¿El JG invade o farmea? ¿Start? ¿Path? ¿Posición a 3:15?', 'Loading'],
           ],
         },
         {
           phase: '4. Early Game',
           items: [
-            [
-              'Trackear JG enemigo',
-              'Wardear raptors y trackear desde nivel 1',
-              'Early',
-            ],
-            [
-              'Proteger que nos trackeen',
-              'Cubrir raptor y limpiar wards enemigas según lado del mapa',
-              'Early',
-            ],
-            [
-              'Minimapa',
-              'Mirar el mapa cada ~5 segundos sin excepción',
-              'Early',
-            ],
+            ['Trackear JG enemigo', 'Wardear raptors (usualmente el mid). Trackearlo desde lvl 1', 'Early'],
+            ['Proteger que nos trackeen', 'Mid/soporte cubren la zona de raptor para que no warden. Limpiar si wardean (depende del lado del mapa)', 'Early'],
+            ['Minimapa', 'Mirar el mapa cada ~5 segundos — sin excepción', 'Early'],
             ['Wards clave', 'Plantar wards a 2:50 / 5:00 / 8:00', 'Early'],
-            [
-              'Escarabajo del río',
-              'Ganando línea + JG va -> todos rotan; si vas perdiendo -> no pelear',
-              'Early',
-            ],
-            [
-              'Wave management',
-              'Freeze si vas ganando; slowpush antes de base o roam',
-              'Early',
-            ],
-            ['Trades', 'No morir por tradear; solo con ventaja real', 'Early'],
-            [
-              'Respetar spikes',
-              'Respeta nivel 6, primer item y summoners enemigos',
-              'Early',
-            ],
-            [
-              'Gankeo y vida aliada',
-              'Mira la vida de tus lanes antes de gankear',
-              'Early',
-            ],
+            ['Escarabajo del río', 'Ganando línea + JG va → TODOS rotan. Perdiendo → no pelear, JG va al otro cangrejo', 'Early'],
+            ['Wave management', 'Freeze si vas ganando (solo hasta min 6-7). Slowpush antes de base o roam', 'Early'],
+            ['Trades', 'No morir por tradear — solo con ventaja: números / visión / cooldowns listos', 'Early'],
+            ['Respetar spikes', 'Respetar nivel 6 / primer item / summoners enemigos', 'Early'],
+            ['Gankeo — vida aliada', 'Mirar la vida de tus lanes antes de gankear: ¿pueden darte cover o estás solo?', 'Early'],
           ],
         },
         {
           phase: '5. Mid Game',
           items: [
-            [
-              'Prio en medio',
-              'La torre más importante es medio: luego objetivos',
-              'Mid',
-            ],
-            [
-              'Soporte y base',
-              'Al salir de base, abre por medio antes de bajar/subir',
-              'Mid',
-            ],
-            [
-              'Forzar en medio',
-              'Si el rival está 2 en side, hay ventana para forzar 3v5',
-              'Mid',
-            ],
-            [
-              'Tempo tras kill',
-              'Kill -> acción inmediata antes de respuesta rival',
-              'Mid',
-            ],
-            [
-              'Tempo completo',
-              'Kill -> Push -> Base -> Spike antes que el rival',
-              'Mid',
-            ],
-            [
-              'Rotaciones',
-              'Torre top caída -> rotar, invadir o presionar mid',
-              'Mid',
-            ],
-            [
-              'Side play',
-              'Si no puedes responder una jugada -> haz otra al otro lado',
-              'Mid',
-            ],
-            [
-              'No pelear sin razón',
-              'Bailar / presionar / zonear > pelear porque sí',
-              'Mid',
-            ],
-            [
-              'TP / Splitpush',
-              'Solo si cambia algo importante y con visión/soporte del mapa',
-              'Mid',
-            ],
-            [
-              'Visión',
-              'Ofensiva si ganas, defensiva si pierdes, flancos antes de objetivos',
-              'Mid',
-            ],
-            [
-              'Dragones',
-              'Prioriza drags y entiende cuándo tradear objetivos',
-              'Mid',
-            ],
-            [
-              'Tomar medio',
-              'Si medio no cayó, usa Heraldo para abrir mapa',
-              'Mid',
-            ],
+            ['Prio en medio siempre', 'La torre más importante del juego. Antes de cualquier objetivo → prio mid. ADC la toma; si necesita ayuda va con JG/SUPP, luego se mueven al objetivo', 'Mid'],
+            ['Soporte no ir directo a bot', 'Siempre que el soporte salga de base tiene que abrir por medio, luego baja a bot o sube top según el objetivo cercano', 'Mid'],
+            ['Forzar en medio', 'Si hay 2 en sides → ventana de ~20s para forzar 3v5 en mid antes de que los sidelanes pushen', 'Mid'],
+            ['Tempo tras kill', 'Kill → acción inmediata de equipo antes de que el rival responda (push / obj / base)', 'Mid'],
+            ['Tempo completo', 'Kill → Push → Base → Spike antes que el rival', 'Mid'],
+            ['Rotaciones', 'Torre top caída → rotar / invadir / presionar mid inmediatamente', 'Mid'],
+            ['Side play', 'Si no podemos responder a una jugada → buscar otra play al otro lado del mapa', 'Mid'],
+            ['Side play defensiva', 'Si aliados hicieron una play en un lado → cuidado con respuesta enemiga alrededor tuyo', 'Mid'],
+            ['No pelear sin razón', 'Bailar / presionar / zonear > pelear porque sí', 'Mid'],
+            ['Sides — no dejarse iniciar', 'No dejar que nos inicien si estamos pusheando sides', 'Mid'],
+            ['TP', 'Solo si cambia algo importante. Flexible mid → usar casi siempre. Top → opcional', 'Mid'],
+            ['Splitpush', 'Solo si el equipo puede aguantar + hay visión + tienes TP. O si vamos perdiendo y no podemos 5v5', 'Mid'],
+            ['Visión ofensiva', 'Si vas ganando → pinks en zona enemiga para presionar', 'Mid'],
+            ['Visión defensiva', 'Si vas perdiendo → pinks para proteger la base', 'Mid'],
+            ['Ward post-escarabajo', 'Wardear JG enemiga luego del escarabajo para ver 2do pathing (paralelo vs contrario)', 'Mid'],
+            ['Wards flancos', 'Wardear flancos y entradas de jungla antes de cualquier objetivo', 'Mid'],
+            ['Fake check', 'Simular que entras al arbusto para detectar enemigos sin arriesgarte (tanque con soporte detrás)', 'Mid'],
+            ['Sweeper con intención', 'Sweepear con objetivo claro. Si el supp enemigo no tiene wards → descifrar dónde los puso', 'Mid'],
+            ['Dragones', 'Priorizar drags. Si bot pierde mucho → invadir JG para nivel, luego pedir ayuda al equipo para el 3er drag', 'Mid'],
+            ['Tradear objetivos', 'Saber cuándo un objetivo es mejor que otro — no jugar a tenerlo todo perfecto', 'Mid'],
+            ['Tomar mid con Heraldo', 'Si no está tumbada la torre de mid → usar el Heraldo para tumbarla y abrir el mapa', 'Mid'],
+            ['Luego del Barón', 'Esperar que los solo laners pushen antes de avanzar', 'Mid'],
           ],
         },
         {
           phase: '6. Teamfights',
           items: [
-            [
-              'Revisar CDs',
-              'Mira cooldowns propios y enemigos antes de entrar',
-              'TF',
-            ],
-            [
-              'No entrar sin alcance',
-              'No entres si tu equipo no puede acompañar daño',
-              'TF',
-            ],
-            ['Baitear CC', 'Haz gastar CC antes del engage real', 'TF'],
-            [
-              'Chaining CC',
-              'Encadena CC con aliados para máximo control',
-              'TF',
-            ],
-            ['No chasear', 'No persigas kills saliendo de la teamfight', 'TF'],
-            [
-              'Target focus',
-              'Prioriza el target correcto, no solo el más cercano',
-              'TF',
-            ],
-            [
-              'Posicionamiento',
-              'Backline atrás, engage desde flancos, itemiza según matchup',
-              'TF',
-            ],
-            ['Peel ADC', 'Protege al ADC si es la condición de daño', 'TF'],
-            [
-              'Jugar con el más fuerte',
-              'Teamplay alrededor del campeón más fed',
-              'TF',
-            ],
-            ['Marcar summoners', 'Registrar hechizos enemigos gastados', 'TF'],
-            ['Si nos van a acabar', 'Eliminar oleada para evitar cierre', 'TF'],
+            ['Revisar CDs antes', 'Mirar rápido CDs propios y enemigos antes de entrar', 'TF'],
+            ['No entrar sin alcance', 'No entrar si el equipo no tiene alcance para hacer daño o está zoneado', 'TF'],
+            ['Baitear CC', 'Baitear el CC enemigo antes de entrar con el engage real', 'TF'],
+            ['Chaining CC', 'Encadenar tu CC con el de aliados para máximo control', 'TF'],
+            ['No chasear en TF', 'No perseguir una kill saliendo de la TF — quedarse y ayudar al equipo', 'TF'],
+            ['Target focus', 'Priorizar el target correcto — no el más cercano', 'TF'],
+            ['Posicionamiento', 'Frágiles atrás. Engage desde flancos. Tenacidad / Cleanse / Stopwatch según matchup', 'TF'],
+            ['Peel ADC', 'Proteger al ADC con CC, escudos y posición. Dejarle las kills para que haga snowball', 'TF'],
+            ['Si no ganas frontline', 'Si no ganamos de frente → flanquear', 'TF'],
+            ['Jugar con el más fuerte', 'Teamplay alrededor del campeón más fed o con mayor impacto en este momento', 'TF'],
+            ['Marcar summoners', 'Marcar en el chat los hechizos enemigos gastados. SUPP los registra en el chat — obligatorio', 'TF'],
+            ['Si nos van a acabar', 'Eliminar la oleada para que no acaben la base', 'TF'],
+            ['Romper espíritu', 'Si el enemigo no se rinde y hay un carry enemigo → eliminarlo para cerrar el comeback', 'TF'],
           ],
         },
         {
           phase: '7. Late Game / Cierre',
           items: [
-            [
-              'Post-pelea',
-              'Ganar pelea -> push + objetivo. Cero tiempo muerto',
-              'Late',
-            ],
-            ['Barón regla', 'Con Barón no pelear en jungla enemiga', 'Late'],
-            [
-              'Barón tempo',
-              'Back luego de Barón para pushear con mismo tempo',
-              'Late',
-            ],
-            [
-              'Ventaja alta',
-              'Convierte kills en torres, dragones o Nashor',
-              'Late',
-            ],
-            [
-              'No suicidarse',
-              'No morir por objetivo menor salvo Barón, Alma o 3er drag',
-              'Late',
-            ],
-            [
-              'No regalar ventaja',
-              'Si vas ganando, no inventes plays arriesgadas',
-              'Late',
-            ],
-            ['Presión', 'Oro sin presión no gana partidas', 'Late'],
-            [
-              'Visión antes de obj',
-              'Negar visión enemiga antes de objetivo grande',
-              'Late',
-            ],
-            ['Cierre', 'Ganar pelea -> algo importante debe caer', 'Late'],
-            [
-              'Cazadas',
-              'Caza al enemigo fuera de posición antes del objetivo',
-              'Late',
-            ],
+            ['Post-pelea', 'Ganar pelea → push inmediato + tomar objetivo — cero tiempo muerto', 'Late'],
+            ['Barón — regla', 'Con Barón NO pelear en jungla enemiga', 'Late'],
+            ['Barón — tempo', 'Back luego de Barón para tener mismo tempo antes de pushear', 'Late'],
+            ['Ventaja alta', 'Convertir kills en objetivos: torres / dragones / Nashor — no en más kills', 'Late'],
+            ['No suicidarse por X', 'No morir por un objetivo menor. Excepción: Barón, 3er drag, Alma', 'Late'],
+            ['No regalar ventaja', 'Si vas ganando → no inventar plays arriesgadas innecesarias', 'Late'],
+            ['Oro sin presión = nada', 'El oro sin presión no gana partidas — siempre convertir a presión de mapa', 'Late'],
+            ['Mapa neutro = perdido', 'Mapa neutro equivale a ventaja perdida — siempre tener algo presionando', 'Late'],
+            ['Asfixia lenta', 'Ahogar lento es mejor que forzar — no dejar que el enemigo recupere gratis', 'Late'],
+            ['Visión antes de obj', 'Negar visión enemiga antes de cualquier objetivo grande', 'Late'],
+            ['Cierre', 'Ganar pelea → ALGO debe caer (torre / inhibidor / nexo)', 'Late'],
+            ['Si dudas', 'Si dudas → push + visión. Nunca avanzar sin visión', 'Late'],
+            ['Cazadas', 'Identificar cuándo el enemigo está fuera de posición → cazarlo antes del objetivo', 'Late'],
           ],
         },
         {
           phase: '8. Mentalidad Avanzada',
           items: [
-            [
-              'No seguir malas calls',
-              'Si la call es mala, no la ejecutes por presión social',
-              'Siempre',
-            ],
-            [
-              'Castiga errores',
-              'Castigar errores rival > inventar plays propias',
-              'Siempre',
-            ],
-            [
-              'Solución > problema',
-              'No te quedes en el error: busca salida',
-              'Siempre',
-            ],
-            [
-              'Revisión de items',
-              'Mira TAB con intención, no por inercia',
-              'Siempre',
-            ],
-            [
-              'Botas / Itemización',
-              'Compra según matchup y estado de partida',
-              'Siempre',
-            ],
-            [
-              'Engaño / finta',
-              'Fintea antes de ejecutar la jugada real',
-              'Siempre',
-            ],
-            [
-              'Presión 2v3',
-              'Forzar 2-3 enemigos sin morir también es victoria de mapa',
-              'Siempre',
-            ],
-            [
-              'Skip campamentos',
-              'Si faltan 40s para drag, ajusta ruta para llegar con tempo',
-              'Siempre',
-            ],
-            ['Liderazgo', 'Pingea, rota y marca el ritmo', 'Siempre'],
+            ['No seguir malas calls', 'Si la call es mala → no ejecutarla aunque el equipo presione', 'Siempre'],
+            ['Castiga errores', 'Castigar errores del rival > inventar plays propias', 'Siempre'],
+            ['Solución > problema', 'No centrarse en el problema → centrarse en la solución', 'Siempre'],
+            ['Revisión de items', 'Revisar TAB constantemente con intención — no por inercia', 'Siempre'],
+            ['Botas', 'Comprar botas según el matchup y la comp enemiga (no automático)', 'Siempre'],
+            ['Itemización', 'Ajustar build según comp y estado de la partida — no build estática', 'Siempre'],
+            ['Engaño / finta', 'Fintear al enemigo antes de ejecutar la jugada real', 'Siempre'],
+            ['Presión 2v3', 'Forzar 2-3 enemigos sin morir = victoria de mapa aunque no mates', 'Siempre'],
+            ['Skip campamentos', 'Skipear sapo/rocas si faltan ~40s para drag → lobos into raptors (o al revés) → drag', 'Siempre'],
+            ['Liderazgo', 'Pingea / rota / marca el ritmo — no esperes que el equipo lo haga', 'Siempre'],
           ],
         },
       ]
@@ -2909,6 +2815,36 @@
           ? moods.map(([l, v]) => bar(l, v, moods[0][1], 'blue')).join('')
           : '<div class="small">Sin moods registrados.</div>'
       }
+      function boolBox(icon, label, value, goodIsTrue) {
+        if (value === null || value === undefined) return ''
+        const isGood = goodIsTrue ? !!value : !value
+        return `<div class="bool-box ${isGood ? 'bb-good' : 'bb-bad'}"><span class="bb-icon">${icon}</span><span class="bb-label">${label}</span></div>`
+      }
+      function statGrade(type, v) {
+        v = Number(v) || 0
+        switch (type) {
+          case 'kills':
+            return v >= 7 ? 'good' : v >= 4 ? 'mid' : 'bad'
+          case 'deaths':
+            return v <= 3 ? 'good' : v <= 5 ? 'mid' : 'bad'
+          case 'assists':
+            return v >= 9 ? 'good' : v >= 4 ? 'mid' : 'bad'
+          case 'cs':
+            return v >= 7 ? 'good' : v >= 5 ? 'mid' : 'bad'
+          case 'wards':
+            return v >= 8 ? 'good' : v >= 5 ? 'mid' : 'bad'
+          case 'pinks':
+            return v >= 3 ? 'good' : v >= 2 ? 'mid' : 'bad'
+          default:
+            return 'mid'
+        }
+      }
+      function statCell(type, value, label) {
+        const g = statGrade(type, value)
+        const v = Number(value) || 0
+        const display = type === 'cs' ? v.toFixed(1) : v
+        return `<div class="stat-cell sc-${g}"><span class="sc-label">${label}</span><span class="sc-val">${display}</span></div>`
+      }
       function changeHistoryPage(next) {
         historyPage = next
         renderHistory()
@@ -2943,19 +2879,19 @@
           ? items
               .map(
                 (g) =>
-                  `<div class="game"><div class="gameTop"><div class="res ${g.result}">${g.result === 'win' ? 'Victoria' : 'Derrota'}</div><div><div style="display:flex;gap:10px;align-items:center"><div style="display:flex;align-items:center;gap:5px"><img class="champ-preview" src="${champImg(g.champ)}" alt="${g.champ}"><div class="vs-badge">VS</div><img class="champ-preview" src="${champImg(g.enemy)}" alt="${g.enemy}"></div><div><h4 style="font-size:12px;color:var(--muted);font-weight:700;letter-spacing:.08em;text-transform:uppercase">${ROLE_LABEL[g.role] || g.role}</h4><div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:4px"><span class="tag date">${g.date}</span><span class="tag ${g.result}">${g.result === 'win' ? 'Victoria' : 'Derrota'}</span><span class="tag role">${ROLE_LABEL[g.role] || g.role}</span><span class="tag rank">${RANK_LABEL[g.tier] || g.tier} ${g.division === '--' ? '' : g.division}</span>${lpTag(g.result, g.lp)}</div></div></div></div><div class="score">${g.kills}/${g.deaths}/${g.assists}<span>${g.csMin || 0} CS/min · ${fmtDur(g.durationSec || 0)}</span></div></div><div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,255,255,.05)">${g.moodStart || g.moodEnd ? `<span class="tag ${moodClass(g.moodStart)}">😐 Mood: ${g.moodStart || '—'} → ${g.moodEnd || '—'}</span>` : ''}<span class="tag metric">👁 Visión: ${g.wards || 0} wards · ${g.pinks || 0} pinks</span>${g.flow !== null && g.flow !== undefined ? `<span class="tag ${g.flow ? 'bool-yes' : 'bool-no'}">⚡ Flow: ${g.flow ? 'SÍ' : 'NO'}</span>` : ''} ${g.autopilot !== null && g.autopilot !== undefined ? `<span class="tag ${!g.autopilot ? 'bool-yes' : 'bool-no'}">🤖 Autopilot: ${g.autopilot ? 'SÍ' : 'NO'}</span>` : ''} ${g.map5 !== null && g.map5 !== undefined ? `<span class="tag ${g.map5 ? 'bool-yes' : 'bool-no'}">🗺 Mapa c/5s: ${g.map5 ? 'SÍ' : 'NO'}</span>` : ''} ${g.trackedJg !== null && g.trackedJg !== undefined ? `<span class="tag ${g.trackedJg ? 'bool-yes' : 'bool-no'}">🎯 Trackeó JG: ${g.trackedJg ? 'SÍ' : 'NO'}</span>` : ''}</div>${
+                  `<div class="game"><div class="gameTop"><div class="res ${g.result}">${g.result === 'win' ? 'Victoria' : 'Derrota'}</div><div><div style="display:flex;gap:10px;align-items:center"><div style="display:flex;align-items:center;gap:5px"><img class="champ-preview" src="${champImg(g.champ)}" alt="${g.champ}"><div class="vs-badge">VS</div><img class="champ-preview" src="${champImg(g.enemy)}" alt="${g.enemy}"></div><div><h4 style="font-size:12px;color:var(--muted);font-weight:700;letter-spacing:.08em;text-transform:uppercase">${ROLE_LABEL[g.role] || g.role}</h4><div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:4px"><span class="tag date">${g.date}</span><span class="tag rank">${RANK_LABEL[g.tier] || g.tier} ${g.division === '--' ? '' : g.division}</span>${lpTag(g.result, g.lp)}<span class="tag metric">${fmtDur(g.durationSec||0)}</span></div></div></div></div></div><div class="stat-cells">${statCell('kills', g.kills, 'Kills')}${statCell('deaths', g.deaths, 'Deaths')}${statCell('assists', g.assists, 'Assists')}${statCell('cs', g.csMin, 'CS/min')}${statCell('wards', g.wards, 'Wards')}${statCell('pinks', g.pinks, 'Pinks')}</div><div style="margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,255,255,.05)">${g.moodStart || g.moodEnd ? `<div style="display:grid;grid-template-columns:1fr auto 1fr;gap:6px;align-items:center;margin-bottom:8px"><div class="bool-box" style="text-align:center;padding:8px 6px"><span style="font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:.07em;color:rgba(255,255,255,.35);display:block;margin-bottom:4px">Inicio</span><span class="tag ${moodClass(g.moodStart)}" style="justify-content:center;display:inline-flex">😐 ${g.moodStart||'—'}</span></div><span style="font-size:14px;color:var(--muted);text-align:center">→</span><div class="bool-box" style="text-align:center;padding:8px 6px"><span style="font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:.07em;color:rgba(255,255,255,.35);display:block;margin-bottom:4px">Final</span><span class="tag ${moodClass(g.moodEnd)}" style="justify-content:center;display:inline-flex">${g.moodEnd||'—'}</span></div></div>` : ''}${(g.flow !== null && g.flow !== undefined) || (g.autopilot !== null && g.autopilot !== undefined) || (g.map5 !== null && g.map5 !== undefined) || (g.trackedJg !== null && g.trackedJg !== undefined) ? `<div class="bool-boxes">${boolBox('⚡', 'En Flow', g.flow, true)}${boolBox('🤖', 'Jugué en\nAutopilot', g.autopilot, false)}${boolBox('🗺', 'Revisé\nel Mapa', g.map5, true)}${boolBox('🎯', 'Trackeé\nal JG rival', g.trackedJg, true)}</div>` : ''}</div>${
                     (g.recurringErrors || []).filter(Boolean).length
-                      ? `<div style="margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,255,255,.05)"><div style="font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,91,91,.7);margin-bottom:6px">🔴 Errores</div><div style="display:flex;flex-wrap:wrap;gap:5px">${(
+                      ? `<div style="margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,255,255,.05)"><div style="font-size:10px;font-weight:900;letter-spacing:.12em;text-transform:uppercase;color:#ff5b5b;margin-bottom:7px">⚠ Errores detectados</div><div style="display:grid;gap:6px">${(
                           g.recurringErrors || []
                         )
                           .filter(Boolean)
                           .map(
                             (e) =>
-                              `<span style="padding:4px 10px;border-radius:999px;background:rgba(255,91,91,.1);border:1px solid rgba(255,91,91,.2);font-size:11px;color:#ff8f8f">${e}</span>`
+                              `<div style="font-size:12px;color:var(--text);padding:10px 13px;background:rgba(255,91,91,.08);border-radius:10px;border-left:3px solid rgba(255,91,91,.5);line-height:1.6;text-transform:uppercase;letter-spacing:.04em">${e}</div>`
                           )
                           .join('')}</div></div>`
                       : ''
-                  }${g.improve ? `<div style="margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,255,255,.05)"><div style="font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:6px">🎯 Ajuste para la próxima</div><div style="font-size:12px;color:var(--muted);padding:8px 12px;background:rgba(255,255,255,.03);border-radius:10px;border-left:2px solid rgba(255,91,91,.4);line-height:1.5">${g.improve}</div></div>` : ''}${g.comments ? `<div style="margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,255,255,.05)"><div style="font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:6px">💬 Comentarios</div><div style="font-size:12px;color:var(--muted);line-height:1.5">${g.comments}</div></div>` : ''}${g.coach ? `<div style="margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,255,255,.05)"><div style="font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:6px">📹 VOD / Coach</div><div style="font-size:12px;color:var(--blue);word-break:break-all">${g.coach}</div></div>` : ''}</div>`
+                  }${g.improve ? `<div style="margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,255,255,.05)"><div style="font-size:10px;font-weight:900;letter-spacing:.12em;text-transform:uppercase;color:#8ab4ff;margin-bottom:7px">→ Ajuste próxima sesión</div><div style="font-size:12px;color:var(--text);padding:10px 13px;background:rgba(138,180,255,.06);border-radius:10px;border-left:3px solid rgba(138,180,255,.4);line-height:1.6;text-transform:uppercase;letter-spacing:.04em">${g.improve}</div></div>` : ''}${g.comments ? `<div style="margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,255,255,.05)"><div style="font-size:10px;font-weight:900;letter-spacing:.12em;text-transform:uppercase;color:#ff8a4c;margin-bottom:7px">💬 Comentarios</div><div style="font-size:12px;color:var(--text);padding:10px 13px;background:rgba(255,138,76,.07);border-radius:10px;border-left:3px solid rgba(255,138,76,.45);line-height:1.6;text-transform:uppercase;letter-spacing:.04em">${g.comments}</div></div>` : ''}${g.coach ? `<div style="margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,255,255,.05)"><div style="font-size:10px;font-weight:900;letter-spacing:.12em;text-transform:uppercase;color:#a78bfa;margin-bottom:7px">📹 VOD / Coach</div><div style="font-size:13px;color:var(--text);padding:10px 13px;background:rgba(167,139,250,.07);border-radius:10px;border-left:3px solid rgba(167,139,250,.4);line-height:1.6;word-break:break-all">${g.coach}</div></div>` : ''}</div>`
               )
               .join('')
           : ''
