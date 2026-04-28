@@ -892,10 +892,12 @@
       }
       .champ-row.tight {
         max-width: 370px;
+        margin-top: -18px;
       }
       .champ-row.tier-only {
         max-width: 220px;
         grid-template-columns: 1fr;
+        align-items: end;
       }
       .champ-preview {
         width: 56px;
@@ -1150,6 +1152,9 @@
         align-self: start;
         padding-bottom: 0;
       }
+      #gDivisionWrap select {
+        margin-top: 4px;
+      }
       /* ACCOUNT SWITCHER SELECT */
       .acc-switch {
         appearance: none;
@@ -1240,6 +1245,29 @@
         .metaGrid,
         .toggles {
           grid-template-columns: 1fr;
+        }
+      }
+      @media (max-width: 640px) {
+        .navIn {
+          display: flex;
+          gap: 8px;
+          overflow-x: auto;
+          overflow-y: hidden;
+          padding: 8px 10px calc(10px + env(safe-area-inset-bottom));
+          scrollbar-width: none;
+          -ms-overflow-style: none;
+        }
+        .navIn::-webkit-scrollbar {
+          display: none;
+        }
+        .nav button {
+          min-width: 82px;
+          flex: 0 0 auto;
+          padding: 10px 8px;
+        }
+        .nav span {
+          font-size: 9px;
+          letter-spacing: 0.06em;
         }
       }
     </style>
