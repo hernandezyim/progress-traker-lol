@@ -1041,8 +1041,8 @@
         margin: 0 auto;
         padding: 8px 10px calc(8px + env(safe-area-inset-bottom));
         display: grid;
-        grid-template-columns: repeat(6, minmax(0, 1fr));
-        gap: 6px;
+        grid-template-columns: repeat(7, minmax(0, 1fr));
+        gap: 4px;
       }
       .nav button {
         background: transparent;
@@ -1399,6 +1399,137 @@
       .bb-bad .bb-label {
         color: #ff5b5b;
       }
+      /* GUIDE CARDS */
+      .guide-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+      }
+      .guide-card {
+        background: var(--panel2);
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        overflow: hidden;
+        position: relative;
+        transition: border-color 0.18s;
+      }
+      .guide-card:hover {
+        border-color: rgba(255, 91, 91, 0.3);
+      }
+      .guide-thumb-wrap {
+        position: relative;
+        aspect-ratio: 16 / 9;
+        background: #08080a;
+        overflow: hidden;
+      }
+      .guide-thumb-wrap img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+      .guide-play-btn {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(0, 0, 0, 0.42);
+        opacity: 0;
+        transition: opacity 0.18s;
+        text-decoration: none;
+        color: #fff;
+        font-size: 38px;
+      }
+      .guide-card:hover .guide-play-btn {
+        opacity: 1;
+      }
+      .guide-no-thumb {
+        aspect-ratio: 16 / 9;
+        background: linear-gradient(
+          135deg,
+          rgba(255, 91, 91, 0.07),
+          rgba(143, 16, 24, 0.1)
+        );
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 30px;
+        text-decoration: none;
+      }
+      .guide-del-btn {
+        position: absolute;
+        top: 8px;
+        right: 8px;
+        width: 26px;
+        height: 26px;
+        border-radius: 50%;
+        background: rgba(0, 0, 0, 0.65);
+        border: none;
+        color: #fff;
+        font-size: 12px;
+        cursor: pointer;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        z-index: 2;
+        backdrop-filter: blur(4px);
+      }
+      .guide-card:hover .guide-del-btn {
+        display: flex;
+      }
+      .guide-body {
+        padding: 10px 12px 12px;
+      }
+      .guide-body-top {
+        display: flex;
+        justify-content: space-between;
+        gap: 8px;
+        align-items: flex-start;
+        margin-bottom: 5px;
+      }
+      .guide-title {
+        font-size: 13px;
+        font-weight: 700;
+        line-height: 1.4;
+        color: var(--text);
+        flex: 1;
+      }
+      .guide-cat-badge {
+        font-size: 9px;
+        font-weight: 900;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        padding: 3px 8px;
+        border-radius: 999px;
+        white-space: nowrap;
+        flex-shrink: 0;
+      }
+      .guide-notes {
+        font-size: 11px;
+        color: var(--muted);
+        line-height: 1.45;
+        margin-top: 5px;
+      }
+      .guide-url-preview {
+        border-radius: 12px;
+        overflow: hidden;
+        display: none;
+        margin-top: 8px;
+        max-width: 320px;
+      }
+      .guide-url-preview.show {
+        display: block;
+      }
+      .guide-url-preview img {
+        width: 100%;
+        display: block;
+      }
+      @media (max-width: 640px) {
+        .guide-grid {
+          grid-template-columns: 1fr;
+        }
+      }
       /* STAT COLOR CELLS */
       .stat-cells {
         display: grid;
@@ -1604,6 +1735,7 @@
       <section id="tab-historial" class="hidden"></section>
       <section id="tab-matchups" class="hidden"></section>
       <section id="tab-tips" class="hidden"></section>
+      <section id="tab-guias" class="hidden"></section>
 
       <div class="nav">
         <div class="navIn">
@@ -1617,6 +1749,7 @@
           </button>
           <button data-tab="matchups"><b>⌘</b><span>Matchups</span></button>
           <button data-tab="tips"><b>✎</b><span>Tips</span></button>
+          <button data-tab="guias"><b>▶</b><span>Guías</span></button>
         </div>
       </div>
       <div
@@ -1673,6 +1806,9 @@
             </button>
             <button class="mobile-nav-btn" data-mobile-tab="tips">
               <span>✎</span><span>Tips</span>
+            </button>
+            <button class="mobile-nav-btn" data-mobile-tab="guias">
+              <span>▶</span><span>Guías</span>
             </button>
           </div>
           <button
@@ -1732,6 +1868,15 @@
         'JP',
         'TR',
         'RU',
+      ]
+      const GUIDE_CATEGORIES = [
+        { key: 'general', label: 'Conceptos Generales', color: '#8ab4ff' },
+        { key: 'recursos', label: 'Recursos', color: '#a78bfa' },
+        { key: 'top', label: 'Top', color: '#c3b6ff' },
+        { key: 'jg', label: 'Jungla', color: '#57f287' },
+        { key: 'mid', label: 'Mid', color: '#8ab4ff' },
+        { key: 'adc', label: 'ADC', color: '#ffc098' },
+        { key: 'supp', label: 'Support', color: '#ffb3d6' },
       ]
       const MOODS = [
         'Normal',
@@ -2185,6 +2330,7 @@
         matchupSheets: [],
         activeMatchupId: '',
         matchupFilters: { query: '', lane: 'all', diff: 'all' },
+        guides: [],
       }
       let form = {
         result: null,
@@ -2193,6 +2339,46 @@
         pendingRecurringErrors: [],
       }
       let historyPage = 1
+      let guideFilter = 'all'
+      let guidePage = 1
+      const PREDEFINED_GUIDES = [
+        { id: 1001, url: 'https://www.youtube.com/watch?v=VUBUhBMzjvw', title: 'Motivacion LOL (League Of Legends)', category: 'general', notes: '' },
+        { id: 1002, url: 'https://www.youtube.com/watch?v=Aj-sN4F4Jz4', title: '✅ Descúbre tu ROL IDEAL de League of Legends 2025', category: 'general', notes: '' },
+        { id: 1003, url: 'https://www.youtube.com/watch?v=ZVluth1bzUs', title: '🚀 ¿Qué Hice YO para APRENDER a JUGAR? ► Cómo JUGAR LOL S11', category: 'general', notes: '' },
+        { id: 1004, url: 'https://www.youtube.com/watch?v=40OI6o48aTk', title: '🧠 NO SABES Jugar Bien a League of Legends ► Cómo JUGAR LOL S11', category: 'general', notes: '' },
+        { id: 1005, url: 'https://www.youtube.com/watch?v=PSnu7vBhYfU', title: '🧠 Como mejorar tu mindset LoL — Como no tiltearse', category: 'general', notes: '' },
+        { id: 1006, url: 'https://www.youtube.com/watch?v=Ac2pNSJDWtc', title: 'El MAYOR ERROR ❌ de un JUGADOR — Errores que te impiden subir ELO', category: 'general', notes: '' },
+        { id: 1007, url: 'https://www.youtube.com/watch?v=onPl3DtGtvE', title: '⛔ PARA de COMETER los mismos ERRORES — Guía LoL para subir ELO', category: 'general', notes: '' },
+        { id: 1008, url: 'https://www.youtube.com/watch?v=o5AQQ2-1-_g', title: 'COMO arreglar tu MMR en 2025 (elohell, trolls, matchmaking)', category: 'general', notes: '' },
+        { id: 1009, url: 'https://www.youtube.com/watch?v=2iajdkdDCgQ', title: '🚀 Mi CONFIGURACIÓN para llegar a CHALLENGER en la SEASON 11', category: 'general', notes: '' },
+        { id: 1010, url: 'https://www.youtube.com/watch?v=vUOgVNxkeQk', title: '🚀 Como GANAR tu LINEA LoL — Guía LoL para subir ELO', category: 'general', notes: '' },
+        { id: 1011, url: 'https://www.youtube.com/watch?v=9BUVToiHlHo', title: '🌠 Cómo hacer snowball / Como carrear en League of Legends', category: 'general', notes: '' },
+        { id: 1012, url: 'https://www.youtube.com/watch?v=q6UleWEQCBM', title: '🤯 Coach PROFESIONAL explica PENETRACIÓN, LETALIDAD y tipo de daño — Curso LoL #6', category: 'general', notes: '' },
+        { id: 1013, url: 'https://www.youtube.com/watch?v=0p8t1SE64eo', title: '🧠 Cómo GANAR la LINEA Melee vs Ranged — Guía LoL para subir ELO', category: 'general', notes: '' },
+        { id: 1014, url: 'https://www.youtube.com/watch?v=fHL8Iftin-E', title: '🌌 Como POKEAR en lol — Guía LoL para GANAR la LÍNEA', category: 'general', notes: '' },
+        { id: 1015, url: 'https://www.youtube.com/watch?v=r4kBpi-sjV0', title: 'Why a Challenger Gets FLAMED in LOW ELO! (Diamond in 90 Days)', category: 'general', notes: '' },
+        { id: 2001, url: 'https://lolalytics.com', title: 'LoLalytics — Campeones OP del parche, builds y % de victoria', category: 'recursos', notes: 'Ver los campeones op del parche y builds con su porcentaje de victoria' },
+        { id: 2002, url: 'https://www.probuildstats.com', title: 'Probuilds — Ver las builds que se hacen los pro players', category: 'recursos', notes: '' },
+        { id: 2003, url: 'https://op.gg', title: 'OP.GG — Estadísticas, tier list, builds y perfil', category: 'recursos', notes: '' },
+        { id: 2004, url: 'https://u.gg', title: 'U.GG — Tier list y builds (muy completo)', category: 'recursos', notes: 'Mejor que OP.GG según muchos' },
+        { id: 2005, url: 'https://wottactic.com/lol', title: 'LOL Tactics — Planner para planear jugadas en el mapa', category: 'recursos', notes: '' },
+        { id: 2006, url: 'https://draftlol.dawe.gg', title: 'DraftLOL — Planear compos y picks antes de la partida', category: 'recursos', notes: '' },
+        { id: 2007, url: 'https://smitepractice.com', title: 'Smite Practice — Juego web para practicar el smite', category: 'recursos', notes: '' },
+        { id: 3001, url: 'https://www.youtube.com/watch?v=CJE_uCcvnnY', title: '👊 ¡LA GUÍA DEFINITIVA para GANAR LA TOPLANE! Rotaciones, Oleadas, Objetivos', category: 'top', notes: '' },
+        { id: 3002, url: 'https://www.youtube.com/watch?v=cZsbjuSGnIw', title: '🔎 ¿Cómo WARDEAR en TOP? ► Cómo Jugar TOP S11', category: 'top', notes: '' },
+        { id: 4001, url: 'https://www.youtube.com/watch?v=6EQAQ9yUeVc', title: '🌳 Cómo KITEAR en la JUNGLA ► Cómo JUGAR JUNGLA S11', category: 'jg', notes: '' },
+        { id: 4002, url: 'https://www.youtube.com/watch?v=uTzNs4gULUc', title: '🌳 ¡ENTIENDE la JUNGLA GUÍA DEFINITIVA! De Inicio a Avanzado, Rutas, gankeos, invades y objetivos', category: 'jg', notes: '' },
+        { id: 4003, url: 'https://www.youtube.com/watch?v=5n1q6mTwgnM', title: '💥 ¿Qué es un CHOKE POINT y Cómo Debes Utilizarlo? ► Cómo JUGAR LOL S11', category: 'jg', notes: '' },
+        { id: 4004, url: 'https://www.youtube.com/watch?v=Tfu8uBrm9X8', title: '💥 Cuando Hacer OBJETIVOS — Gestión de objetivos — League of Legends', category: 'jg', notes: '' },
+        { id: 4005, url: 'https://www.youtube.com/watch?v=jT4jAzXwB5E', title: '🍁 Como usar las PLANTAS de la JUNGLA Correctamente — Guía LoL para subir ELO', category: 'jg', notes: '' },
+        { id: 4006, url: 'https://www.youtube.com/watch?v=gtQV2c2a6EQ', title: '🍁 Como hacer COUNTER JUNGLA — Guía League of Legends para subir ELO', category: 'jg', notes: '' },
+        { id: 4007, url: 'https://www.youtube.com/watch?v=klI2e4GVbio', title: '🌳 ¿Qué LÍNEA GANKEAR para GANAR? ► Cómo Jugar JUNGLA S11', category: 'jg', notes: '' },
+        { id: 4008, url: 'https://www.youtube.com/watch?v=Li1WPpzSc0Y', title: '15 AÑOS de JUNGLA resumidos en 1 hora y 38 minutos', category: 'jg', notes: '' },
+        { id: 4009, url: 'https://www.youtube.com/watch?v=bgl073c7Br4', title: 'No subís por esto — Por esto NO subes ELO en LEAGUE OF LEGENDS', category: 'jg', notes: '' },
+        { id: 5001, url: 'https://www.youtube.com/watch?v=itb-zcYo_js', title: '🔎 ¿Cómo WARDEAR en MID s11? ► Cómo Jugar MID 2021', category: 'mid', notes: '' },
+        { id: 6001, url: 'https://www.youtube.com/watch?v=o3Ucgb7QFM8', title: '👁️ ¿Cúando Debes CAMBIAR el WARD? ► Cómo JUGAR LOL S11', category: 'supp', notes: '' },
+        { id: 6002, url: 'https://www.youtube.com/watch?v=GAsqJaMelj4', title: 'Guía de rotaciones en League of Legends / Aprende a rotar como soporte', category: 'supp', notes: '' },
+      ]
       function load() {
         try {
           const raw = localStorage.getItem(KEY)
@@ -2204,6 +2390,8 @@
               .filter(Boolean)
           if (!data.profile.server) data.profile.server = 'LAN'
           if (!Array.isArray(data.accounts)) data.accounts = []
+          if (!Array.isArray(data.guides)) data.guides = []
+          if (data.guides.length === 0) data.guides = PREDEFINED_GUIDES.map((g) => ({ ...g }))
         } catch {}
       }
       function save() {
@@ -2299,6 +2487,8 @@
         $('tab-matchups').innerHTML =
           `<div class="card"><div class="title"><h2>Matchups</h2><span>Importa hojas de Excel y navega entre ellas</span></div><div class="sheet-toolbar"><input class="hidden-file" id="matchupFile" type="file" accept=".xlsx,.xls" onchange="importMatchupWorkbook(event)"><button class="btn" onclick="document.getElementById('matchupFile')?.click()">📄 Elegir Matchups</button><button class="danger" onclick="clearMatchups()">Borrar matchups</button></div><div id="matchupContent"></div></div>`
         $('tab-tips').innerHTML = renderTips()
+        $('tab-guias').innerHTML = `<div class="card"><div class="title"><h2>Guías</h2><span>Videos y recursos por categoría</span></div><div class="form" style="margin-bottom:0"><div class="f s8"><label>URL del video (YouTube u otro)</label><input id="guideUrl" type="url" placeholder="https://youtube.com/watch?v=..." oninput="onGuideUrlInput()"></div><div class="f s4"><label>Categoría</label><select id="guideCat">${GUIDE_CATEGORIES.map((c) => `<option value="${c.key}">${c.label}</option>`).join('')}</select></div><div class="f s8"><label>Título</label><input id="guideTitle" placeholder="Nombre de la guía o video"></div><div class="f s4" style="display:flex;align-items:end"><button class="btn" style="width:100%;height:38px" onclick="saveGuide()">Guardar</button></div><div class="f s12"><label>Notas (opcional)</label><input id="guideNotes" placeholder="Concepto clave o para qué sirve esta guía"></div></div><div id="guideUrlPreview" class="guide-url-preview"></div><div style="margin-top:16px;padding-top:14px;border-top:1px solid var(--line)" id="guidesContent"></div></div>`
+        renderGuides()
       }
       function saveProfile() {
         const gameName = $('pGameName').value.trim()
@@ -3048,6 +3238,134 @@
               .join('')
           : '<div class="small">Todavía no hay partidas importadas.</div>'
       }
+      function ytId(url) {
+        if (!url) return null
+        const m = String(url).match(
+          /(?:v=|youtu\.be\/|embed\/|shorts\/)([a-zA-Z0-9_-]{11})/
+        )
+        return m ? m[1] : null
+      }
+      function ytThumb(url) {
+        const id = ytId(url)
+        return id ? `https://img.youtube.com/vi/${id}/mqdefault.jpg` : null
+      }
+      async function fetchYtTitle(url) {
+        try {
+          const res = await fetch(
+            `https://www.youtube.com/oembed?url=${encodeURIComponent(url)}&format=json`
+          )
+          const json = await res.json()
+          return json.title || ''
+        } catch {
+          return ''
+        }
+      }
+      async function onGuideUrlInput() {
+        const url = $('guideUrl')?.value.trim()
+        if (!url) return
+        const preview = $('guideUrlPreview')
+        const thumb = ytThumb(url)
+        if (thumb && preview) {
+          preview.innerHTML = `<img src="${thumb}" alt="">`
+          preview.className = 'guide-url-preview show'
+          const titleInput = $('guideTitle')
+          if (titleInput && !titleInput.value) {
+            titleInput.placeholder = 'Cargando título...'
+            const title = await fetchYtTitle(url)
+            if (title) {
+              titleInput.value = title
+              titleInput.placeholder = 'Nombre de la guía o video'
+            } else {
+              titleInput.placeholder = 'Nombre de la guía o video'
+            }
+          }
+        } else if (preview) {
+          preview.className = 'guide-url-preview'
+          preview.innerHTML = ''
+        }
+      }
+      function saveGuide() {
+        const url = $('guideUrl')?.value.trim()
+        const title = $('guideTitle')?.value.trim()
+        const category = $('guideCat')?.value || 'general'
+        const notes = $('guideNotes')?.value.trim()
+        if (!url) return toast('Pega una URL primero')
+        if (!title) return toast('Ponle un título')
+        if (!Array.isArray(data.guides)) data.guides = []
+        data.guides.push({ id: Date.now(), url, title, category, notes: notes || '' })
+        save()
+        $('guideUrl').value = ''
+        $('guideTitle').value = ''
+        $('guideNotes').value = ''
+        const preview = $('guideUrlPreview')
+        if (preview) { preview.className = 'guide-url-preview'; preview.innerHTML = '' }
+        renderGuides()
+        toast('Guía guardada')
+      }
+      function deleteGuide(id) {
+        data.guides = (data.guides || []).filter((g) => g.id !== id)
+        save()
+        renderGuides()
+      }
+      function setGuideFilter(cat) {
+        guideFilter = cat
+        guidePage = 1
+        renderGuides()
+      }
+      function changeGuidePage(next) {
+        guidePage = next
+        renderGuides()
+      }
+      function renderGuides() {
+        const box = $('guidesContent')
+        if (!box) return
+        const guides = data.guides || []
+        const catMap = Object.fromEntries(GUIDE_CATEGORIES.map((c) => [c.key, c]))
+        const filtered =
+          guideFilter === 'all'
+            ? guides
+            : guides.filter((g) => g.category === guideFilter)
+        const perPage = 12
+        const totalPages = Math.max(1, Math.ceil(filtered.length / perPage))
+        if (guidePage > totalPages) guidePage = totalPages
+        const start = (guidePage - 1) * perPage
+        const pageItems = filtered.slice(start, start + perPage)
+        const pills = `<div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px">
+          <button class="sheet-pill ${guideFilter === 'all' ? 'active' : ''}" onclick="setGuideFilter('all')">Todas</button>
+          ${GUIDE_CATEGORIES.map(
+            (c) =>
+              `<button class="sheet-pill ${guideFilter === c.key ? 'active' : ''}" onclick="setGuideFilter('${c.key}')">${c.label}</button>`
+          ).join('')}
+        </div>`
+        const grid = pageItems.length
+          ? `<div class="guide-grid">${pageItems
+              .map((g) => {
+                const thumb = ytThumb(g.url)
+                const isYt = !!ytId(g.url)
+                const cat = catMap[g.category] || { label: g.category, color: '#ff8585' }
+                return `<div class="guide-card">
+                  ${
+                    isYt
+                      ? `<div class="guide-thumb-wrap"><img src="${thumb}" alt="" loading="lazy"><a class="guide-play-btn" href="${g.url}" target="_blank" rel="noopener">▶</a></div>`
+                      : `<a href="${g.url}" target="_blank" rel="noopener" class="guide-no-thumb">🔗</a>`
+                  }
+                  <button class="guide-del-btn" onclick="deleteGuide(${g.id})">✕</button>
+                  <div class="guide-body">
+                    <div class="guide-body-top">
+                      <div class="guide-title">${g.title}</div>
+                      <span class="guide-cat-badge" style="color:${cat.color};background:${cat.color}18;border:1px solid ${cat.color}30">${cat.label}</span>
+                    </div>
+                    ${g.notes ? `<div class="guide-notes">${g.notes}</div>` : ''}
+                  </div>
+                </div>`
+              })
+              .join('')}</div>`
+          : '<div class="small" style="padding:8px 0">No hay guías en esta categoría todavía.</div>'
+        const pager = filtered.length > perPage
+          ? `<div style="display:flex;justify-content:center;align-items:center;gap:14px;margin-top:14px;padding-top:12px;border-top:1px solid rgba(255,255,255,.06)"><button class="acc-icon" onclick="changeGuidePage(${guidePage - 1})" ${guidePage === 1 ? 'disabled style="opacity:.3;cursor:default;pointer-events:none"' : ''}>←</button><span style="font-size:12px;color:var(--muted);font-weight:700;min-width:48px;text-align:center">${guidePage} / ${totalPages}</span><button class="acc-icon" onclick="changeGuidePage(${guidePage + 1})" ${guidePage === totalPages ? 'disabled style="opacity:.3;cursor:default;pointer-events:none"' : ''}>→</button></div>`
+          : ''
+        box.innerHTML = pills + grid + pager
+      }
       function renderMatchups() {
         const box = $('matchupContent')
         if (!box) return
@@ -3297,6 +3615,7 @@
           'historial',
           'matchups',
           'tips',
+          'guias',
         ].forEach((t) => {
           $(`tab-${t}`).classList.toggle('hidden', t !== tab)
         })
@@ -3312,6 +3631,7 @@
         if (tab === 'historial') renderHistory()
         if (tab === 'importar') renderImported()
         if (tab === 'matchups') renderMatchups()
+        if (tab === 'guias') renderGuides()
       }
       function toggleMobileMenu(force) {
         const drawer = $('mobileDrawer')
