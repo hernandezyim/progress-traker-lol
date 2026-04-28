@@ -1,0 +1,3120 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SUPRO Tracker</title>
+    <link
+      rel="icon"
+      type="image/png"
+      href="https://res.cloudinary.com/dfr9zlu8d/image/upload/v1777329733/supro-logo_rvavuy.jpg"
+    />
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      }
+      :root {
+        --bg: #090909;
+        --panel: #121214;
+        --panel2: #1a1a1f;
+        --line: #2a2a32;
+        --text: #f5f5f7;
+        --muted: #9e9ea8;
+        --gold: #ff5454;
+        --green: #57f287;
+        --red: #ff5b5b;
+        --blue: #8ab4ff;
+        --amber: #ff8a4c;
+      }
+      body {
+        background:
+          radial-gradient(
+            circle at top,
+            rgba(255, 55, 55, 0.08),
+            transparent 24%
+          ),
+          linear-gradient(180deg, #0b0b0d, #090909);
+        background-attachment: fixed;
+        color: var(--text);
+        padding-bottom: 84px;
+      }
+      .wrap {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 16px;
+      }
+      .header {
+        position: sticky;
+        top: 0;
+        z-index: 20;
+        background: rgba(10, 13, 20, 0.94);
+        backdrop-filter: blur(12px);
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+        align-items: center;
+        padding: 12px 16px;
+        margin: -16px -16px 16px;
+        border-bottom: 1px solid rgba(255, 91, 91, 0.16);
+      }
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .brand-logo {
+        width: 48px;
+        height: 48px;
+        border-radius: 14px;
+        object-fit: cover;
+        border: 1px solid rgba(255, 91, 91, 0.28);
+        box-shadow: 0 0 18px rgba(255, 91, 91, 0.18);
+      }
+      .brand b {
+        display: block;
+        font-size: 18px;
+        letter-spacing: 0.08em;
+      }
+      .brand span {
+        display: none;
+      }
+      .header-actions {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+      }
+      .discord-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 10px 14px;
+        border-radius: 999px;
+        border: 1px solid rgba(255, 91, 91, 0.22);
+        background: linear-gradient(
+          135deg,
+          rgba(143, 16, 24, 0.92),
+          rgba(255, 77, 77, 0.88)
+        );
+        color: #fff;
+        font-size: 12px;
+        font-weight: 900;
+        letter-spacing: 0.04em;
+        text-decoration: none;
+        box-shadow: 0 8px 20px rgba(255, 77, 77, 0.16);
+      }
+      .discord-btn svg {
+        flex-shrink: 0;
+      }
+      .chip {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 6px 10px;
+        border-radius: 999px;
+        background: var(--panel);
+        border: 1px solid var(--line);
+        font-size: 11px;
+        font-weight: 800;
+        text-align: center;
+      }
+      .chip.profile {
+        min-width: auto;
+        justify-content: center;
+        gap: 8px;
+        padding: 6px 14px;
+        font-size: 13px;
+      }
+      .mini-select {
+        appearance: none;
+        background: var(--panel);
+        color: var(--text);
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        padding: 10px 14px;
+        font-size: 12px;
+        font-weight: 800;
+      }
+      .icon-btn {
+        width: 42px;
+        height: 42px;
+        border-radius: 999px;
+        background: var(--panel);
+        color: var(--text);
+        border: 1px solid var(--line);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+      }
+      .grid {
+        display: grid;
+        gap: 14px;
+      }
+      .g2 {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      .g3 {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+      .g4 {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+      .card {
+        background: linear-gradient(180deg, var(--panel), #0f1422);
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        padding: 16px;
+      }
+      .hero {
+        border-color: rgba(215, 171, 82, 0.25);
+        background:
+          radial-gradient(
+            circle at top right,
+            rgba(248, 113, 113, 0.16),
+            transparent 25%
+          ),
+          linear-gradient(135deg, #17120e, #101828);
+      }
+      .title {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+        align-items: center;
+        margin-bottom: 12px;
+      }
+      .title h2 {
+        font-size: 13px;
+        color: #ff6b6b;
+        text-transform: uppercase;
+        letter-spacing: 0.16em;
+        font-variant-caps: all-small-caps;
+      }
+      .title span {
+        font-size: 12px;
+        color: var(--muted);
+      }
+      .hero h3 {
+        font-size: 28px;
+        line-height: 1.08;
+        margin-bottom: 10px;
+      }
+      .hero p,
+      .note,
+      .meta,
+      .small {
+        font-size: 13px;
+        color: var(--muted);
+        line-height: 1.55;
+      }
+      .kpi {
+        background: var(--panel2);
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        padding: 14px;
+      }
+      .kpi .v {
+        font-size: 28px;
+        font-weight: 900;
+      }
+      .kpi .l {
+        font-size: 11px;
+        color: var(--muted);
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        margin-top: 4px;
+      }
+      .hero-grid {
+        display: grid;
+        grid-template-columns: 1.4fr 0.6fr;
+        gap: 16px;
+        align-items: center;
+      }
+      .hero-mark {
+        width: 100%;
+        max-width: 280px;
+        justify-self: end;
+        border-radius: 24px;
+        border: 1px solid rgba(248, 113, 113, 0.24);
+        box-shadow: 0 0 30px rgba(248, 113, 113, 0.14);
+      }
+      .form {
+        display: grid;
+        grid-template-columns: repeat(12, minmax(0, 1fr));
+        gap: 10px;
+      }
+      .f {
+        display: grid;
+        gap: 0;
+        align-content: start;
+      }
+      .f label {
+        font-size: 10px;
+        color: var(--muted);
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        margin-bottom: 0;
+        line-height: 1;
+      }
+      .compact-field label {
+        align-self: start;
+        padding-bottom: 0;
+      }
+      .f input,
+      .f select,
+      .f textarea {
+        width: 100%;
+        padding: 8px 10px;
+        background: var(--panel2);
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        color: var(--text);
+        font-size: 12px;
+        outline: none;
+        min-height: 38px;
+        line-height: 1.2;
+        margin-top: 0 !important;
+      }
+      .f input:not([type='checkbox']):not([type='radio']),
+      .f select {
+        height: 38px;
+      }
+      .compact-field input,
+      .compact-field select {
+        padding: 8px 10px;
+        min-height: 38px;
+        height: 38px;
+        font-size: 12px;
+      }
+      .f textarea {
+        min-height: 86px;
+        height: auto;
+        resize: vertical;
+      }
+      .f select[multiple] {
+        min-height: 180px;
+      }
+      .s2 {
+        grid-column: span 2;
+      }
+      .s3 {
+        grid-column: span 3;
+      }
+      .s4 {
+        grid-column: span 4;
+      }
+      .s5 {
+        grid-column: span 5;
+      }
+      .s6 {
+        grid-column: span 6;
+      }
+      .s8 {
+        grid-column: span 8;
+      }
+      .s12 {
+        grid-column: span 12;
+      }
+      .seg,
+      .toggles,
+      .bars,
+      .list,
+      .checks,
+      .guide {
+        display: grid;
+        gap: 10px;
+      }
+      .seg {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      .seg button,
+      .nav button,
+      .btn,
+      .soft,
+      .danger {
+        cursor: pointer;
+        border: none;
+      }
+      .seg button {
+        padding: 14px;
+        border-radius: 14px;
+        background: var(--panel2);
+        border: 2px solid var(--line);
+        font-weight: 900;
+        color: var(--muted);
+      }
+      .seg button.active.win {
+        background: rgba(74, 222, 128, 0.1);
+        border-color: rgba(74, 222, 128, 0.45);
+        color: var(--green);
+      }
+      .seg button.active.loss {
+        background: rgba(248, 113, 113, 0.1);
+        border-color: rgba(248, 113, 113, 0.45);
+        color: var(--red);
+      }
+      .toggles {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      .toggle {
+        min-height: 88px;
+        padding: 12px;
+        border-radius: 16px;
+        background: var(--panel2);
+        border: 2px solid var(--line);
+      }
+      .toggle .q {
+        font-size: 12px;
+        line-height: 1.35;
+      }
+      .toggle .a {
+        font-size: 22px;
+        font-weight: 900;
+        color: var(--muted);
+        margin-top: 10px;
+      }
+      .toggle.goodYes,
+      .toggle.goodNo {
+        border-color: rgba(74, 222, 128, 0.45);
+        background: rgba(74, 222, 128, 0.08);
+      }
+      .toggle.goodYes .a,
+      .toggle.goodNo .a {
+        color: var(--green);
+      }
+      .toggle.badYes,
+      .toggle.badNo {
+        border-color: rgba(248, 113, 113, 0.45);
+        background: rgba(248, 113, 113, 0.08);
+      }
+      .toggle.badYes .a,
+      .toggle.badNo .a {
+        color: var(--red);
+      }
+      .btn,
+      .soft,
+      .danger {
+        padding: 12px 14px;
+        border-radius: 12px;
+        font-weight: 900;
+      }
+      .btn {
+        background: linear-gradient(135deg, #8f1018, #ff4d4d);
+        color: #fff;
+      }
+      .btn.cta {
+        box-shadow: 0 10px 24px rgba(255, 77, 77, 0.22);
+        transform: translateY(-1px);
+      }
+      .soft {
+        background: var(--panel2);
+        color: var(--text);
+        border: 1px solid var(--line);
+      }
+      .danger {
+        background: #2a1015;
+        color: #ffc2c2;
+        border: 1px solid #5a202b;
+      }
+      .checkGroup {
+        padding: 12px;
+        border-radius: 16px;
+        background: rgba(255, 255, 255, 0.02);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+      }
+      .checkGroup h4 {
+        font-size: 12px;
+        color: var(--gold);
+        margin-bottom: 8px;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+      .check {
+        display: flex;
+        gap: 10px;
+        padding: 10px;
+        border-radius: 12px;
+      }
+      .check.on {
+        background: rgba(74, 222, 128, 0.08);
+        border: 1px solid rgba(74, 222, 128, 0.18);
+      }
+      .dot {
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        border: 2px solid var(--line);
+        display: grid;
+        place-items: center;
+        flex: 0 0 auto;
+        font-size: 11px;
+        font-weight: 900;
+        color: #06120a;
+      }
+      .check.on .dot {
+        background: var(--green);
+        border-color: var(--green);
+      }
+      .check b {
+        font-size: 13px;
+        display: block;
+      }
+      .check span {
+        font-size: 11px;
+        color: var(--muted);
+        display: block;
+        margin-top: 2px;
+        line-height: 1.35;
+      }
+      .barRow {
+        display: grid;
+        gap: 6px;
+      }
+      .barHead {
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+      }
+      .barHead span:first-child {
+        font-size: 13px;
+      }
+      .barHead span:last-child {
+        font-size: 12px;
+        color: var(--muted);
+      }
+      .barWrap {
+        height: 10px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.06);
+        overflow: hidden;
+      }
+      .bar {
+        height: 100%;
+        border-radius: 999px;
+        background: linear-gradient(90deg, #d7ab52, #f2d48f);
+      }
+      .bar.green {
+        background: linear-gradient(90deg, #34d399, #86efac);
+      }
+      .bar.red {
+        background: linear-gradient(90deg, #fb7185, #fca5a5);
+      }
+      .bar.blue {
+        background: linear-gradient(90deg, #60a5fa, #93c5fd);
+      }
+      .bar.amber {
+        background: linear-gradient(90deg, #f59e0b, #fcd34d);
+      }
+      .game {
+        padding: 14px;
+        border-radius: 16px;
+        background: var(--panel2);
+        border: 1px solid var(--line);
+      }
+      .gameTop {
+        display: grid;
+        grid-template-columns: auto 1fr auto;
+        gap: 12px;
+        align-items: center;
+      }
+      .res {
+        min-width: 76px;
+        height: 48px;
+        padding: 0 10px;
+        border-radius: 14px;
+        display: grid;
+        place-items: center;
+        font-size: 11px;
+        font-weight: 900;
+        text-align: center;
+      }
+      .res.win {
+        background: rgba(74, 222, 128, 0.1);
+        border: 1px solid rgba(74, 222, 128, 0.3);
+        color: var(--green);
+      }
+      .res.loss {
+        background: rgba(248, 113, 113, 0.1);
+        border: 1px solid rgba(248, 113, 113, 0.3);
+        color: var(--red);
+      }
+      .game h4 {
+        font-size: 16px;
+      }
+      .game small {
+        display: block;
+        font-size: 12px;
+        color: var(--muted);
+        margin-top: 2px;
+      }
+      .score {
+        font-size: 15px;
+        font-weight: 900;
+        color: var(--gold);
+        text-align: right;
+      }
+      .score span {
+        display: block;
+        font-size: 11px;
+        color: var(--muted);
+      }
+      .metaGrid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 8px;
+        margin-top: 10px;
+      }
+      .meta {
+        padding: 10px;
+        border-radius: 12px;
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+      }
+      .guide {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      .guide .card {
+        padding: 14px;
+      }
+      .guide h4 {
+        font-size: 13px;
+        color: #ff6b6b;
+        margin-bottom: 6px;
+        font-variant-caps: all-small-caps;
+        letter-spacing: 0.08em;
+      }
+      .match {
+        padding: 12px;
+        border-radius: 14px;
+        background: var(--panel2);
+        border: 1px solid var(--line);
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+        align-items: center;
+      }
+      .match strong {
+        font-size: 13px;
+      }
+      .match span {
+        display: block;
+        font-size: 11px;
+        color: var(--muted);
+        margin-top: 3px;
+      }
+      .resource {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+        align-items: center;
+        padding: 14px;
+        border-radius: 16px;
+        background: var(--panel2);
+        border: 1px solid var(--line);
+      }
+      .sheet-toolbar {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        align-items: center;
+        margin-bottom: 14px;
+      }
+      .hidden-file {
+        display: none;
+      }
+      .sheet-pills {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        margin-bottom: 14px;
+      }
+      .sheet-pill {
+        padding: 8px 12px;
+        border-radius: 999px;
+        background: var(--panel2);
+        border: 1px solid var(--line);
+        color: var(--muted);
+        cursor: pointer;
+        font-size: 12px;
+        font-weight: 800;
+      }
+      .sheet-pill.active {
+        background: rgba(255, 91, 91, 0.1);
+        border-color: rgba(255, 91, 91, 0.32);
+        color: #ff8a8a;
+      }
+      .matchup-filters {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        align-items: center;
+        margin-bottom: 12px;
+      }
+      .matchup-filters .select-pill,
+      .matchup-filters input {
+        min-width: 160px;
+      }
+      .table-wrap {
+        overflow: auto;
+        border-radius: 16px;
+        border: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.02);
+      }
+      table.sheet-table {
+        width: 100%;
+        border-collapse: collapse;
+        min-width: 760px;
+      }
+      .sheet-table th,
+      .sheet-table td {
+        padding: 14px 16px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        text-align: left;
+        font-size: 14px;
+        vertical-align: middle;
+        line-height: 1.5;
+      }
+      .sheet-table th {
+        position: sticky;
+        top: 0;
+        background: #15151b;
+        color: #ff8a8a;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        font-size: 11px;
+      }
+      .matchup-champ {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .matchup-champ img {
+        width: 72px;
+        height: 72px;
+        border-radius: 16px;
+        object-fit: cover;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+      }
+      .matchup-pill {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 90px;
+        padding: 7px 14px;
+        border-radius: 999px;
+        font-size: 13px;
+        font-weight: 900;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+      }
+      .diff-1,
+      .diff-2 {
+        background: rgba(87, 242, 135, 0.12);
+        color: #8cffb0;
+      }
+      .diff-3 {
+        background: rgba(138, 180, 255, 0.12);
+        color: #9fc3ff;
+      }
+      .diff-4 {
+        background: rgba(255, 138, 76, 0.14);
+        color: #ffb17c;
+      }
+      .diff-5,
+      .diff-6,
+      .diff-7,
+      .diff-8,
+      .diff-9,
+      .diff-10 {
+        background: rgba(255, 91, 91, 0.14);
+        color: #ff8f8f;
+      }
+      .lane-top {
+        background: rgba(195, 182, 255, 0.14);
+        color: #d6ccff;
+      }
+      .lane-jg,
+      .lane-jungle {
+        background: rgba(87, 242, 135, 0.14);
+        color: #93ffba;
+      }
+      .lane-mid,
+      .lane-middle {
+        background: rgba(138, 180, 255, 0.14);
+        color: #a7c7ff;
+      }
+      .lane-bot,
+      .lane-adc,
+      .lane-bottom {
+        background: rgba(255, 138, 76, 0.14);
+        color: #ffc098;
+      }
+      .lane-supp,
+      .lane-support,
+      .lane-utility {
+        background: rgba(255, 105, 180, 0.14);
+        color: #ffb3d6;
+      }
+      .account {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+        align-items: center;
+        padding: 14px;
+        border-radius: 16px;
+        background: var(--panel2);
+        border: 1px solid var(--line);
+      }
+      .account-main {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+      }
+      .account-actions {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        align-items: center;
+      }
+      .rank-badge {
+        width: 136px;
+        height: 136px;
+        object-fit: contain;
+        transform: scale(1.45);
+        transform-origin: center;
+        filter: drop-shadow(0 0 18px rgba(255, 77, 77, 0.18));
+      }
+      .account .rank-badge {
+        width: 52px;
+        height: 52px;
+      }
+      #accountRankPreview {
+        width: 160px;
+        height: 160px;
+      }
+      #gRankPreview {
+        width: 56px;
+        height: 56px;
+        object-fit: contain;
+        transform: scale(1.35);
+        transform-origin: center;
+        filter: drop-shadow(0 2px 8px rgba(255, 77, 77, 0.3));
+      }
+      .tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 5px 10px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        font-size: 11px;
+        color: var(--muted);
+      }
+      .tag.date {
+        color: #ff9d5c;
+      }
+      .tag.win {
+        color: var(--green);
+      }
+      .tag.loss {
+        color: var(--red);
+      }
+      .tag.role {
+        color: #c3b6ff;
+      }
+      .tag.rank {
+        color: #ff6b6b;
+      }
+      .tag.metric {
+        color: #9fd0ff;
+      }
+      .tag.mood-normal {
+        color: #d1d5db;
+      }
+      .tag.mood-confiado {
+        color: #60a5fa;
+      }
+      .tag.mood-emocionado {
+        color: #fb7185;
+      }
+      .tag.mood-concentrado {
+        color: #a78bfa;
+      }
+      .tag.mood-tilted {
+        color: #ff5b5b;
+      }
+      .tag.mood-cansado {
+        color: #94a3b8;
+      }
+      .tag.mood-ansioso {
+        color: #f59e0b;
+      }
+      .tag.mood-frío {
+        color: #67e8f9;
+      }
+      .tag.bool-yes {
+        color: var(--green);
+      }
+      .tag.bool-no {
+        color: var(--red);
+      }
+      .tag.lp-plus {
+        color: var(--green);
+      }
+      .tag.lp-minus {
+        color: var(--red);
+      }
+      .select-pill {
+        appearance: none;
+        background: var(--panel2);
+        border: 1px solid var(--line);
+        color: var(--text);
+        padding: 10px 12px;
+        border-radius: 999px;
+        font-size: 12px;
+      }
+      .filters {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        margin-bottom: 12px;
+      }
+      .champ-row {
+        display: grid;
+        grid-template-columns: 1fr 56px;
+        gap: 10px;
+        align-items: end;
+      }
+      .champ-row.tight {
+        max-width: 370px;
+      }
+      .champ-row.tier-only {
+        max-width: 220px;
+        grid-template-columns: 1fr;
+      }
+      .champ-preview {
+        width: 56px;
+        height: 56px;
+        border-radius: 14px;
+        object-fit: cover;
+        border: 1px solid var(--line);
+      }
+      .history-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 8px;
+        margin-top: 10px;
+      }
+      .history-stat {
+        padding: 10px 12px;
+        border-radius: 14px;
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.04),
+          rgba(255, 255, 255, 0.02)
+        );
+        border: 1px solid rgba(255, 255, 255, 0.06);
+      }
+      .history-stat b {
+        display: block;
+        font-size: 10px;
+        color: var(--muted);
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        margin-bottom: 5px;
+      }
+      .history-stat span {
+        font-size: 13px;
+        color: var(--text);
+      }
+      .pager {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 10px;
+        margin-top: 14px;
+      }
+      .pager-info {
+        font-size: 12px;
+        color: var(--muted);
+      }
+      .tips-wrap {
+        display: grid;
+        gap: 12px;
+      }
+      .tip-phase {
+        border-radius: 18px;
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.03),
+          rgba(255, 255, 255, 0.015)
+        );
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        overflow: hidden;
+      }
+      .tip-head {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+        align-items: center;
+        padding: 14px 16px;
+        background: linear-gradient(
+          90deg,
+          rgba(143, 16, 24, 0.28),
+          rgba(255, 77, 77, 0.06)
+        );
+        border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      }
+      .tip-head h3 {
+        font-size: 14px;
+        letter-spacing: 0.12em;
+        font-variant-caps: all-small-caps;
+        color: #ff8f8f;
+      }
+      .tip-count {
+        font-size: 11px;
+        color: var(--muted);
+      }
+      .tip-list {
+        display: grid;
+        gap: 10px;
+        padding: 14px;
+      }
+      .tip-item {
+        padding: 12px 14px;
+        border-radius: 14px;
+        background: var(--panel2);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+      }
+      .tip-top {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+        flex-wrap: wrap;
+        margin-bottom: 6px;
+      }
+      .tip-top strong {
+        font-size: 13px;
+        color: var(--text);
+      }
+      .tip-copy {
+        font-size: 12px;
+        line-height: 1.5;
+        color: var(--muted);
+      }
+      .nav {
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 30;
+        background: rgba(10, 10, 12, 0.97);
+        border-top: 1px solid rgba(255, 91, 91, 0.14);
+        backdrop-filter: blur(12px);
+      }
+      .navIn {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 8px 10px calc(8px + env(safe-area-inset-bottom));
+        display: grid;
+        grid-template-columns: repeat(6, minmax(0, 1fr));
+        gap: 6px;
+      }
+      .nav button {
+        background: transparent;
+        border-radius: 14px;
+        padding: 10px 4px;
+        color: var(--muted);
+      }
+      .nav button.active {
+        background: rgba(255, 91, 91, 0.08);
+        color: #ff8585;
+      }
+      .nav b {
+        display: block;
+        font-size: 18px;
+        line-height: 1;
+      }
+      .nav span {
+        display: block;
+        font-size: 10px;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .toast {
+        position: fixed;
+        top: 18px;
+        right: 18px;
+        left: auto;
+        bottom: auto;
+        transform: translateY(-20px);
+        background: linear-gradient(135deg, #18181d, #23232b);
+        color: var(--text);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        padding: 10px 18px;
+        border-radius: 14px;
+        font-size: 13px;
+        font-weight: 900;
+        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.28);
+        transition:
+          transform 0.2s,
+          opacity 0.2s;
+        z-index: 40;
+        opacity: 0;
+      }
+      .toast.show {
+        transform: translateY(0);
+        opacity: 1;
+      }
+      .hidden {
+        display: none;
+      }
+      /* VS BADGE */
+      .vs-badge {
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #8f1018, #ff4d4d);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 8px;
+        font-weight: 900;
+        color: #fff;
+        flex-shrink: 0;
+        letter-spacing: 0.06em;
+        box-shadow: 0 2px 10px rgba(255, 55, 55, 0.4);
+        border: 1.5px solid rgba(255, 255, 255, 0.1);
+      }
+      /* LOGOUT BTN (see header consistent heights below) */
+      /* ACCOUNT BUTTONS */
+      .acc-use {
+        padding: 7px 16px;
+        border-radius: 999px;
+        background: linear-gradient(135deg, #8f1018, #ff4d4d);
+        color: #fff;
+        font-size: 11px;
+        font-weight: 800;
+        border: none;
+        cursor: pointer;
+        white-space: nowrap;
+        box-shadow: 0 4px 12px rgba(255, 55, 55, 0.2);
+      }
+      .acc-use:hover {
+        box-shadow: 0 4px 18px rgba(255, 55, 55, 0.35);
+      }
+      .acc-icon {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        background: var(--panel2);
+        border: 1px solid var(--line);
+        color: var(--muted);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        font-size: 12px;
+        flex-shrink: 0;
+        transition: all 0.15s;
+      }
+      .acc-icon:hover {
+        border-color: #aaa;
+        color: var(--text);
+      }
+      .acc-del:hover {
+        border-color: rgba(255, 91, 91, 0.5) !important;
+        color: var(--red) !important;
+        background: rgba(255, 91, 91, 0.08) !important;
+      }
+      /* CHAMP FIELD LABEL FIX */
+      .champ-f {
+        align-content: start !important;
+      }
+      .champ-f label {
+        align-self: start;
+        padding-bottom: 0;
+      }
+      #gDivisionWrap {
+        align-content: start;
+      }
+      #gDivisionWrap label {
+        align-self: start;
+        padding-bottom: 0;
+      }
+      /* ACCOUNT SWITCHER SELECT */
+      .acc-switch {
+        appearance: none;
+        background: transparent;
+        color: var(--text);
+        border: none;
+        font-size: 13px;
+        font-weight: 800;
+        cursor: pointer;
+        outline: none;
+        padding: 2px 4px;
+        max-width: 200px;
+      }
+      /* HEADER CONSISTENT HEIGHTS */
+      .logout-btn {
+        height: 40px;
+        padding: 0 16px;
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        border-radius: 999px;
+        background: rgba(255, 91, 91, 0.08);
+        border: 1px solid rgba(255, 91, 91, 0.2);
+        color: #ff8585;
+        font-size: 13px;
+        font-weight: 800;
+        cursor: pointer;
+        transition: background 0.15s;
+      }
+      .logout-btn:hover {
+        background: rgba(255, 91, 91, 0.16);
+      }
+      .chip.profile {
+        height: 40px;
+        padding: 0 14px 0 8px;
+        align-items: center;
+        gap: 8px;
+        min-width: auto;
+        font-size: 13px;
+      }
+      /* ACCOUNT CARD HOVER */
+      .account {
+        cursor: pointer;
+        transition:
+          border-color 0.2s,
+          background 0.15s;
+      }
+      .account:not(.active):hover {
+        border-color: rgba(255, 91, 91, 0.28);
+        background: linear-gradient(
+          180deg,
+          rgba(255, 91, 91, 0.04),
+          var(--panel2)
+        );
+      }
+      .account.active {
+        border-color: rgba(255, 91, 91, 0.45) !important;
+        background: linear-gradient(
+          180deg,
+          rgba(255, 91, 91, 0.07),
+          var(--panel2)
+        ) !important;
+      }
+      .account.active:hover {
+        border-color: rgba(255, 91, 91, 0.65) !important;
+      }
+      @media (max-width: 900px) {
+        .g4,
+        .g3,
+        .g2,
+        .guide,
+        .hero-grid {
+          grid-template-columns: 1fr;
+        }
+        .hero-mark {
+          justify-self: start;
+          max-width: 180px;
+        }
+        .s2,
+        .s3,
+        .s4,
+        .s5,
+        .s6,
+        .s8,
+        .s12 {
+          grid-column: span 12;
+        }
+        .metaGrid,
+        .toggles {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <div class="header">
+        <div class="brand">
+          <img
+            class="brand-logo"
+            src="https://res.cloudinary.com/dfr9zlu8d/image/upload/v1777329733/supro-logo_rvavuy.jpg"
+            alt="SUPRO"
+          />
+          <div><b>🩸 • SUƤRƐMO SƐRVƐR • 🩸</b><span></span></div>
+        </div>
+        <div class="header-actions">
+          <a
+            class="discord-btn"
+            href="https://discord.gg/3YThSbf7eD"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              aria-hidden="true"
+            >
+              <path
+                d="M20.317 4.369A19.791 19.791 0 0015.885 3c-.191.328-.404.767-.554 1.11a18.27 18.27 0 00-5.462 0A11.64 11.64 0 009.315 3a19.736 19.736 0 00-4.433 1.369C2.078 8.58 1.31 12.688 1.694 16.738a19.92 19.92 0 005.388 2.745c.436-.598.824-1.232 1.157-1.897-.635-.24-1.24-.53-1.811-.863.152-.111.301-.226.445-.345 3.49 1.64 7.274 1.64 10.723 0 .146.12.294.234.446.345-.572.333-1.18.624-1.815.864.333.664.72 1.298 1.157 1.896a19.881 19.881 0 005.39-2.745c.455-4.693-.778-8.764-3.457-12.369zM8.02 14.121c-1.047 0-1.909-.961-1.909-2.137 0-1.177.84-2.138 1.909-2.138 1.078 0 1.92.97 1.909 2.138 0 1.176-.84 2.137-1.909 2.137zm7.974 0c-1.047 0-1.909-.961-1.909-2.137 0-1.177.84-2.138 1.909-2.138 1.079 0 1.92.97 1.909 2.138 0 1.176-.83 2.137-1.909 2.137z"
+              />
+            </svg>
+            Discord
+          </a>
+          <div
+            class="chip profile"
+            id="profileChip"
+            style="display: none"
+          ></div>
+          <button
+            class="logout-btn"
+            id="headerLogoutBtn"
+            onclick="logoutProfile()"
+            style="display: none"
+          >
+            <svg
+              width="13"
+              height="13"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+            >
+              <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4" />
+              <polyline points="16 17 21 12 16 7" />
+              <line x1="21" y1="12" x2="9" y2="12" /></svg
+            >Salir
+          </button>
+        </div>
+      </div>
+
+      <section id="tab-inicio"></section>
+      <section id="tab-partida" class="hidden"></section>
+      <section id="tab-importar" class="hidden"></section>
+      <section id="tab-historial" class="hidden"></section>
+      <section id="tab-matchups" class="hidden"></section>
+      <section id="tab-tips" class="hidden"></section>
+
+      <div class="nav">
+        <div class="navIn">
+          <button class="active" data-tab="inicio">
+            <b>⌂</b><span>Inicio</span>
+          </button>
+          <button data-tab="partida"><b>✦</b><span>Partida</span></button>
+          <button data-tab="importar"><b>◈</b><span>Cuenta</span></button>
+          <button data-tab="historial">
+            <b>☰</b><span>Rendimiento</span>
+          </button>
+          <button data-tab="matchups"><b>⌘</b><span>Matchups</span></button>
+          <button data-tab="tips"><b>✎</b><span>Tips</span></button>
+        </div>
+      </div>
+      <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+      <div class="toast" id="toast">Guardado</div>
+    </div>
+    <script>
+      const KEY = 'supro_tracker_v4'
+      const RANKS = [
+        'IRON',
+        'BRONZE',
+        'SILVER',
+        'GOLD',
+        'PLATINUM',
+        'EMERALD',
+        'DIAMOND',
+        'MASTER',
+        'GRANDMASTER',
+        'CHALLENGER',
+      ]
+      const RANK_LABEL = {
+        IRON: 'Hierro',
+        BRONZE: 'Bronce',
+        SILVER: 'Plata',
+        GOLD: 'Oro',
+        PLATINUM: 'Platino',
+        EMERALD: 'Esmeralda',
+        DIAMOND: 'Diamante',
+        MASTER: 'Master',
+        GRANDMASTER: 'Grandmaster',
+        CHALLENGER: 'Challenger',
+      }
+      const ROLE_LABEL = {
+        TOP: 'Top',
+        JUNGLE: 'Jungla',
+        MIDDLE: 'Mid',
+        BOTTOM: 'Bot',
+        UTILITY: 'Support',
+      }
+      const SERVERS = [
+        'LAN',
+        'LAS',
+        'NA',
+        'EUW',
+        'EUNE',
+        'BR',
+        'KR',
+        'OCE',
+        'JP',
+        'TR',
+        'RU',
+      ]
+      const MOODS = [
+        'Normal',
+        'Confiado',
+        'Emocionado',
+        'Concentrado',
+        'Tilted',
+        'Cansado',
+        'Ansioso',
+        'Frío',
+      ]
+      const RANK_DATA = {
+        IRON: {
+          error: 'Pelear sin farm ni tempo.',
+          skill: 'Sube el CS y deja de regalar muertes.',
+          meta: 'Meta: 5.0+ CS/min y menos de 6 muertes promedio.',
+        },
+        BRONZE: {
+          error: 'Autopilot y cero mapa.',
+          skill: 'Mirar mapa cada 5s y jugar jugadas simples.',
+          meta: 'Meta: ping constante y un objetivo después de cada kill.',
+        },
+        SILVER: {
+          error: 'Forzar todo lo que se mueve.',
+          skill: 'Selecciona mejor las peleas.',
+          meta: 'Meta: no gankear por debajo de 80/50 si tú también mueres.',
+        },
+        GOLD: {
+          error: 'No capitalizar ventaja.',
+          skill: 'Fight ganada = objetivo inmediato.',
+          meta: 'Meta: convierte cada ventana en torre, dragón o invade.',
+        },
+        PLATINUM: {
+          error: 'No trackear al jungla enemigo.',
+          skill: 'Trackeo + wards con intención.',
+          meta: 'Meta: saber lado probable del jungla antes de cada jugada.',
+        },
+        EMERALD: {
+          error: 'Autopilot con ego.',
+          skill: 'Tempo consciente y plan desde loading screen.',
+          meta: 'Meta: decidir por qué haces cada ruta y cada invade.',
+        },
+        DIAMOND: {
+          error: 'Mal reparto de recursos.',
+          skill: 'Identificar carry y jugar alrededor de él.',
+          meta: 'Meta: invadir y pelear solo con prioridad real.',
+        },
+        MASTER: {
+          error: 'No adaptarte al parche.',
+          skill: 'Build y plan según draft y meta.',
+          meta: 'Meta: cero builds automáticas.',
+        },
+        GRANDMASTER: {
+          error: 'Pequeños errores repetidos.',
+          skill: 'Castigar timings y ventanas finas.',
+          meta: 'Meta: reducir errores recurrentes por matchup.',
+        },
+        CHALLENGER: {
+          error: 'Complacencia.',
+          skill: 'Mantener el estándar.',
+          meta: 'Meta: revisión obsesiva del detalle.',
+        },
+      }
+      const RULES = [
+        'Si no puedes atender una jugada, haz una crossmap de valor parecido.',
+        'El LoL es por turnos: si gastaste tempo, no inventes otra jugada gratis.',
+        'Farm temprano > gank de baja probabilidad.',
+        'Trackear jungla enemigo es parte del daño que haces.',
+        'Con Barón no son 5 mid sin pensar: primero empuja la estructura del mapa.',
+      ]
+      const CHECKS = {
+        antes: [
+          [
+            'safeChamp',
+            'Fui con picks seguros y rol estable',
+            'No probé campeón ni cambié de rol a última hora.',
+          ],
+          [
+            'baseMindset',
+            'Entré con foco total',
+            'Sin autopilot y sin mirar rangos enemigos para distraerme.',
+          ],
+        ],
+        draft: [
+          [
+            'compCheck',
+            'Revisé composición y daño mixto',
+            'Tanque, daño AP/AD, engage y hechizos según la draft.',
+          ],
+          [
+            'flexPlan',
+            'Pensé el orden y valor de los picks',
+            'No pickeé en automático si la draft pedía otra cosa.',
+          ],
+        ],
+        loading: [
+          [
+            'winCondition',
+            'Definí win condition aliada y enemiga',
+            'Quién escala, quién acelera y quién borra carries.',
+          ],
+          [
+            'lanePrio',
+            'Leí prioridad de líneas y amenazas',
+            'Qué líneas tienen prio y dónde se puede jugar temprano.',
+          ],
+        ],
+        early: [
+          [
+            'map5',
+            'Miré minimapa cada 5 segundos',
+            'Con intención, no por inercia.',
+          ],
+          [
+            'spikes',
+            'Respeté spikes y ventajas reales',
+            'Nivel 6, primer item, summoners, visión y números.',
+          ],
+          [
+            'earlyWards',
+            'Wards a tiempo y sin pelear por ego',
+            'Cangrejo, entradas y rotaciones solo con contexto.',
+          ],
+        ],
+        mid: [
+          [
+            'midPrio',
+            'Jugué desde prio en medio',
+            'La presión de medio abrió objetivos y rotaciones.',
+          ],
+          [
+            'tempo',
+            'Kill -> acción -> reset',
+            'No desperdicié la ventana después de una jugada buena.',
+          ],
+          [
+            'crossmap',
+            'Si no podía responder, hice crossmap',
+            'No intenté estar en todo el mapa a la vez.',
+          ],
+        ],
+        tf: [
+          [
+            'cdCheck',
+            'Revisé cooldowns y target antes de entrar',
+            'No entré a ciegas ni chaseé kills fuera de la pelea.',
+          ],
+          [
+            'position',
+            'Me posicioné según mi rol',
+            'Backline protegida, engage con timing, peel si toca.',
+          ],
+        ],
+        late: [
+          [
+            'baronRule',
+            'Con ventaja convertí en presión real',
+            'Torres, visión, Nashor o inhibidor; no más kills vacías.',
+          ],
+          [
+            'lateVision',
+            'Negué visión antes de objetivos grandes',
+            'Si dudé, fue push + visión, no avanzar a ciegas.',
+          ],
+        ],
+        mental: [
+          [
+            'adaptBuild',
+            'Adapté build, botas e idea',
+            'No compré en automático ni seguí calls malas.',
+          ],
+          [
+            'leadership',
+            'Marqué ritmo y castigué errores',
+            'Pings, rotaciones y jugar alrededor del más fuerte.',
+          ],
+        ],
+      }
+      const CHECK_LABELS = {
+        antes: 'Antes de Rankear',
+        draft: 'Draft',
+        loading: 'Pantalla de Carga',
+        early: 'Juego Temprano',
+        mid: 'Juego Medio',
+        tf: 'Peleas de Equipo',
+        late: 'Late Game / Cierre',
+        mental: 'Mentalidad Avanzada',
+      }
+      const TIPS = [
+        {
+          phase: '1. Antes de Rankear',
+          items: [
+            [
+              'Campeón',
+              'No probar campeones: ir a lo seguro siempre',
+              'Pre-partida',
+            ],
+            ['Rol', 'No cambiar de rol a último minuto', 'Pre-partida'],
+            [
+              'Mentalidad base',
+              'Juega como si todos fueran Challenger: sin autopilot, cada acción tiene propósito',
+              'Pre-partida',
+            ],
+            [
+              'Modo focus',
+              'Modo streamer: deja de ver rangos enemigos, foco total en lo propio',
+              'Pre-partida',
+            ],
+          ],
+        },
+        {
+          phase: '2. Draft',
+          items: [
+            [
+              'Orden de picks',
+              'Usualmente: 1 JG -> 2 ADC -> 3 SUPP -> 4 MID -> 5 TOP',
+              'Draft',
+            ],
+            [
+              'Composición tanque',
+              'Si top no es tanque -> JG debe ser tanque; si JG no es tanque -> SUPP debe serlo',
+              'Draft',
+            ],
+            ['Daño mixto', 'Asegura daño dividido entre AP y AD', 'Draft'],
+            ['Hechizos', 'Si hay mucho CC -> ADC lleva Limpiar', 'Draft'],
+            [
+              'Flex picks',
+              'Si un champ puede ir 2-3 roles y encaja en la comp -> úsalo para confundir',
+              'Draft',
+            ],
+          ],
+        },
+        {
+          phase: '3. Pantalla de Carga',
+          items: [
+            [
+              'Win conditions',
+              'Define WIN CONDITION aliada y enemiga',
+              'Loading',
+            ],
+            ['Escala', '¿Quién gana late? ¿Aceleramos o esperamos?', 'Loading'],
+            ['Amenazas', '¿Quién puede borrar a nuestros carries?', 'Loading'],
+            [
+              'Prioridad de líneas',
+              '¿Qué líneas tienen prio? ¿Dónde habrá ganks o dives?',
+              'Loading',
+            ],
+            [
+              'Comp enemiga',
+              'Engage / Disengage / CC / Burst: identifica el patrón',
+              'Loading',
+            ],
+            [
+              'Plan de jungla',
+              '¿Invade o farmea? ¿Start? ¿Path? ¿Posición a 3:15?',
+              'Loading',
+            ],
+          ],
+        },
+        {
+          phase: '4. Early Game',
+          items: [
+            [
+              'Trackear JG enemigo',
+              'Wardear raptors y trackear desde nivel 1',
+              'Early',
+            ],
+            [
+              'Proteger que nos trackeen',
+              'Cubrir raptor y limpiar wards enemigas según lado del mapa',
+              'Early',
+            ],
+            [
+              'Minimapa',
+              'Mirar el mapa cada ~5 segundos sin excepción',
+              'Early',
+            ],
+            ['Wards clave', 'Plantar wards a 2:50 / 5:00 / 8:00', 'Early'],
+            [
+              'Escarabajo del río',
+              'Ganando línea + JG va -> todos rotan; si vas perdiendo -> no pelear',
+              'Early',
+            ],
+            [
+              'Wave management',
+              'Freeze si vas ganando; slowpush antes de base o roam',
+              'Early',
+            ],
+            ['Trades', 'No morir por tradear; solo con ventaja real', 'Early'],
+            [
+              'Respetar spikes',
+              'Respeta nivel 6, primer item y summoners enemigos',
+              'Early',
+            ],
+            [
+              'Gankeo y vida aliada',
+              'Mira la vida de tus lanes antes de gankear',
+              'Early',
+            ],
+          ],
+        },
+        {
+          phase: '5. Mid Game',
+          items: [
+            [
+              'Prio en medio',
+              'La torre más importante es medio: luego objetivos',
+              'Mid',
+            ],
+            [
+              'Soporte y base',
+              'Al salir de base, abre por medio antes de bajar/subir',
+              'Mid',
+            ],
+            [
+              'Forzar en medio',
+              'Si el rival está 2 en side, hay ventana para forzar 3v5',
+              'Mid',
+            ],
+            [
+              'Tempo tras kill',
+              'Kill -> acción inmediata antes de respuesta rival',
+              'Mid',
+            ],
+            [
+              'Tempo completo',
+              'Kill -> Push -> Base -> Spike antes que el rival',
+              'Mid',
+            ],
+            [
+              'Rotaciones',
+              'Torre top caída -> rotar, invadir o presionar mid',
+              'Mid',
+            ],
+            [
+              'Side play',
+              'Si no puedes responder una jugada -> haz otra al otro lado',
+              'Mid',
+            ],
+            [
+              'No pelear sin razón',
+              'Bailar / presionar / zonear > pelear porque sí',
+              'Mid',
+            ],
+            [
+              'TP / Splitpush',
+              'Solo si cambia algo importante y con visión/soporte del mapa',
+              'Mid',
+            ],
+            [
+              'Visión',
+              'Ofensiva si ganas, defensiva si pierdes, flancos antes de objetivos',
+              'Mid',
+            ],
+            [
+              'Dragones',
+              'Prioriza drags y entiende cuándo tradear objetivos',
+              'Mid',
+            ],
+            [
+              'Tomar medio',
+              'Si medio no cayó, usa Heraldo para abrir mapa',
+              'Mid',
+            ],
+          ],
+        },
+        {
+          phase: '6. Teamfights',
+          items: [
+            [
+              'Revisar CDs',
+              'Mira cooldowns propios y enemigos antes de entrar',
+              'TF',
+            ],
+            [
+              'No entrar sin alcance',
+              'No entres si tu equipo no puede acompañar daño',
+              'TF',
+            ],
+            ['Baitear CC', 'Haz gastar CC antes del engage real', 'TF'],
+            [
+              'Chaining CC',
+              'Encadena CC con aliados para máximo control',
+              'TF',
+            ],
+            ['No chasear', 'No persigas kills saliendo de la teamfight', 'TF'],
+            [
+              'Target focus',
+              'Prioriza el target correcto, no solo el más cercano',
+              'TF',
+            ],
+            [
+              'Posicionamiento',
+              'Backline atrás, engage desde flancos, itemiza según matchup',
+              'TF',
+            ],
+            ['Peel ADC', 'Protege al ADC si es la condición de daño', 'TF'],
+            [
+              'Jugar con el más fuerte',
+              'Teamplay alrededor del campeón más fed',
+              'TF',
+            ],
+            ['Marcar summoners', 'Registrar hechizos enemigos gastados', 'TF'],
+            ['Si nos van a acabar', 'Eliminar oleada para evitar cierre', 'TF'],
+          ],
+        },
+        {
+          phase: '7. Late Game / Cierre',
+          items: [
+            [
+              'Post-pelea',
+              'Ganar pelea -> push + objetivo. Cero tiempo muerto',
+              'Late',
+            ],
+            ['Barón regla', 'Con Barón no pelear en jungla enemiga', 'Late'],
+            [
+              'Barón tempo',
+              'Back luego de Barón para pushear con mismo tempo',
+              'Late',
+            ],
+            [
+              'Ventaja alta',
+              'Convierte kills en torres, dragones o Nashor',
+              'Late',
+            ],
+            [
+              'No suicidarse',
+              'No morir por objetivo menor salvo Barón, Alma o 3er drag',
+              'Late',
+            ],
+            [
+              'No regalar ventaja',
+              'Si vas ganando, no inventes plays arriesgadas',
+              'Late',
+            ],
+            ['Presión', 'Oro sin presión no gana partidas', 'Late'],
+            [
+              'Visión antes de obj',
+              'Negar visión enemiga antes de objetivo grande',
+              'Late',
+            ],
+            ['Cierre', 'Ganar pelea -> algo importante debe caer', 'Late'],
+            [
+              'Cazadas',
+              'Caza al enemigo fuera de posición antes del objetivo',
+              'Late',
+            ],
+          ],
+        },
+        {
+          phase: '8. Mentalidad Avanzada',
+          items: [
+            [
+              'No seguir malas calls',
+              'Si la call es mala, no la ejecutes por presión social',
+              'Siempre',
+            ],
+            [
+              'Castiga errores',
+              'Castigar errores rival > inventar plays propias',
+              'Siempre',
+            ],
+            [
+              'Solución > problema',
+              'No te quedes en el error: busca salida',
+              'Siempre',
+            ],
+            [
+              'Revisión de items',
+              'Mira TAB con intención, no por inercia',
+              'Siempre',
+            ],
+            [
+              'Botas / Itemización',
+              'Compra según matchup y estado de partida',
+              'Siempre',
+            ],
+            [
+              'Engaño / finta',
+              'Fintea antes de ejecutar la jugada real',
+              'Siempre',
+            ],
+            [
+              'Presión 2v3',
+              'Forzar 2-3 enemigos sin morir también es victoria de mapa',
+              'Siempre',
+            ],
+            [
+              'Skip campamentos',
+              'Si faltan 40s para drag, ajusta ruta para llegar con tempo',
+              'Siempre',
+            ],
+            ['Liderazgo', 'Pingea, rota y marca el ritmo', 'Siempre'],
+          ],
+        },
+      ]
+      const FALLBACK_CHAMPS = [
+        'Aatrox',
+        'Ahri',
+        'Akali',
+        'Amumu',
+        'Annie',
+        'Ashe',
+        'Aurora',
+        "Bel'Veth",
+        'Blitzcrank',
+        'Briar',
+        'Caitlyn',
+        'Camille',
+        "Cho'Gath",
+        'Darius',
+        'Diana',
+        'Dr. Mundo',
+        'Draven',
+        'Ekko',
+        'Elise',
+        'Evelynn',
+        'Ezreal',
+        'Fiddlesticks',
+        'Fiora',
+        'Fizz',
+        'Garen',
+        'Gragas',
+        'Graves',
+        'Gwen',
+        'Hecarim',
+        'Irelia',
+        'Ivern',
+        'Janna',
+        'Jarvan IV',
+        'Jax',
+        'Jhin',
+        'Jinx',
+        "Kai'Sa",
+        'Karthus',
+        'Kassadin',
+        'Katarina',
+        'Kayle',
+        'Kayn',
+        'Kindred',
+        'Kled',
+        'Lee Sin',
+        'Leona',
+        'Lillia',
+        'Lucian',
+        'Lulu',
+        'Lux',
+        'Malphite',
+        'Master Yi',
+        'Miss Fortune',
+        'Mordekaiser',
+        'Morgana',
+        'Naafiri',
+        'Nami',
+        'Nasus',
+        'Nidalee',
+        'Nocturne',
+        'Nunu & Willump',
+        'Olaf',
+        'Orianna',
+        'Pantheon',
+        'Poppy',
+        'Pyke',
+        'Qiyana',
+        'Rakan',
+        'Rammus',
+        "Rek'Sai",
+        'Renekton',
+        'Rengar',
+        'Riven',
+        'Sejuani',
+        'Senna',
+        'Seraphine',
+        'Sett',
+        'Shaco',
+        'Shen',
+        'Shyvana',
+        'Sion',
+        'Smolder',
+        'Soraka',
+        'Swain',
+        'Sylas',
+        'Talon',
+        'Thresh',
+        'Tristana',
+        'Tryndamere',
+        'Twisted Fate',
+        'Udyr',
+        'Vayne',
+        'Veigar',
+        'Vex',
+        'Vi',
+        'Viego',
+        'Vladimir',
+        'Volibear',
+        'Warwick',
+        'Wukong',
+        'Xayah',
+        'Xin Zhao',
+        'Yasuo',
+        'Yone',
+        'Yuumi',
+        'Zed',
+        'Zeri',
+        'Ziggs',
+        'Zoe',
+      ]
+      let data = {
+        profile: {
+          gameName: '',
+          tagLine: '',
+          server: 'LAN',
+          role: 'JUNGLE',
+          rank: 'IRON',
+          goal: 'MASTER',
+          pool: [],
+        },
+        accounts: [],
+        games: [],
+        recurringErrors: [
+          'Probar campeones en ranked',
+          'Cambiar de rol a última hora',
+          'Entrar en autopilot',
+          'No definir la win condition',
+          'No mirar el mapa cada 5 segundos',
+          'Pelear sin prioridad o sin números',
+          'No respetar spikes de nivel/item/summoners',
+          'No convertir kills en objetivo',
+          'No wardear flancos antes de objetivos',
+          'No adaptar build, botas o plan',
+        ],
+        champions: [...FALLBACK_CHAMPS],
+        championImages: {},
+        importedMatches: [],
+        matchupSheets: [],
+        activeMatchupId: '',
+        matchupFilters: { query: '', lane: 'all', diff: 'all' },
+      }
+      let form = {
+        result: null,
+        quick: { flow: null, autopilot: null, jg: null, map: null },
+        checks: {},
+        pendingRecurringErrors: [],
+      }
+      let historyPage = 1
+      function load() {
+        try {
+          const raw = localStorage.getItem(KEY)
+          if (raw) data = { ...data, ...JSON.parse(raw) }
+          if (!Array.isArray(data.profile.pool))
+            data.profile.pool = String(data.profile.pool || '')
+              .split(',')
+              .map((v) => v.trim())
+              .filter(Boolean)
+          if (!data.profile.server) data.profile.server = 'LAN'
+          if (!Array.isArray(data.accounts)) data.accounts = []
+        } catch {}
+      }
+      function save() {
+        localStorage.setItem(KEY, JSON.stringify(data))
+      }
+      const $ = (id) => document.getElementById(id)
+      function toast(t) {
+        $('toast').textContent = t
+        $('toast').classList.add('show')
+        setTimeout(() => $('toast').classList.remove('show'), 1800)
+      }
+      function pct(a, b) {
+        return b ? Math.round((a / b) * 100) : 0
+      }
+      function avg(arr) {
+        return arr.length ? arr.reduce((a, b) => a + b, 0) / arr.length : 0
+      }
+      function fmtDur(sec) {
+        const m = Math.floor(sec / 60) || 0
+        const s = sec % 60 || 0
+        return `${m}m ${String(s).padStart(2, '0')}s`
+      }
+      function createOptions(arr, selected = '') {
+        return arr
+          .map(
+            (v) => `<option ${v === selected ? 'selected' : ''}>${v}</option>`
+          )
+          .join('')
+      }
+      function accountId(p) {
+        return `${(p.gameName || '').toLowerCase()}#${(p.tagLine || '').toLowerCase()}@${p.server || 'LAN'}`
+      }
+      function hasActiveProfile() {
+        return Boolean(data.profile?.gameName && data.profile?.tagLine)
+      }
+      function myGames() {
+        const id = accountId(data.profile)
+        return data.games.filter((g) => !g.accountId || g.accountId === id)
+      }
+      function rankImg(rank) {
+        return `https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-static-assets/global/default/ranked-emblem/emblem-${String(rank || 'iron').toLowerCase()}.png`
+      }
+      function champImg(name) {
+        if (!name)
+          return 'https://res.cloudinary.com/dfr9zlu8d/image/upload/v1777329733/supro-logo_rvavuy.jpg'
+        if (data.championImages?.[name]) return data.championImages[name]
+        const key = name
+          .replace(/[\s'.&]/g, '')
+          .replace(/:/g, '')
+          .replace(/-/g, '')
+        return `https://ddragon.leagueoflegends.com/cdn/15.8.1/img/champion/${key}.png`
+      }
+      function moodClass(mood) {
+        return `mood-${String(mood || '').toLowerCase()}`
+      }
+      function boolTag(v, goodText = 'Sí', badText = 'No') {
+        return `<span class="tag ${v ? 'bool-yes' : 'bool-no'}">${v ? goodText : badText}</span>`
+      }
+      function lpTag(result, lp) {
+        const sign = result === 'win' ? '+' : '-'
+        return `<span class="tag ${result === 'win' ? 'lp-plus' : 'lp-minus'}">${sign}${Math.abs(Number(lp) || 0)} LP</span>`
+      }
+      function updateNavVisibility() {
+        const active = hasActiveProfile()
+        document
+          .querySelector('[data-tab="partida"]')
+          ?.classList.toggle('hidden', !active)
+        document
+          .querySelector('[data-tab="historial"]')
+          ?.classList.toggle('hidden', !active)
+      }
+      function renderTips() {
+        return `<div class="card"><div class="title"><h2>Tips</h2><span>Macro, draft y mentalidad</span></div><div class="tips-wrap">${TIPS.map((phase) => `<div class="tip-phase"><div class="tip-head"><h3>${phase.phase}</h3><div class="tip-count">${phase.items.length} tips</div></div><div class="tip-list">${phase.items.map(([concept, rule, moment]) => `<div class="tip-item"><div class="tip-top"><span class="tag rank">${moment}</span><strong>${concept}</strong></div><div class="tip-copy">${rule}</div></div>`).join('')}</div></div>`).join('')}</div></div>`
+      }
+      function renderBase() {
+        $('tab-inicio').innerHTML = `
+    <div class="card hero"><div class="hero-grid"><div><div class="title"><h2>SUPRO Tracker</h2><span id="todayFocus">Conecta una cuenta y empieza a trackear</span></div><h3>Analiza tus ranked con más intención.</h3><p>Una herramienta pensada para cualquier jugador que quiera revisar partidas, detectar patrones reales y construir progreso con criterio, no con autopilot.</p><p class="small" style="margin-top:10px">Creada por Grymm para el clan SUPRO y abierta para cualquiera que quiera mejorar de verdad.</p><div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:14px">${hasActiveProfile() ? '' : `<button class="btn cta" onclick="switchTab('importar')">Conectar cuenta</button>`}</div></div><img class="hero-mark" src="https://res.cloudinary.com/dfr9zlu8d/image/upload/v1777329733/supro-logo_rvavuy.jpg" alt="SUPRO"></div></div>
+    ${hasActiveProfile() ? `<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px"><div class="kpi"><div class="v" id="kpiWins" style="color:var(--green)">--</div><div class="l">Victorias</div></div><div class="kpi"><div class="v" id="kpiLosses" style="color:var(--red)">--</div><div class="l">Derrotas</div></div><div class="kpi"><div class="v" id="kpiWR" style="color:var(--green)">--</div><div class="l">Win Rate</div></div><div class="kpi"><div class="v" id="kpiGames">--</div><div class="l">Partidas</div></div><div class="kpi"><div class="v" id="kpiFlow" style="color:var(--blue)">--</div><div class="l">Flow</div></div><div class="kpi"><div class="v" id="kpiCs" style="color:#ff8a4c">--</div><div class="l">CS/min</div></div></div>` : ''}
+    <div class="card" style="margin-top:14px"><div class="title"><h2>Recursos</h2><span>Herramientas y referencias</span></div><div class="grid g2"><div class="resource"><div><strong>Santo Grial de Grymm</strong><div class="small">PDF base del método para compartir con el clan.</div></div><a class="btn cta" href="https://drive.google.com/file/d/1abmbZSzuCdm_E9n6g1XIpDflbBMfzr2q/view" target="_blank" rel="noopener noreferrer">Ver guía</a></div><div class="resource"><div><strong>LoLalytics</strong><div class="small">Campeones OP del parche, builds y win rates.</div></div><button class="soft" onclick="window.open('https://lolalytics.com/','_blank')">Abrir</button></div><div class="resource"><div><strong>Probuilds</strong><div class="small">Builds reales de pro players.</div></div><button class="soft" onclick="window.open('https://probuildstats.com/','_blank')">Abrir</button></div><div class="resource"><div><strong>OP.GG</strong><div class="small">Stats, builds y perfiles por Riot ID + Tag.</div></div><button class="soft" onclick="window.open('https://op.gg/','_blank')">Abrir</button></div><div class="resource"><div><strong>U.GG</strong><div class="small">Tier list, builds y matchup data.</div></div><button class="soft" onclick="window.open('https://u.gg/','_blank')">Abrir</button></div><div class="resource"><div><strong>LOL Tactics Planner</strong><div class="small">Planear jugadas en el mapa.</div></div><button class="soft" onclick="window.open('https://planner.loltactics.gg/','_blank')">Abrir</button></div><div class="resource"><div><strong>DRAF</strong><div class="small">Pensar compos y draft.</div></div><button class="soft" onclick="window.open('https://draf.gg/','_blank')">Abrir</button></div><div class="resource"><div><strong>Biblioteca de Tips</strong><div class="small">Toda la macro, draft y mentalidad en una pantalla aparte.</div></div><button class="soft" onclick="switchTab('tips')">Abrir</button></div></div></div>`
+        const checkHtml = Object.entries(CHECKS)
+          .map(
+            ([k, items]) =>
+              `<div class="checkGroup"><h4>${CHECK_LABELS[k]}</h4>${items.map(([id, l, d]) => `<div class="check ${form.checks[id] ? 'on' : ''}" onclick="toggleCheck('${id}')"><div class="dot">${form.checks[id] ? '✓' : ''}</div><div><b>${l}</b><span>${d}</span></div></div>`).join('')}</div>`
+          )
+          .join('')
+        $('tab-partida').innerHTML =
+          `<div class="card"><div class="title"><h2>Registrar partida</h2></div><div class="seg" style="margin-bottom:14px"><button id="btnWin" onclick="setResult('win')">Victoria</button><button id="btnLoss" onclick="setResult('loss')">Derrota</button></div><div class="form"><div class="f s3"><label>Fecha</label><input id="gDate" type="date"></div><div class="f s3"><label>Mood inicial</label><select id="gMoodStart">${createOptions(MOODS)}</select></div><div class="f s3"><label>Mood final</label><select id="gMoodEnd">${createOptions(MOODS)}</select></div><div class="f s3"><label>Rol</label><select id="gRole"><option value="TOP">TOP</option><option value="JUNGLE">JG</option><option value="MIDDLE">MID</option><option value="BOTTOM">ADC</option><option value="UTILITY">SUP</option></select></div><div class="f s4 champ-f"><label>Mi campeón</label><div class="champ-row tight"><select id="gChamp" onchange="updateChampionPreview()"></select><img id="gChampPreview" class="champ-preview" src="https://res.cloudinary.com/dfr9zlu8d/image/upload/v1777329733/supro-logo_rvavuy.jpg" alt=""></div></div><div class="f s4 champ-f"><label>Campeón enemigo</label><div class="champ-row tight"><select id="gEnemy" onchange="updateChampionPreview()"></select><img id="gEnemyPreview" class="champ-preview" src="https://res.cloudinary.com/dfr9zlu8d/image/upload/v1777329733/supro-logo_rvavuy.jpg" alt=""></div></div><div class="f s2 champ-f"><label>Elo</label><div class="champ-row tier-only"><select id="gTier" onchange="updateTierFields()">${RANKS.map((r) => `<option value="${r}">${RANK_LABEL[r]}</option>`).join('')}</select></div></div><div class="f s2 compact-field" id="gDivisionWrap"><label>División</label><select id="gDivision"><option value="I">I</option><option value="II">II</option><option value="III">III</option><option value="IV">IV</option><option value="--">--</option></select></div><div class="f s2 compact-field"><label>LP</label><input id="gLp" type="number" min="0" max="60" placeholder="55"></div><div class="f s2 compact-field"><label>Kills</label><input id="gKills" type="number" min="0"></div><div class="f s2 compact-field"><label>Deaths</label><input id="gDeaths" type="number" min="0"></div><div class="f s2 compact-field"><label>Assists</label><input id="gAssists" type="number" min="0"></div><div class="f s2 compact-field"><label>CS/min</label><input id="gCs" type="number" min="0" step="0.1"></div><div class="f s2 compact-field"><label>Wards</label><input id="gWards" type="number" min="0"></div><div class="f s2 compact-field"><label>Pinks</label><input id="gPinks" type="number" min="0"></div><div class="f s2 compact-field"><label>Duración min</label><input id="gDurMin" type="number" min="0" max="99"></div><div class="f s2 compact-field"><label>Duración seg</label><input id="gDurSec" type="number" min="0" max="59"></div></div><div class="title" style="margin-top:16px"><h2>Autoevaluación rápida</h2></div><div class="toggles"><div class="toggle" id="qFlow" onclick="toggleQuick('flow')"><div class="q">¿Estabas en flow?</div><div class="a">—</div></div><div class="toggle" id="qAuto" onclick="toggleQuick('autopilot')"><div class="q">¿Jugaste en autopilot?</div><div class="a">—</div></div><div class="toggle" id="qJg" onclick="toggleQuick('jg')"><div class="q">¿Trackeaste bien al rival más importante?</div><div class="a">—</div></div><div class="toggle" id="qMap" onclick="toggleQuick('map')"><div class="q">¿Miraste el mapa cada 5s?</div><div class="a">—</div></div></div><div class="title" style="margin-top:16px"><h2>Checklist post-partida</h2></div><div class="checks">${checkHtml}</div><div class="title" style="margin-top:16px"><h2>Errores y notas</h2></div><div class="form"><div class="f s6"><label>Error recurrente detectado</label><select id="gRecurring"><option value="">Selecciona un error</option>${data.recurringErrors.map((e) => `<option>${e}</option>`).join('')}</select></div><div class="f s6"><label>Agregar errores nuevos</label><input id="gNewRecurring" placeholder="Escribe uno y presiona Enter" onkeydown="handleRecurringErrorKeydown(event)"><div id="pendingRecurringErrors" class="sheet-pills" style="margin-top:8px"></div></div><div class="f s12"><label>Ajuste para la próxima sesión</label><textarea id="gImprove"></textarea></div><div class="f s12"><label>Comentarios</label><textarea id="gComments"></textarea></div><div class="f s12"><label>Coach video / VOD</label><input id="gCoach" placeholder="URL"></div></div><div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:14px"><button class="btn" onclick="saveGame()">Guardar partida</button><button class="soft" onclick="resetForm()">Limpiar</button></div></div>`
+        $('tab-importar').innerHTML =
+          `<div class="grid g2"><div class="card"><div class="title"><h2>Conexión de Cuenta</h2><span>Cuenta local</span></div><div class="form"><div class="f s4"><label>Nombre</label><input id="pGameName"></div><div class="f s2"><label>Tag</label><input id="pTagLine"></div><div class="f s3"><label>Servidor</label><select id="pServer">${SERVERS.map((s) => `<option value="${s}">${s}</option>`).join('')}</select></div><div class="f s6 compact-field"><label>Rango actual</label><select id="pRank" onchange="updateAccountPreview()">${RANKS.map((r) => `<option value="${r}">${RANK_LABEL[r]}</option>`).join('')}</select></div><div class="f s6" style="display:grid;place-items:center"><label>Emblema actual</label><img id="accountRankPreview" class="rank-badge" src="${rankImg(data.profile.rank)}" alt=""></div></div><div class="note" style="margin-top:12px">Esto funciona como sesión local. Puedes guardar varias cuentas, cambiar entre perfiles y abrir tu cuenta en OPGG cuando haya una activa.</div><div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:12px"><button class="btn cta" onclick="saveProfile()">Guardar / Conectar</button></div></div><div class="card"><div class="title"><h2>Cuentas Guardadas</h2><span>Switch rápido</span></div><div class="list" id="accountsBox"></div></div></div>`
+        $('tab-historial').innerHTML =
+          `<div class="card"><div class="title"><h2>Rendimiento personal</h2><span>Todas tus partidas</span></div><div class="filters"><select class="select-pill" id="hFilter" onchange="renderHistory()"><option value="all">Todos</option><option value="win">Victorias</option><option value="loss">Derrotas</option></select><select class="select-pill" id="hChampFilter" onchange="renderHistory()"><option value="all">Todos los campeones</option>${data.champions.map((c) => `<option value="${c}">${c}</option>`).join('')}</select><select class="select-pill" id="hRoleFilter" onchange="renderHistory()"><option value="all">Todos los roles</option><option value="TOP">Top</option><option value="JUNGLE">Jungla</option><option value="MIDDLE">Mid</option><option value="BOTTOM">Bot</option><option value="UTILITY">Support</option></select><input class="select-pill" id="hDateFrom" type="date" onchange="renderHistory()"><input class="select-pill" id="hDateTo" type="date" onchange="renderHistory()"><div style="margin-left:auto;display:flex;gap:8px;flex-shrink:0"><button class="soft" onclick="exportHistoryWorkbook()">Exportar</button><button class="danger" onclick="clearAll()">Limpiar historial</button></div></div><div class="list" id="historyBox"></div></div>`
+        $('tab-matchups').innerHTML =
+          `<div class="card"><div class="title"><h2>Matchups</h2><span>Importa hojas de Excel y navega entre ellas</span></div><div class="sheet-toolbar"><input class="hidden-file" id="matchupFile" type="file" accept=".xlsx,.xls" onchange="importMatchupWorkbook(event)"><button class="btn" onclick="document.getElementById('matchupFile')?.click()">📄 Elegir Matchups</button><button class="danger" onclick="clearMatchups()">Borrar matchups</button></div><div id="matchupContent"></div></div>`
+        $('tab-tips').innerHTML = renderTips()
+      }
+      function saveProfile() {
+        const gameName = $('pGameName').value.trim()
+        const tagLine = $('pTagLine').value.trim()
+        if (!gameName || !tagLine) {
+          toast('Pon nombre y tag antes de guardar')
+          return
+        }
+        data.profile = {
+          gameName,
+          tagLine,
+          server: $('pServer').value,
+          role: data.profile.role || 'JUNGLE',
+          rank: $('pRank').value,
+          goal: data.profile.goal || 'MASTER',
+          pool: [],
+        }
+        const id = accountId(data.profile)
+        const existing = data.accounts.findIndex((a) => accountId(a) === id)
+        if (existing >= 0) data.accounts[existing] = { ...data.profile }
+        else data.accounts.unshift({ ...data.profile })
+        save()
+        renderBase()
+        syncProfileInputs()
+        seedInputs()
+        renderQuick()
+        renderDashboard()
+        renderProgress()
+        renderHistory()
+        renderAccounts()
+        updateNavVisibility()
+        switchTab('inicio')
+        toast('Cuenta guardada')
+      }
+      function prefillVerificationTip() {
+        toast(
+          'Más adelante la cuenta se podrá verificar con un paso simple como icono de invocador o consulta directa a Riot.'
+        )
+      }
+      function syncProfileInputs() {
+        if ($('pGameName')) $('pGameName').value = data.profile.gameName || ''
+        if ($('pTagLine')) $('pTagLine').value = data.profile.tagLine || ''
+        if ($('pServer')) $('pServer').value = data.profile.server || 'LAN'
+        if ($('pRank')) $('pRank').value = data.profile.rank
+        if ($('profileChip')) {
+          if (hasActiveProfile()) {
+            const rankImgEl = `<img src="${rankImg(data.profile.rank)}" style="width:52px;height:52px;object-fit:contain;flex-shrink:0;filter:drop-shadow(0 2px 10px rgba(255,77,77,.35));transform:scale(1.18);transform-origin:center">`
+            if (data.accounts.length > 1) {
+              const acctOpts = data.accounts
+                .map(
+                  (a) =>
+                    `<option value="${accountId(a)}" ${accountId(a) === accountId(data.profile) ? 'selected' : ''}>${a.gameName}#${a.tagLine} · ${RANK_LABEL[a.rank]}</option>`
+                )
+                .join('')
+              $('profileChip').innerHTML =
+                `${rankImgEl}<select class="acc-switch" onchange="switchHeaderAccount(this.value)">${acctOpts}</select>`
+            } else {
+              $('profileChip').innerHTML =
+                `${rankImgEl}<span class="acc-switch" style="cursor:default;pointer-events:none">${data.profile.gameName}#${data.profile.tagLine} · ${RANK_LABEL[data.profile.rank]}</span>`
+            }
+          } else {
+            $('profileChip').innerHTML = ''
+          }
+          $('profileChip').style.display = hasActiveProfile()
+            ? 'inline-flex'
+            : 'none'
+        }
+        if ($('headerLogoutBtn'))
+          $('headerLogoutBtn').style.display = hasActiveProfile()
+            ? 'inline-flex'
+            : 'none'
+        if ($('accountRankPreview'))
+          $('accountRankPreview').src = rankImg(data.profile.rank)
+      }
+      function renderDashboard() {
+        if (!hasActiveProfile()) {
+          if ($('todayFocus')) $('todayFocus').textContent = ''
+          updateNavVisibility()
+          return
+        }
+        const games = myGames(),
+          wins = games.filter((g) => g.result === 'win').length,
+          flows = games.filter((g) => g.flow === true).length,
+          csAvg = avg(games.map((g) => g.csMin).filter(Boolean))
+        $('kpiGames').textContent = games.length || '--'
+        $('kpiWins').textContent = games.length ? wins : '--'
+        $('kpiLosses').textContent = games.length ? games.length - wins : '--'
+        $('kpiWR').textContent = games.length
+          ? `${pct(wins, games.length)}%`
+          : '--'
+        $('kpiFlow').textContent = games.length
+          ? `${pct(flows, games.length)}%`
+          : '--'
+        $('kpiCs').textContent = csAvg ? csAvg.toFixed(1) : '--'
+        $('todayFocus').textContent = ''
+        updateNavVisibility()
+      }
+      function renderAccounts() {
+        if (!$('accountsBox')) return
+        $('accountsBox').innerHTML = data.accounts.length
+          ? data.accounts
+              .map(
+                (a) =>
+                  `<div class="account${accountId(a) === accountId(data.profile) ? ' active' : ''}" onclick="useAccount('${accountId(a)}')"><div class="account-main"><img src="${rankImg(a.rank)}" style="width:48px;height:48px;object-fit:contain;flex-shrink:0"><div><strong>${a.gameName}#${a.tagLine}</strong><div class="small">${a.server} · ${RANK_LABEL[a.rank]} · ${ROLE_LABEL[a.role] || a.role}</div></div></div><div class="account-actions"><button class="acc-icon" onclick="event.stopPropagation();openOpgg('${accountId(a)}')" title="Ver en OP.GG"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></button><button class="acc-icon acc-del" onclick="event.stopPropagation();deleteAccount('${accountId(a)}')" title="Eliminar">✕</button></div></div>`
+              )
+              .join('')
+          : '<div class="small">No hay cuentas guardadas todavía.</div>'
+      }
+      function deleteAccount(id) {
+        const target = data.accounts.find((a) => accountId(a) === id)
+        if (!target) return
+        data.accounts = data.accounts.filter((a) => accountId(a) !== id)
+        if (accountId(data.profile) === id) {
+          data.profile = {
+            gameName: '',
+            tagLine: '',
+            server: 'LAN',
+            role: 'JUNGLE',
+            rank: 'IRON',
+            goal: 'MASTER',
+            pool: [],
+          }
+        }
+        save()
+        renderBase()
+        syncProfileInputs()
+        seedInputs()
+        renderQuick()
+        renderDashboard()
+        renderProgress()
+        renderHistory()
+        renderAccounts()
+        if (!hasActiveProfile()) switchTab('inicio')
+        toast('Cuenta eliminada')
+      }
+      function switchHeaderAccount(id) {
+        if (!id) return
+        useAccount(id)
+      }
+      function useAccount(id) {
+        const found = data.accounts.find((a) => accountId(a) === id)
+        if (!found) return
+        data.profile = { ...found }
+        save()
+        renderBase()
+        syncProfileInputs()
+        seedInputs()
+        renderQuick()
+        renderDashboard()
+        renderProgress()
+        renderHistory()
+        renderAccounts()
+        switchTab('inicio')
+        toast('Cuenta activa cambiada')
+      }
+      function logoutProfile() {
+        data.profile = {
+          gameName: '',
+          tagLine: '',
+          server: 'LAN',
+          role: 'JUNGLE',
+          rank: 'IRON',
+          goal: 'MASTER',
+          pool: [],
+        }
+        save()
+        renderBase()
+        syncProfileInputs()
+        seedInputs()
+        renderQuick()
+        renderDashboard()
+        renderProgress()
+        renderHistory()
+        renderAccounts()
+        switchTab('inicio')
+        toast('Sesión cerrada')
+      }
+      function openOpgg(id) {
+        const account = id
+          ? data.accounts.find((a) => accountId(a) === id)
+          : data.profile
+        if (!account?.gameName) return toast('Guarda una cuenta primero')
+        window.open(
+          `https://op.gg/es/lol/summoners/${account.server.toLowerCase()}/${encodeURIComponent(account.gameName)}-${encodeURIComponent(account.tagLine)}`,
+          '_blank'
+        )
+      }
+      function updateAccountPreview() {
+        if ($('accountRankPreview') && $('pRank'))
+          $('accountRankPreview').src = rankImg($('pRank').value)
+      }
+      function updateRankPreview() {
+        if ($('gRankPreview') && $('gTier'))
+          $('gRankPreview').src = rankImg($('gTier').value)
+      }
+      function updateChampionPreview() {
+        if ($('gChampPreview'))
+          $('gChampPreview').src = champImg($('gChamp').value)
+        if ($('gEnemyPreview'))
+          $('gEnemyPreview').src = champImg($('gEnemy').value)
+      }
+      function setResult(result) {
+        form.result = result
+        $('btnWin').classList.toggle('active', result === 'win')
+        $('btnWin').classList.toggle('win', result === 'win')
+        $('btnLoss').classList.toggle('active', result === 'loss')
+        $('btnLoss').classList.toggle('loss', result === 'loss')
+      }
+      function toggleQuick(key) {
+        const vals = [null, true, false]
+        form.quick[key] = vals[(vals.indexOf(form.quick[key]) + 1) % 3]
+        renderQuick()
+      }
+      function renderQuick() {
+        const map = {
+          flow: ['qFlow', false],
+          autopilot: ['qAuto', true],
+          jg: ['qJg', false],
+          map: ['qMap', false],
+        }
+        Object.entries(map).forEach(([k, [id, invert]]) => {
+          const el = $(id)
+          el.className = 'toggle'
+          const a = el.querySelector('.a')
+          const v = form.quick[k]
+          a.textContent = v === null ? '—' : v ? 'Sí' : 'No'
+          if (v === null) return
+          const good = invert ? !v : v
+          el.classList.add(
+            good ? (v ? 'goodYes' : 'goodNo') : v ? 'badYes' : 'badNo'
+          )
+        })
+      }
+      function captureGameFields() {
+        return $('gChamp')
+          ? {
+              date: $('gDate').value,
+              moodStart: $('gMoodStart').value,
+              moodEnd: $('gMoodEnd').value,
+              role: $('gRole').value,
+              champ: $('gChamp').value,
+              enemy: $('gEnemy').value,
+              tier: $('gTier').value,
+              division: $('gDivision').value,
+              lp: $('gLp').value,
+              kills: $('gKills').value,
+              deaths: $('gDeaths').value,
+              assists: $('gAssists').value,
+              cs: $('gCs').value,
+              wards: $('gWards').value,
+              pinks: $('gPinks').value,
+              durMin: $('gDurMin').value,
+              durSec: $('gDurSec').value,
+              recurring: $('gRecurring').value,
+              newRecurring: $('gNewRecurring').value,
+              pendingRecurringErrors: [...form.pendingRecurringErrors],
+              improve: $('gImprove').value,
+              comments: $('gComments').value,
+              coach: $('gCoach').value,
+            }
+          : null
+      }
+      function restoreGameFields(v) {
+        if (!v || !$('gChamp')) return
+        $('gDate').value = v.date
+        $('gMoodStart').value = v.moodStart
+        $('gMoodEnd').value = v.moodEnd
+        $('gRole').value = v.role
+        $('gChamp').value = v.champ
+        $('gEnemy').value = v.enemy
+        $('gTier').value = v.tier
+        $('gDivision').value = v.division
+        $('gLp').value = v.lp
+        $('gKills').value = v.kills
+        $('gDeaths').value = v.deaths
+        $('gAssists').value = v.assists
+        $('gCs').value = v.cs
+        $('gWards').value = v.wards
+        $('gPinks').value = v.pinks
+        $('gDurMin').value = v.durMin
+        $('gDurSec').value = v.durSec
+        $('gRecurring').value = v.recurring
+        $('gNewRecurring').value = v.newRecurring
+        form.pendingRecurringErrors = [...(v.pendingRecurringErrors || [])]
+        $('gImprove').value = v.improve
+        $('gComments').value = v.comments
+        $('gCoach').value = v.coach
+        renderPendingRecurringErrors()
+      }
+      function toggleCheck(id) {
+        const draft = captureGameFields()
+        form.checks[id] = !form.checks[id]
+        renderBase()
+        syncProfileInputs()
+        seedInputs()
+        restoreGameFields(draft)
+        if (form.result) setResult(form.result)
+        renderDashboard()
+        renderQuick()
+      }
+      function setMultiSelectValues(id, values) {
+        const el = $(id)
+        if (!el) return
+        ;[...el.options].forEach((opt) => {
+          opt.selected = values.includes(opt.value)
+        })
+      }
+      function seedInputs() {
+        const champOptions =
+          '<option value="">— Seleccionar —</option>' +
+          data.champions
+            .sort()
+            .map((c) => `<option value="${c}">${c}</option>`)
+            .join('')
+        if ($('gChamp')) {
+          $('gChamp').innerHTML = champOptions
+          $('gEnemy').innerHTML = champOptions
+          $('gDate').value =
+            $('gDate').value || new Date().toISOString().slice(0, 10)
+          $('gRole').value = data.profile.role || 'JUNGLE'
+          $('gTier').value = data.profile.rank || 'IRON'
+          $('gChamp').value = ''
+          $('gEnemy').value = ''
+          updateChampionPreview()
+          updateRankPreview()
+          renderPendingRecurringErrors()
+        }
+      }
+      function resetForm() {
+        form = {
+          result: null,
+          quick: { flow: null, autopilot: null, jg: null, map: null },
+          checks: {},
+          pendingRecurringErrors: [],
+        }
+        renderBase()
+        syncProfileInputs()
+        seedInputs()
+        renderQuick()
+        renderDashboard()
+        renderHistory()
+        renderProgress()
+      }
+      function renderPendingRecurringErrors() {
+        const box = $('pendingRecurringErrors')
+        if (!box) return
+        box.innerHTML = form.pendingRecurringErrors.length
+          ? form.pendingRecurringErrors
+              .map(
+                (err, index) =>
+                  `<span class="sheet-pill active" onclick="removePendingRecurringError(${index})">${err} ×</span>`
+              )
+              .join('')
+          : ''
+      }
+      function handleRecurringErrorKeydown(event) {
+        if (event.key !== 'Enter') return
+        event.preventDefault()
+        const input = $('gNewRecurring')
+        const value = input?.value?.trim()
+        if (!value) return
+        if (!form.pendingRecurringErrors.includes(value))
+          form.pendingRecurringErrors.push(value)
+        input.value = ''
+        renderPendingRecurringErrors()
+      }
+      function removePendingRecurringError(index) {
+        form.pendingRecurringErrors.splice(index, 1)
+        renderPendingRecurringErrors()
+      }
+      function saveGame() {
+        if (!form.result) return toast('Selecciona victoria o derrota')
+        const newErr = $('gNewRecurring').value.trim(),
+          selectedErr = $('gRecurring').value,
+          errors = [
+            ...new Set(
+              [selectedErr, newErr, ...form.pendingRecurringErrors].filter(
+                Boolean
+              )
+            ),
+          ]
+        errors.forEach((e) => {
+          if (!data.recurringErrors.includes(e)) data.recurringErrors.unshift(e)
+        })
+        const game = {
+          id: Date.now(),
+          accountId: accountId(data.profile),
+          date: $('gDate').value,
+          result: form.result,
+          moodStart: $('gMoodStart').value,
+          moodEnd: $('gMoodEnd').value,
+          role: $('gRole').value,
+          champ: $('gChamp').value,
+          enemy: $('gEnemy').value,
+          tier: $('gTier').value,
+          division: $('gDivision').value,
+          lp: Number($('gLp').value || 0),
+          kills: Number($('gKills').value || 0),
+          deaths: Number($('gDeaths').value || 0),
+          assists: Number($('gAssists').value || 0),
+          csMin: Number($('gCs').value || 0),
+          wards: Number($('gWards').value || 0),
+          pinks: Number($('gPinks').value || 0),
+          durationSec:
+            Number($('gDurMin').value || 0) * 60 +
+            Number($('gDurSec').value || 0),
+          flow: form.quick.flow,
+          autopilot: form.quick.autopilot,
+          trackedJg: form.quick.jg,
+          map5: form.quick.map,
+          checks: { ...form.checks },
+          recurringErrors: errors,
+          improve: $('gImprove').value.trim(),
+          comments: $('gComments').value.trim(),
+          coach: $('gCoach').value.trim(),
+        }
+        data.games.unshift(game)
+        save()
+        resetForm()
+        toast('Partida guardada')
+      }
+      function bar(label, value, max, color = '') {
+        return `<div class="barRow"><div class="barHead"><span>${label}</span><span>${value}</span></div><div class="barWrap"><div class="bar ${color}" style="width:${max ? Math.max(8, Math.round((value / max) * 100)) : 0}%"></div></div></div>`
+      }
+      function renderProgress() {
+        const g = myGames()
+        if (!$('summaryBars')) return
+        const wins = g.filter((x) => x.result === 'win').length
+        const flow = g.filter((x) => x.flow === true).length
+        const noAuto = g.filter((x) => x.autopilot === false).length
+        const map = g.filter((x) => x.map5 === true).length
+        const jg = g.filter((x) => x.trackedJg === true).length
+        $('summaryBars').innerHTML =
+          [
+            ['Win rate', pct(wins, g.length)],
+            ['Flow', pct(flow, g.length)],
+            ['No autopilot', pct(noAuto, g.length)],
+            ['Lectura del rival clave', pct(jg, g.length)],
+            ['Mapa cada 5s', pct(map, g.length)],
+          ]
+            .map(([l, v], i) =>
+              bar(l, v, 100, ['green', 'blue', '', '', ''][i] || '')
+            )
+            .join('') || '<div class="small">Sin datos.</div>'
+        const errorCount = {}
+        g.forEach((x) =>
+          (x.recurringErrors || []).forEach(
+            (e) => (errorCount[e] = (errorCount[e] || 0) + 1)
+          )
+        )
+        const topErrors = Object.entries(errorCount)
+          .sort((a, b) => b[1] - a[1])
+          .slice(0, 7)
+        $('errorBars').innerHTML = topErrors.length
+          ? topErrors
+              .map(([l, v]) => bar(l, v, topErrors[0][1], 'red'))
+              .join('')
+          : '<div class="small">Sin errores guardados todavía.</div>'
+        const enemyStats = {}
+        g.forEach((x) => {
+          if (!x.enemy) return
+          enemyStats[x.enemy] ??= { games: 0, wins: 0 }
+          enemyStats[x.enemy].games++
+          if (x.result === 'win') enemyStats[x.enemy].wins++
+        })
+        const topEnemies = Object.entries(enemyStats)
+          .sort((a, b) => b[1].games - a[1].games)
+          .slice(0, 7)
+        $('matchupBars').innerHTML = topEnemies.length
+          ? topEnemies
+              .map(([l, v]) =>
+                bar(
+                  `${l} · ${pct(v.wins, v.games)}% WR`,
+                  v.games,
+                  topEnemies[0][1].games,
+                  'amber'
+                )
+              )
+              .join('')
+          : '<div class="small">Sin matchups suficientes.</div>'
+        const champStats = {}
+        g.forEach((x) => {
+          champStats[x.champ] ??= { games: 0, wins: 0 }
+          champStats[x.champ].games++
+          if (x.result === 'win') champStats[x.champ].wins++
+        })
+        const topChamps = Object.entries(champStats)
+          .sort((a, b) => b[1].games - a[1].games)
+          .slice(0, 7)
+        $('champBars').innerHTML = topChamps.length
+          ? topChamps
+              .map(([l, v]) =>
+                bar(
+                  `${l} · ${pct(v.wins, v.games)}% WR`,
+                  v.games,
+                  topChamps[0][1].games,
+                  'green'
+                )
+              )
+              .join('')
+          : '<div class="small">Sin campeones aún.</div>'
+        const moodCount = {}
+        g.forEach((x) => {
+          ;[x.moodStart, x.moodEnd]
+            .filter(Boolean)
+            .forEach((m) => (moodCount[m] = (moodCount[m] || 0) + 1))
+        })
+        const moods = Object.entries(moodCount)
+          .sort((a, b) => b[1] - a[1])
+          .slice(0, 7)
+        $('moodBars').innerHTML = moods.length
+          ? moods.map(([l, v]) => bar(l, v, moods[0][1], 'blue')).join('')
+          : '<div class="small">Sin moods registrados.</div>'
+      }
+      function changeHistoryPage(next) {
+        historyPage = next
+        renderHistory()
+      }
+      function renderHistory() {
+        if (!hasActiveProfile()) {
+          if ($('historyBox'))
+            $('historyBox').innerHTML =
+              '<div class="small">Conecta una cuenta para ver historial.</div>'
+          return
+        }
+        if (!$('historyBox')) return
+        const filter = $('hFilter')?.value || 'all'
+        const champ = $('hChampFilter')?.value || 'all'
+        const role = $('hRoleFilter')?.value || 'all'
+        const from = $('hDateFrom')?.value || ''
+        const to = $('hDateTo')?.value || ''
+        const filtered = myGames().filter(
+          (g) =>
+            (filter === 'all' || g.result === filter) &&
+            (champ === 'all' || g.champ === champ) &&
+            (role === 'all' || g.role === role) &&
+            (!from || g.date >= from) &&
+            (!to || g.date <= to)
+        )
+        const perPage = 6
+        const totalPages = Math.max(1, Math.ceil(filtered.length / perPage))
+        if (historyPage > totalPages) historyPage = totalPages
+        const start = (historyPage - 1) * perPage
+        const items = filtered.slice(start, start + perPage)
+        const cards = items.length
+          ? items
+              .map(
+                (g) =>
+                  `<div class="game"><div class="gameTop"><div class="res ${g.result}">${g.result === 'win' ? 'Victoria' : 'Derrota'}</div><div><div style="display:flex;gap:10px;align-items:center"><div style="display:flex;align-items:center;gap:5px"><img class="champ-preview" src="${champImg(g.champ)}" alt="${g.champ}"><div class="vs-badge">VS</div><img class="champ-preview" src="${champImg(g.enemy)}" alt="${g.enemy}"></div><div><h4 style="font-size:12px;color:var(--muted);font-weight:700;letter-spacing:.08em;text-transform:uppercase">${ROLE_LABEL[g.role] || g.role}</h4><div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:4px"><span class="tag date">${g.date}</span><span class="tag ${g.result}">${g.result === 'win' ? 'Victoria' : 'Derrota'}</span><span class="tag role">${ROLE_LABEL[g.role] || g.role}</span><span class="tag rank">${RANK_LABEL[g.tier] || g.tier} ${g.division === '--' ? '' : g.division}</span>${lpTag(g.result, g.lp)}</div></div></div></div><div class="score">${g.kills}/${g.deaths}/${g.assists}<span>${g.csMin || 0} CS/min · ${fmtDur(g.durationSec || 0)}</span></div></div><div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,255,255,.05)">${g.moodStart || g.moodEnd ? `<span class="tag ${moodClass(g.moodStart)}">😐 Mood: ${g.moodStart || '—'} → ${g.moodEnd || '—'}</span>` : ''}<span class="tag metric">👁 Visión: ${g.wards || 0} wards · ${g.pinks || 0} pinks</span>${g.flow !== null && g.flow !== undefined ? `<span class="tag ${g.flow ? 'bool-yes' : 'bool-no'}">⚡ Flow: ${g.flow ? 'SÍ' : 'NO'}</span>` : ''} ${g.autopilot !== null && g.autopilot !== undefined ? `<span class="tag ${!g.autopilot ? 'bool-yes' : 'bool-no'}">🤖 Autopilot: ${g.autopilot ? 'SÍ' : 'NO'}</span>` : ''} ${g.map5 !== null && g.map5 !== undefined ? `<span class="tag ${g.map5 ? 'bool-yes' : 'bool-no'}">🗺 Mapa c/5s: ${g.map5 ? 'SÍ' : 'NO'}</span>` : ''} ${g.trackedJg !== null && g.trackedJg !== undefined ? `<span class="tag ${g.trackedJg ? 'bool-yes' : 'bool-no'}">🎯 Trackeó JG: ${g.trackedJg ? 'SÍ' : 'NO'}</span>` : ''}</div>${
+                    (g.recurringErrors || []).filter(Boolean).length
+                      ? `<div style="margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,255,255,.05)"><div style="font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,91,91,.7);margin-bottom:6px">🔴 Errores</div><div style="display:flex;flex-wrap:wrap;gap:5px">${(
+                          g.recurringErrors || []
+                        )
+                          .filter(Boolean)
+                          .map(
+                            (e) =>
+                              `<span style="padding:4px 10px;border-radius:999px;background:rgba(255,91,91,.1);border:1px solid rgba(255,91,91,.2);font-size:11px;color:#ff8f8f">${e}</span>`
+                          )
+                          .join('')}</div></div>`
+                      : ''
+                  }${g.improve ? `<div style="margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,255,255,.05)"><div style="font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:6px">🎯 Ajuste para la próxima</div><div style="font-size:12px;color:var(--muted);padding:8px 12px;background:rgba(255,255,255,.03);border-radius:10px;border-left:2px solid rgba(255,91,91,.4);line-height:1.5">${g.improve}</div></div>` : ''}${g.comments ? `<div style="margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,255,255,.05)"><div style="font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:6px">💬 Comentarios</div><div style="font-size:12px;color:var(--muted);line-height:1.5">${g.comments}</div></div>` : ''}${g.coach ? `<div style="margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,255,255,.05)"><div style="font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:6px">📹 VOD / Coach</div><div style="font-size:12px;color:var(--blue);word-break:break-all">${g.coach}</div></div>` : ''}</div>`
+              )
+              .join('')
+          : ''
+        const empty =
+          '<div class="small">No hay partidas con esos filtros.</div>'
+        const pager =
+          filtered.length > perPage
+            ? `<div style="display:flex;justify-content:center;align-items:center;gap:14px;margin-top:14px;padding-top:12px;border-top:1px solid rgba(255,255,255,.06)"><button class="acc-icon" onclick="changeHistoryPage(${historyPage - 1})" ${historyPage === 1 ? 'disabled style="opacity:.3;cursor:default;pointer-events:none"' : ''}>←</button><span style="font-size:12px;color:var(--muted);font-weight:700;min-width:48px;text-align:center">${historyPage} / ${totalPages}</span><button class="acc-icon" onclick="changeHistoryPage(${historyPage + 1})" ${historyPage === totalPages ? 'disabled style="opacity:.3;cursor:default;pointer-events:none"' : ''}>→</button></div>`
+            : ''
+        $('historyBox').innerHTML = (cards || empty) + pager
+      }
+      function human(v) {
+        return v === null || v === undefined ? '—' : v ? 'Sí' : 'No'
+      }
+      function clearAll() {
+        if (!confirm('¿Borrar el historial de esta cuenta?')) return
+        const id = accountId(data.profile)
+        data.games = data.games.filter((g) => g.accountId && g.accountId !== id)
+        save()
+        resetForm()
+        renderHistory()
+        renderDashboard()
+        toast('Historial borrado')
+      }
+      function exportHistoryWorkbook() {
+        if (typeof XLSX === 'undefined')
+          return toast('No pude cargar el exportador de Excel')
+        const accountGames = myGames()
+        if (!accountGames.length) return toast('No hay historial para exportar')
+        const historyRows = accountGames.map((g) => ({
+          Fecha: g.date,
+          Resultado: g.result === 'win' ? 'Victoria' : 'Derrota',
+          Rol: g.role,
+          Campeon: g.champ,
+          Rival: g.enemy,
+          Elo: RANK_LABEL[g.tier] || g.tier,
+          Division: g.division,
+          LP: `${g.result === 'win' ? '+' : '-'}${g.lp}`,
+          Kills: g.kills,
+          Deaths: g.deaths,
+          Assists: g.assists,
+          'CS/min': g.csMin,
+          Wards: g.wards,
+          Pinks: g.pinks,
+          Duracion: fmtDur(g.durationSec || 0),
+          'Mood inicial': g.moodStart,
+          'Mood final': g.moodEnd,
+          Flow: g.flow,
+          Autopilot: g.autopilot,
+          'Track rival': g.trackedJg,
+          'Mapa cada 5s': g.map5,
+          'Errores clave': (g.recurringErrors || []).join(' | '),
+          'Proxima mejora': g.improve || '',
+          Comentarios: g.comments || '',
+          Coach: g.coach || '',
+        }))
+        const wins = accountGames.filter((x) => x.result === 'win').length
+        const flow = accountGames.filter((x) => x.flow === true).length
+        const noAuto = accountGames.filter((x) => x.autopilot === false).length
+        const map = accountGames.filter((x) => x.map5 === true).length
+        const jg = accountGames.filter((x) => x.trackedJg === true).length
+        const summaryRows = [
+          ['Metrica', 'Valor'],
+          ['Partidas', accountGames.length],
+          ['Win rate', `${pct(wins, accountGames.length)}%`],
+          ['Flow', `${pct(flow, accountGames.length)}%`],
+          ['No autopilot', `${pct(noAuto, accountGames.length)}%`],
+          ['Lectura del rival clave', `${pct(jg, accountGames.length)}%`],
+          ['Mapa cada 5s', `${pct(map, accountGames.length)}%`],
+        ]
+        const errorCount = {}
+        accountGames.forEach((x) =>
+          (x.recurringErrors || []).forEach(
+            (e) => (errorCount[e] = (errorCount[e] || 0) + 1)
+          )
+        )
+        const errorRows = Object.entries(errorCount)
+          .sort((a, b) => b[1] - a[1])
+          .map(([error, count]) => ({ Error: error, Veces: count }))
+        const workbook = XLSX.utils.book_new()
+        XLSX.utils.book_append_sheet(
+          workbook,
+          XLSX.utils.json_to_sheet(historyRows),
+          'Historial'
+        )
+        XLSX.utils.book_append_sheet(
+          workbook,
+          XLSX.utils.aoa_to_sheet(summaryRows),
+          'Progreso'
+        )
+        if (errorRows.length) {
+          XLSX.utils.book_append_sheet(
+            workbook,
+            XLSX.utils.json_to_sheet(errorRows),
+            'Errores'
+          )
+        }
+        XLSX.writeFile(workbook, 'supro-rendimiento.xlsx')
+        toast('Excel exportado')
+      }
+      async function fetchChampionList() {
+        try {
+          const res = await fetch(
+            'https://ddragon.leagueoflegends.com/cdn/15.8.1/data/en_US/champion.json'
+          )
+          const json = await res.json()
+          const champs = Object.values(json.data)
+          data.champions = champs.map((x) => x.name).sort()
+          data.championImages = Object.fromEntries(
+            champs.map((x) => [
+              x.name,
+              `https://ddragon.leagueoflegends.com/cdn/15.8.1/img/champion/${x.image.full}`,
+            ])
+          )
+          save()
+          renderBase()
+          syncProfileInputs()
+          seedInputs()
+          renderQuick()
+          renderDashboard()
+          renderHistory()
+          renderProgress()
+          renderAccounts()
+        } catch {}
+      }
+      async function loadMatches() {
+        const base = $('iProxy').value.trim(),
+          gameName = $('iGameName').value.trim(),
+          tagLine = $('iTagLine').value.trim(),
+          region = $('iRegion').value
+        if (!base) return toast('Agrega el proxy')
+        try {
+          const res = await fetch(
+            `${base}/matches?gameName=${encodeURIComponent(gameName)}&tagLine=${encodeURIComponent(tagLine)}&region=${encodeURIComponent(region)}`
+          )
+          const list = await res.json()
+          data.importedMatches = Array.isArray(list) ? list : []
+          save()
+          renderImported()
+          toast('Partidas cargadas')
+        } catch {
+          toast('No pude leer el proxy')
+        }
+      }
+      function renderImported() {
+        const box = $('matchesBox')
+        if (!box) return
+        box.innerHTML = data.importedMatches.length
+          ? data.importedMatches
+              .map(
+                (m, i) =>
+                  `<div class="match"><div><strong>${m.champion || m.info?.championName || 'Partida'}</strong><span>${m.result === 'win' || m.info?.win ? 'Victoria' : 'Derrota'} · ${m.enemy || m.info?.enemyChampion || 'Rival sin detectar'} · ${m.date || ''}</span></div><button class="soft" onclick="applyImported(${i})">Autorrellenar</button></div>`
+              )
+              .join('')
+          : '<div class="small">Todavía no hay partidas importadas.</div>'
+      }
+      function renderMatchups() {
+        const box = $('matchupContent')
+        if (!box) return
+        if (!data.matchupSheets.length) {
+          box.innerHTML =
+            '<div class="small">Sube un archivo de Excel y cada hoja aparecerá aquí como un matchup separado.</div>'
+          return
+        }
+        const current =
+          data.matchupSheets.find(
+            (sheet) => sheet.id === data.activeMatchupId
+          ) || data.matchupSheets[0]
+        if (current && data.activeMatchupId !== current.id) {
+          data.activeMatchupId = current.id
+          save()
+        }
+        const headers = current.rows?.[0] || []
+        const bodyRows = current.rows?.slice(1) || []
+        const headerKeys = headers.map((cell) =>
+          String(cell ?? '')
+            .toLowerCase()
+            .normalize('NFD')
+            .replace(/[\u0300-\u036f]/g, '')
+            .trim()
+        )
+        const nameIndex = headerKeys.findIndex(
+          (key) =>
+            key.includes('champ') ||
+            key.includes('campeon') ||
+            key.includes('nombre')
+        )
+        const laneIndex = headerKeys.findIndex(
+          (key) =>
+            key.includes('linea') || key.includes('lane') || key.includes('rol')
+        )
+        const diffIndex = headerKeys.findIndex(
+          (key) => key.includes('dific') || key.includes('difficulty')
+        )
+        const query = data.matchupFilters?.query || ''
+        const laneFilter = data.matchupFilters?.lane || 'all'
+        const diffFilter = data.matchupFilters?.diff || 'all'
+        const filteredRows = bodyRows.filter((row) => {
+          const nameText = String(
+            nameIndex >= 0 ? (row?.[nameIndex] ?? '') : ''
+          ).toLowerCase()
+          const laneText = String(
+            laneIndex >= 0 ? (row?.[laneIndex] ?? '') : ''
+          ).toLowerCase()
+          const diffText = String(
+            diffIndex >= 0 ? (row?.[diffIndex] ?? '') : ''
+          )
+          const queryOk = !query || nameText.includes(query)
+          const laneOk = laneFilter === 'all' || laneText === laneFilter
+          const diffOk =
+            diffFilter === 'all' ||
+            String(Number.parseFloat(diffText) || '') === diffFilter
+          return queryOk && laneOk && diffOk
+        })
+        const laneOptions = [
+          ...new Set(
+            bodyRows
+              .map((row) =>
+                String(laneIndex >= 0 ? (row?.[laneIndex] ?? '') : '').trim()
+              )
+              .filter(Boolean)
+          ),
+        ]
+        const diffOptions = Array.from({ length: 9 }, (_, index) =>
+          (1 + index * 0.5).toFixed(1).replace('.0', '')
+        )
+        const renderCell = (headerKey, value) => {
+          const text = String(value ?? '').trim()
+          if (!text) return ''
+          if (headerKey.includes('champ') || headerKey.includes('campeon')) {
+            return `<div class="matchup-champ" title="${text}"><img src="${champImg(text)}" alt="${text}"></div>`
+          }
+          if (headerKey.includes('dific') || headerKey.includes('difficulty')) {
+            const rawLevel = Number.parseFloat(text) || 1
+            const level = Math.max(1, Math.min(10, Math.ceil(rawLevel)))
+            return `<span class="matchup-pill diff-${level}">${text}</span>`
+          }
+          if (
+            headerKey.includes('linea') ||
+            headerKey.includes('lane') ||
+            headerKey.includes('rol')
+          ) {
+            const lane = text.toLowerCase()
+            return `<span class="matchup-pill lane-${lane}">${text}</span>`
+          }
+          return `<div style="min-width:320px;line-height:1.7;white-space:pre-wrap">${text}</div>`
+        }
+        box.innerHTML = `
+          <div class="sheet-pills">
+            ${data.matchupSheets
+              .map(
+                (sheet) =>
+                  `<button class="sheet-pill ${sheet.id === current.id ? 'active' : ''}" onclick="setActiveMatchup('${sheet.id}')">${sheet.sheetName}</button>`
+              )
+              .join('')}
+          </div>
+          <div class="matchup-filters">
+            <input class="select-pill" id="matchupSearch" placeholder="Buscar campeón" value="${query.replace(/"/g, '&quot;')}" oninput="setMatchupSearch(this.value)">
+            <select class="select-pill" id="matchupLaneFilter" onchange="setMatchupLaneFilter(this.value)">
+              <option value="all">Todas las líneas</option>
+              ${laneOptions.map((lane) => `<option value="${lane.toLowerCase()}" ${laneFilter === lane.toLowerCase() ? 'selected' : ''}>${lane}</option>`).join('')}
+            </select>
+            <select class="select-pill" id="matchupDiffFilter" onchange="setMatchupDiffFilter(this.value)">
+              <option value="all">Todas las dificultades</option>
+              ${diffOptions.map((diff) => `<option value="${diff}" ${diffFilter === diff ? 'selected' : ''}>${diff}</option>`).join('')}
+            </select>
+          </div>
+          <div style="display:flex;justify-content:flex-end;margin-bottom:12px"><button class="danger" onclick="deleteMatchupSheet('${current.id}')">Eliminar</button></div>
+          <div class="table-wrap">
+            <table class="sheet-table">
+              <thead>
+                <tr>${headers.map((cell) => `<th>${cell ?? '—'}</th>`).join('')}</tr>
+              </thead>
+              <tbody>
+                ${filteredRows
+                  .map(
+                    (row) =>
+                      `<tr>${headers
+                        .map(
+                          (_, index) =>
+                            `<td>${renderCell(headerKeys[index], row?.[index])}</td>`
+                        )
+                        .join('')}</tr>`
+                  )
+                  .join('')}
+              </tbody>
+            </table>
+          </div>`
+      }
+      function setMatchupSearch(value) {
+        data.matchupFilters.query = String(value || '').toLowerCase()
+        save()
+        renderMatchups()
+        const input = $('matchupSearch')
+        if (input) {
+          input.focus()
+          const len = input.value.length
+          input.setSelectionRange?.(len, len)
+        }
+      }
+      function setMatchupLaneFilter(value) {
+        data.matchupFilters.lane = value
+        save()
+        renderMatchups()
+      }
+      function setMatchupDiffFilter(value) {
+        data.matchupFilters.diff = value
+        save()
+        renderMatchups()
+      }
+      function setActiveMatchup(id) {
+        data.activeMatchupId = id
+        save()
+        renderMatchups()
+      }
+      function deleteMatchupSheet(id) {
+        data.matchupSheets = data.matchupSheets.filter(
+          (sheet) => sheet.id !== id
+        )
+        if (data.activeMatchupId === id)
+          data.activeMatchupId = data.matchupSheets[0]?.id || ''
+        save()
+        renderMatchups()
+        toast('Hoja eliminada')
+      }
+      function clearMatchups() {
+        if (!data.matchupSheets.length) return toast('No hay matchups cargados')
+        if (!confirm('¿Borrar todas las hojas de matchups importadas?')) return
+        data.matchupSheets = []
+        data.activeMatchupId = ''
+        save()
+        renderMatchups()
+        toast('Matchups borrados')
+      }
+      async function importMatchupWorkbook(event) {
+        const file = event?.target?.files?.[0]
+        if (!file) return
+        if (typeof XLSX === 'undefined')
+          return toast('No pude cargar el lector de Excel')
+        try {
+          const buffer = await file.arrayBuffer()
+          const workbook = XLSX.read(buffer, { type: 'array' })
+          const importedSheets = workbook.SheetNames.map((sheetName, index) => {
+            const worksheet = workbook.Sheets[sheetName]
+            const rows = XLSX.utils
+              .sheet_to_json(worksheet, {
+                header: 1,
+                blankrows: false,
+                defval: '',
+              })
+              .filter((row) =>
+                row.some((cell) => String(cell ?? '').trim() !== '')
+              )
+            return {
+              id: `${Date.now()}-${index}-${sheetName}`,
+              workbookName: file.name,
+              sheetName,
+              rows,
+            }
+          }).filter((sheet) => sheet.rows.length)
+          data.matchupSheets = [...data.matchupSheets, ...importedSheets]
+          if (!data.activeMatchupId && importedSheets[0])
+            data.activeMatchupId = importedSheets[0].id
+          save()
+          renderMatchups()
+          event.target.value = ''
+          toast(`${importedSheets.length} hojas importadas`)
+        } catch {
+          toast('No pude leer ese Excel')
+        }
+      }
+      function applyImported(i) {
+        const m = data.importedMatches[i]
+        if (!m) return
+        switchTab('partida')
+        setResult(m.result || (m.info?.win ? 'win' : 'loss'))
+        $('gDate').value = (
+          m.date || new Date().toISOString().slice(0, 10)
+        ).slice(0, 10)
+        $('gChamp').value =
+          m.champion || m.info?.championName || $('gChamp').value
+        $('gEnemy').value =
+          m.enemy || m.info?.enemyChampion || $('gEnemy').value
+        $('gRole').value = m.role || m.info?.teamPosition || $('gRole').value
+        $('gKills').value = m.kills ?? m.info?.kills ?? 0
+        $('gDeaths').value = m.deaths ?? m.info?.deaths ?? 0
+        $('gAssists').value = m.assists ?? m.info?.assists ?? 0
+        $('gCs').value = m.csMin ?? m.info?.csMin ?? 0
+        $('gWards').value = m.wards ?? m.info?.wardsPlaced ?? 0
+        $('gPinks').value = m.pinks ?? m.info?.detectorWardsPlaced ?? 0
+        const d = m.durationSec ?? m.info?.gameDuration ?? 0
+        $('gDurMin').value = Math.floor(d / 60)
+        $('gDurSec').value = d % 60
+        toast('Campos autollenados')
+      }
+      function switchTab(tab) {
+        if ((tab === 'partida' || tab === 'historial') && !hasActiveProfile())
+          tab = 'importar'
+        ;[
+          'inicio',
+          'partida',
+          'importar',
+          'historial',
+          'matchups',
+          'tips',
+        ].forEach((t) => {
+          $(`tab-${t}`).classList.toggle('hidden', t !== tab)
+        })
+        document
+          .querySelectorAll('.nav button')
+          .forEach((b) => b.classList.toggle('active', b.dataset.tab === tab))
+        if (tab === 'historial') renderHistory()
+        if (tab === 'importar') renderImported()
+        if (tab === 'matchups') renderMatchups()
+      }
+      function init() {
+        load()
+        renderBase()
+        syncProfileInputs()
+        seedInputs()
+        renderQuick()
+        renderDashboard()
+        renderHistory()
+        renderProgress()
+        renderMatchups()
+        renderAccounts()
+        updateNavVisibility()
+        fetchChampionList()
+        document
+          .querySelectorAll('.nav button')
+          .forEach((b) => (b.onclick = () => switchTab(b.dataset.tab)))
+      }
+      init()
+    </script>
+  </body>
+</html>
