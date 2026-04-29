@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>League of Legends tracker</title>
+    <title>SUPRO — LoL Tracker</title>
     <link
       rel="icon"
       type="image/png"
@@ -79,7 +79,12 @@
         letter-spacing: 0.08em;
       }
       .brand span {
-        display: none;
+        display: block;
+        font-size: 10px;
+        color: var(--muted);
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        margin-top: 1px;
       }
       .header-actions {
         display: flex;
@@ -1041,7 +1046,7 @@
         margin: 0 auto;
         padding: 8px 10px calc(8px + env(safe-area-inset-bottom));
         display: grid;
-        grid-template-columns: repeat(7, minmax(0, 1fr));
+        grid-template-columns: repeat(8, minmax(0, 1fr));
         gap: 4px;
       }
       .nav button {
@@ -1579,6 +1584,97 @@
       .sc-bad .sc-val {
         color: #ff5b5b;
       }
+      /* STREAK BANNER */
+      .streak-banner {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 12px 16px;
+        border-radius: 16px;
+        margin-top: 14px;
+        font-weight: 900;
+        font-size: 14px;
+        animation: fadeSlide 0.3s ease;
+      }
+      .streak-banner.win-streak {
+        background: rgba(74, 222, 128, 0.1);
+        border: 1px solid rgba(74, 222, 128, 0.3);
+        color: var(--green);
+      }
+      .streak-banner.loss-streak {
+        background: rgba(255, 91, 91, 0.12);
+        border: 1px solid rgba(255, 91, 91, 0.3);
+        color: var(--red);
+      }
+      .streak-icon {
+        font-size: 24px;
+        flex-shrink: 0;
+        line-height: 1;
+      }
+      /* SESSION ROW */
+      .session-row {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+        margin-top: 14px;
+      }
+      /* LP CHART */
+      .lp-chart-wrap {
+        padding: 4px 0 0;
+        position: relative;
+      }
+      /* TREND PILLS */
+      .trend-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        padding: 3px 9px;
+        border-radius: 999px;
+        font-size: 10px;
+        font-weight: 800;
+        vertical-align: middle;
+        margin-left: 6px;
+      }
+      .trend-up {
+        background: rgba(74, 222, 128, 0.12);
+        color: var(--green);
+      }
+      .trend-down {
+        background: rgba(255, 91, 91, 0.12);
+        color: var(--red);
+      }
+      .trend-eq {
+        background: rgba(255, 255, 255, 0.06);
+        color: var(--muted);
+      }
+      /* ROLE WR BARS */
+      .role-wr-grid {
+        display: grid;
+        gap: 8px;
+        margin-top: 10px;
+      }
+      .role-wr-row {
+        display: grid;
+        grid-template-columns: 72px 1fr 54px;
+        gap: 8px;
+        align-items: center;
+      }
+      .role-wr-label {
+        font-size: 11px;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+      }
+      .role-wr-val {
+        font-size: 11px;
+        color: var(--muted);
+        text-align: right;
+      }
+      /* FADE ANIMATION */
+      @keyframes fadeSlide {
+        from { opacity: 0; transform: translateY(-6px); }
+        to   { opacity: 1; transform: translateY(0); }
+      }
       @media (max-width: 900px) {
         .g4,
         .g3,
@@ -1604,10 +1700,13 @@
         .toggles {
           grid-template-columns: 1fr;
         }
+        .session-row {
+          grid-template-columns: repeat(3, 1fr);
+        }
       }
       @media (max-width: 640px) {
         body {
-          padding-bottom: 16px;
+          padding-bottom: 80px;
         }
         .header {
           position: sticky;
@@ -1644,8 +1743,23 @@
           transform: translateY(-50%);
           flex-shrink: 0;
         }
-        .nav {
-          display: none;
+        .navIn {
+          padding: 6px 4px calc(6px + env(safe-area-inset-bottom));
+          gap: 1px;
+        }
+        .nav button {
+          padding: 8px 2px;
+          border-radius: 10px;
+        }
+        .nav b {
+          font-size: 16px;
+        }
+        .nav span {
+          font-size: 9px;
+          letter-spacing: 0.03em;
+        }
+        .session-row {
+          grid-template-columns: repeat(3, 1fr);
         }
       }
     </style>
@@ -1659,7 +1773,7 @@
             src="https://e7.pngegg.com/pngimages/752/220/png-clipart-league-of-legends-computer-icons-riot-games-league-of-legends-game-logo-thumbnail.png"
             alt="SUPRO"
           />
-          <div><b>League of Legends tracker</b><span></span></div>
+          <div><b>SUPRO</b><span>LoL Improvement Tracker</span></div>
         </div>
         <button
           type="button"
@@ -1702,6 +1816,7 @@
             </svg>
             🩸 • SUƤRƐMO SƐRVƐR • 🩸
           </a>
+          <button id="langToggleBtn" onclick="toggleLang()" style="background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);color:var(--muted);border-radius:8px;padding:5px 10px;font-size:11px;font-weight:800;letter-spacing:.06em;cursor:pointer;flex-shrink:0">ES</button>
           <div
             class="chip profile"
             id="profileChip"
@@ -1733,6 +1848,7 @@
       <section id="tab-partida" class="hidden"></section>
       <section id="tab-importar" class="hidden"></section>
       <section id="tab-historial" class="hidden"></section>
+      <section id="tab-stats" class="hidden"></section>
       <section id="tab-matchups" class="hidden"></section>
       <section id="tab-tips" class="hidden"></section>
       <section id="tab-guias" class="hidden"></section>
@@ -1740,16 +1856,17 @@
       <div class="nav">
         <div class="navIn">
           <button class="active" data-tab="inicio">
-            <b>⌂</b><span>Inicio</span>
+            <b>⌂</b><span data-i18n="nav_inicio">Inicio</span>
           </button>
-          <button data-tab="partida"><b>✦</b><span>Partida</span></button>
-          <button data-tab="importar"><b>◈</b><span>Cuenta</span></button>
+          <button data-tab="partida"><b>✦</b><span data-i18n="nav_partida">Partida</span></button>
+          <button data-tab="importar"><b>◈</b><span data-i18n="nav_cuenta">Cuenta</span></button>
           <button data-tab="historial">
-            <b>☰</b><span>Rendimiento</span>
+            <b>☰</b><span data-i18n="nav_rendimiento">Rendimiento</span>
           </button>
-          <button data-tab="matchups"><b>⌘</b><span>Matchups</span></button>
-          <button data-tab="tips"><b>✎</b><span>Tips</span></button>
-          <button data-tab="guias"><b>▶</b><span>Guías</span></button>
+          <button data-tab="stats"><b>◎</b><span data-i18n="nav_stats">Stats</span></button>
+          <button data-tab="matchups"><b>⚔</b><span data-i18n="nav_matchups">Matchups</span></button>
+          <button data-tab="tips"><b>✎</b><span data-i18n="nav_tips">Tips</span></button>
+          <button data-tab="guias"><b>▶</b><span data-i18n="nav_guias">Guías</span></button>
         </div>
       </div>
       <div
@@ -1801,8 +1918,11 @@
             <button class="mobile-nav-btn" data-mobile-tab="historial">
               <span>☰</span><span>Rendimiento</span>
             </button>
+            <button class="mobile-nav-btn" data-mobile-tab="stats">
+              <span>◎</span><span>Stats</span>
+            </button>
             <button class="mobile-nav-btn" data-mobile-tab="matchups">
-              <span>⌘</span><span>Matchups</span>
+              <span>⚔</span><span>Matchups</span>
             </button>
             <button class="mobile-nav-btn" data-mobile-tab="tips">
               <span>✎</span><span>Tips</span>
@@ -1821,6 +1941,7 @@
         </div>
       </div>
       <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
       <div class="toast" id="toast">Guardado</div>
     </div>
     <script>
@@ -1955,9 +2076,9 @@
             'No probé campeón ni cambié de rol a última hora.',
           ],
           [
-            'baseMindset',
-            'Entré con foco total',
-            'Sin autopilot y sin mirar rangos enemigos para distraerme.',
+            'preGameCheck',
+            'Revisé parche, build y rivales antes de entrar',
+            'Consulté lolalytics/probuilds y supe qué campeones están rotos.',
           ],
         ],
         draft: [
@@ -1986,9 +2107,9 @@
         ],
         early: [
           [
-            'map5',
-            'Miré minimapa cada 5 segundos',
-            'Con intención, no por inercia.',
+            'csCtrl',
+            'Controlé el CS sin descuidar el mapa',
+            'Farm + visión + contexto al mismo tiempo; no solo CS.',
           ],
           [
             'spikes',
@@ -2300,6 +2421,49 @@
         'Ziggs',
         'Zoe',
       ]
+      const STRINGS = {
+        es: {
+          nav_inicio:'Inicio', nav_partida:'Partida', nav_cuenta:'Cuenta',
+          nav_rendimiento:'Rendimiento', nav_stats:'Stats', nav_matchups:'Matchups',
+          nav_tips:'Tips', nav_guias:'Guías',
+          kpi_wins:'Victorias', kpi_losses:'Derrotas', kpi_wr:'Win Rate',
+          kpi_games:'Partidas', kpi_streak:'Racha', kpi_last20:'WR últimas 20',
+          kpi_today:'Sesión hoy', kpi_today_wr:'WR sesión', kpi_today_lp:'LP sesión',
+          goal_title:'Meta de rango', lang_lbl:'EN',
+          hero_sub:'Creada por Grymm del clan SUPRO — abierta para todos los que quieran mejorar de verdad en League of Legends.',
+        },
+        en: {
+          nav_inicio:'Home', nav_partida:'Game', nav_cuenta:'Account',
+          nav_rendimiento:'History', nav_stats:'Stats', nav_matchups:'Matchups',
+          nav_tips:'Tips', nav_guias:'Guides',
+          kpi_wins:'Wins', kpi_losses:'Losses', kpi_wr:'Win Rate',
+          kpi_games:'Games', kpi_streak:'Streak', kpi_last20:'Last 20 WR',
+          kpi_today:"Today", kpi_today_wr:'Session WR', kpi_today_lp:'Session LP',
+          goal_title:'Rank Goal', lang_lbl:'ES',
+          hero_sub:'Made by Grymm from clan SUPRO — open to everyone who wants to genuinely improve at League of Legends.',
+        },
+      }
+      let appLang = localStorage.getItem('supro_lang') || (navigator.language?.startsWith('en') ? 'en' : 'es')
+      function T(key) { return STRINGS[appLang]?.[key] ?? STRINGS.es[key] ?? key }
+      function applyLang() {
+        document.querySelectorAll('[data-i18n]').forEach((el) => { el.textContent = T(el.dataset.i18n) })
+        const btn = document.getElementById('langToggleBtn')
+        if (btn) btn.textContent = T('lang_lbl')
+      }
+      function toggleLang() {
+        appLang = appLang === 'es' ? 'en' : 'es'
+        localStorage.setItem('supro_lang', appLang)
+        renderBase(); syncProfileInputs(); seedInputs(); renderQuick()
+        renderDashboard(); renderProgress(); renderHistory(); renderStats()
+        renderMatchups(); applyLang()
+      }
+      function setGoalRank(val) {
+        data.profile.goal = val
+        const idx = data.accounts.findIndex((a) => accountId(a) === accountId(data.profile))
+        if (idx >= 0) data.accounts[idx].goal = val
+        save()
+        renderDashboard()
+      }
       let data = {
         profile: {
           gameName: '',
@@ -2307,6 +2471,7 @@
           server: 'LAN',
           role: 'JUNGLE',
           rank: 'IRON',
+          division: 'IV',
           goal: 'MASTER',
           pool: [],
         },
@@ -2341,6 +2506,7 @@
       let historyPage = 1
       let guideFilter = 'all'
       let guidePage = 1
+      let statsCharts = {}
       const PREDEFINED_GUIDES = [
         { id: 1001, url: 'https://www.youtube.com/watch?v=VUBUhBMzjvw', title: 'Motivacion LOL (League Of Legends)', category: 'general', notes: '' },
         { id: 1002, url: 'https://www.youtube.com/watch?v=Aj-sN4F4Jz4', title: '✅ Descúbre tu ROL IDEAL de League of Legends 2025', category: 'general', notes: '' },
@@ -2518,8 +2684,9 @@
       }
       function renderBase() {
         $('tab-inicio').innerHTML = `
-    <div class="card hero"><div class="hero-grid"><div><div class="title"><span id="todayFocus">Conecta una cuenta y empieza a trackear</span></div><h3>Analiza tus ranked con más intención.</h3><p>Una herramienta pensada para cualquier jugador que quiera revisar partidas, detectar patrones reales y construir progreso con criterio, no con autopilot.</p><p class="small" style="margin-top:10px">Creada por Grymm para el clan SUPRO y abierta para cualquiera que quiera mejorar de verdad.</p><div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:14px">${hasActiveProfile() ? '' : `<button class="btn cta" onclick="switchTab('importar')">Conectar cuenta</button>`}</div></div></div></div>
-    ${hasActiveProfile() ? `<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px"><div class="kpi"><div class="v" id="kpiWins" style="color:var(--green)">--</div><div class="l">Victorias</div></div><div class="kpi"><div class="v" id="kpiLosses" style="color:var(--red)">--</div><div class="l">Derrotas</div></div><div class="kpi"><div class="v" id="kpiWR" style="color:var(--green)">--</div><div class="l">Win Rate</div></div><div class="kpi"><div class="v" id="kpiGames">--</div><div class="l">Partidas</div></div><div class="kpi"><div class="v" id="kpiFlow" style="color:var(--blue)">--</div><div class="l">Flow</div></div><div class="kpi"><div class="v" id="kpiCs" style="color:#ff8a4c">--</div><div class="l">CS/min</div></div></div>` : ''}
+    <div class="card hero"><div class="hero-grid"><div><div class="title"><span id="todayFocus">Conecta una cuenta y empieza a trackear</span></div><h3>Analiza tus ranked con más intención.</h3><p>Una herramienta para cualquier jugador que quiera revisar partidas, detectar patrones y construir progreso con criterio.</p><p class="small" style="margin-top:10px">${T('hero_sub')}</p><div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:14px">${hasActiveProfile() ? '' : `<button class="btn cta" onclick="switchTab('importar')">Conectar cuenta</button>`}</div></div></div></div>
+    ${hasActiveProfile() ? `<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px"><div class="kpi"><div class="v" id="kpiWins" style="color:var(--green)">--</div><div class="l" data-i18n="kpi_wins">${T('kpi_wins')}</div></div><div class="kpi"><div class="v" id="kpiLosses" style="color:var(--red)">--</div><div class="l" data-i18n="kpi_losses">${T('kpi_losses')}</div></div><div class="kpi"><div class="v" id="kpiWR" style="color:var(--green)">--</div><div class="l" data-i18n="kpi_wr">${T('kpi_wr')}</div></div><div class="kpi"><div class="v" id="kpiGames">--</div><div class="l" data-i18n="kpi_games">${T('kpi_games')}</div></div><div class="kpi" style="position:relative"><div class="v" id="kpiStreak">--</div><div class="l" id="kpiStreakLabel" data-i18n="kpi_streak">${T('kpi_streak')}</div></div><div class="kpi"><div class="v" id="kpiLast20" style="font-size:22px">--</div><div class="l" data-i18n="kpi_last20">${T('kpi_last20')}</div></div></div><div id="streakBanner"></div><div id="sessionRow" class="session-row hidden"><div class="kpi"><div class="v" id="sessGames" style="font-size:20px">0V 0D</div><div class="l" data-i18n="kpi_today">${T('kpi_today')}</div></div><div class="kpi"><div class="v" id="sessWR" style="font-size:20px">0%</div><div class="l" data-i18n="kpi_today_wr">${T('kpi_today_wr')}</div></div><div class="kpi"><div class="v" id="sessLP" style="font-size:20px">+0</div><div class="l" data-i18n="kpi_today_lp">${T('kpi_today_lp')}</div></div></div><div id="lpChartSection" class="card hidden" style="margin-top:14px"><div class="title"><h2>Progreso LP</h2><span id="lpChartLabel" style="color:var(--muted);font-size:12px"></span></div><div class="lp-chart-wrap" id="lpChartWrap"></div></div>` : ''}
+    ${hasActiveProfile() ? `<div class="card" style="margin-top:14px" id="goalCard"><div class="title"><h2>Meta de rango</h2><span style="font-size:12px;color:var(--muted)">Editable en Cuenta</span></div><div id="goalContent"></div></div>` : ''}
     <div class="card" style="margin-top:14px"><div class="title"><h2>Recursos</h2><span>Herramientas y referencias</span></div><div class="grid g2"><div class="resource"><div><strong>Santo Grial de Grymm</strong><div class="small">PDF base del método para compartir con el clan.</div></div><a class="btn cta" href="https://drive.google.com/file/d/1abmbZSzuCdm_E9n6g1XIpDflbBMfzr2q/view" target="_blank" rel="noopener noreferrer">Ver guía</a></div><div class="resource"><div><strong>LoLalytics</strong><div class="small">Campeones OP del parche, builds y win rates.</div></div><button class="soft" onclick="window.open('https://lolalytics.com/','_blank')">Abrir</button></div><div class="resource"><div><strong>Probuilds</strong><div class="small">Builds reales de pro players.</div></div><button class="soft" onclick="window.open('https://probuildstats.com/','_blank')">Abrir</button></div><div class="resource"><div><strong>OP.GG</strong><div class="small">Stats, builds y perfiles por Riot ID + Tag.</div></div><button class="soft" onclick="window.open('https://op.gg/','_blank')">Abrir</button></div><div class="resource"><div><strong>U.GG</strong><div class="small">Tier list, builds y matchup data.</div></div><button class="soft" onclick="window.open('https://u.gg/','_blank')">Abrir</button></div><div class="resource"><div><strong>LOL Tactics Planner</strong><div class="small">Planear jugadas en el mapa.</div></div><button class="soft" onclick="window.open('https://planner.loltactics.gg/','_blank')">Abrir</button></div><div class="resource"><div><strong>DRAF</strong><div class="small">Pensar compos y draft.</div></div><button class="soft" onclick="window.open('https://draf.gg/','_blank')">Abrir</button></div><div class="resource"><div><strong>Biblioteca de Tips</strong><div class="small">Toda la macro, draft y mentalidad en una pantalla aparte.</div></div><button class="soft" onclick="switchTab('tips')">Abrir</button></div></div></div>`
         const checkHtml = Object.entries(CHECKS)
           .map(
@@ -2528,13 +2695,29 @@
           )
           .join('')
         $('tab-partida').innerHTML =
-          `<div class="card"><div class="title"><h2>Registrar partida</h2></div><div class="seg" style="margin-bottom:14px"><button id="btnWin" onclick="setResult('win')">Victoria</button><button id="btnLoss" onclick="setResult('loss')">Derrota</button></div><div class="form"><div class="f s3"><label>Fecha</label><input id="gDate" type="date"></div><div class="f s3"><label>Mood inicial</label><select id="gMoodStart">${createOptions(MOODS)}</select></div><div class="f s3"><label>Mood final</label><select id="gMoodEnd">${createOptions(MOODS)}</select></div><div class="f s3"><label>Rol</label><select id="gRole"><option value="TOP">TOP</option><option value="JUNGLE">JG</option><option value="MIDDLE">MID</option><option value="BOTTOM">ADC</option><option value="UTILITY">SUP</option></select></div><div class="f s4 champ-f"><label>Mi campeón</label><div class="champ-row tight"><select id="gChamp" onchange="updateChampionPreview()"></select><img id="gChampPreview" class="champ-preview" src="https://res.cloudinary.com/dfr9zlu8d/image/upload/v1777329733/supro-logo_rvavuy.jpg" alt=""></div></div><div class="f s4 champ-f"><label>Campeón enemigo</label><div class="champ-row tight"><select id="gEnemy" onchange="updateChampionPreview()"></select><img id="gEnemyPreview" class="champ-preview" src="https://res.cloudinary.com/dfr9zlu8d/image/upload/v1777329733/supro-logo_rvavuy.jpg" alt=""></div></div><div class="f s2 champ-f"><label>Elo</label><div class="champ-row tier-only"><select id="gTier" onchange="updateTierFields()">${RANKS.map((r) => `<option value="${r}">${RANK_LABEL[r]}</option>`).join('')}</select></div></div><div class="f s2 compact-field" id="gDivisionWrap"><label>División</label><select id="gDivision"><option value="I">I</option><option value="II">II</option><option value="III">III</option><option value="IV">IV</option><option value="--">--</option></select></div><div class="f s2 compact-field"><label>LP</label><input id="gLp" type="number" min="0" max="60" placeholder="55"></div><div class="f s2 compact-field"><label>Kills</label><input id="gKills" type="number" min="0"></div><div class="f s2 compact-field"><label>Deaths</label><input id="gDeaths" type="number" min="0"></div><div class="f s2 compact-field"><label>Assists</label><input id="gAssists" type="number" min="0"></div><div class="f s2 compact-field"><label>CS/min</label><input id="gCs" type="number" min="0" step="0.1"></div><div class="f s2 compact-field"><label>Wards</label><input id="gWards" type="number" min="0"></div><div class="f s2 compact-field"><label>Pinks</label><input id="gPinks" type="number" min="0"></div><div class="f s2 compact-field"><label>Duración min</label><input id="gDurMin" type="number" min="0" max="99"></div><div class="f s2 compact-field"><label>Duración seg</label><input id="gDurSec" type="number" min="0" max="59"></div></div><div class="title" style="margin-top:16px"><h2>Autoevaluación rápida</h2></div><div class="toggles"><div class="toggle" id="qFlow" onclick="toggleQuick('flow')"><div class="q">¿Estabas en flow?</div><div class="a">—</div></div><div class="toggle" id="qAuto" onclick="toggleQuick('autopilot')"><div class="q">¿Jugaste en autopilot?</div><div class="a">—</div></div><div class="toggle" id="qJg" onclick="toggleQuick('jg')"><div class="q">¿Trackeaste bien al rival más importante?</div><div class="a">—</div></div><div class="toggle" id="qMap" onclick="toggleQuick('map')"><div class="q">¿Miraste el mapa cada 5s?</div><div class="a">—</div></div></div><div class="title" style="margin-top:16px"><h2>Checklist post-partida</h2></div><div class="checks">${checkHtml}</div><div class="title" style="margin-top:16px"><h2>Errores y notas</h2></div><div class="form"><div class="f s6"><label>Error recurrente detectado</label><select id="gRecurring"><option value="">Selecciona un error</option>${data.recurringErrors.map((e) => `<option>${e}</option>`).join('')}</select></div><div class="f s6"><label>Agregar errores nuevos</label><input id="gNewRecurring" placeholder="Escribe uno y presiona Enter" onkeydown="handleRecurringErrorKeydown(event)"><div id="pendingRecurringErrors" class="sheet-pills" style="margin-top:8px"></div></div><div class="f s12"><label>Ajuste para la próxima sesión</label><textarea id="gImprove"></textarea></div><div class="f s12"><label>Comentarios</label><textarea id="gComments"></textarea></div><div class="f s12"><label>Coach video / VOD</label><input id="gCoach" placeholder="URL"></div></div><div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:14px"><button class="btn" onclick="saveGame()">Guardar partida</button><button class="soft" onclick="resetForm()">Limpiar</button></div></div>`
+          `<div class="card"><div class="title"><h2>Registrar partida</h2></div><div class="seg" style="margin-bottom:14px"><button id="btnWin" onclick="setResult('win')">Victoria</button><button id="btnLoss" onclick="setResult('loss')">Derrota</button></div><div class="form"><div class="f s3"><label>Fecha</label><input id="gDate" type="date"></div><div class="f s3"><label>Mood inicial</label><select id="gMoodStart">${createOptions(MOODS)}</select></div><div class="f s3"><label>Mood final</label><select id="gMoodEnd">${createOptions(MOODS)}</select></div><div class="f s3"><label>Rol</label><select id="gRole"><option value="TOP">TOP</option><option value="JUNGLE">JG</option><option value="MIDDLE">MID</option><option value="BOTTOM">ADC</option><option value="UTILITY">SUP</option></select></div><div class="f s6 champ-f"><label>Mi campeón</label><div class="champ-row"><select id="gChamp" onchange="updateChampionPreview()"></select><img id="gChampPreview" class="champ-preview" src="https://res.cloudinary.com/dfr9zlu8d/image/upload/v1777329733/supro-logo_rvavuy.jpg" alt=""></div></div><div class="f s6 champ-f"><label>Campeón enemigo</label><div class="champ-row"><select id="gEnemy" onchange="updateChampionPreview()"></select><img id="gEnemyPreview" class="champ-preview" src="https://res.cloudinary.com/dfr9zlu8d/image/upload/v1777329733/supro-logo_rvavuy.jpg" alt=""></div></div><div class="f s4 compact-field"><label>Elo</label><select id="gTier" onchange="updateTierFields()">${RANKS.map((r) => `<option value="${r}">${RANK_LABEL[r]}</option>`).join('')}</select></div><div class="f s4 compact-field" id="gDivisionWrap"><label>División</label><select id="gDivision"><option value="I">I</option><option value="II">II</option><option value="III">III</option><option value="IV">IV</option><option value="--">--</option></select></div><div class="f s4 compact-field"><label>LP</label><input id="gLp" type="number" min="0" max="60" placeholder="55"></div><div class="f s2 compact-field"><label>Kills</label><input id="gKills" type="number" min="0"></div><div class="f s2 compact-field"><label>Deaths</label><input id="gDeaths" type="number" min="0"></div><div class="f s2 compact-field"><label>Assists</label><input id="gAssists" type="number" min="0"></div><div class="f s2 compact-field"><label>CS/min</label><input id="gCs" type="number" min="0" step="0.1"></div><div class="f s2 compact-field"><label>Wards</label><input id="gWards" type="number" min="0"></div><div class="f s2 compact-field"><label>Pinks</label><input id="gPinks" type="number" min="0"></div><div class="f s2 compact-field"><label>Duración min</label><input id="gDurMin" type="number" min="0" max="99"></div><div class="f s2 compact-field"><label>Duración seg</label><input id="gDurSec" type="number" min="0" max="59"></div></div><div class="title" style="margin-top:16px"><h2>Autoevaluación rápida</h2></div><div class="toggles"><div class="toggle" id="qFlow" onclick="toggleQuick('flow')"><div class="q">¿Estabas en flow?</div><div class="a">—</div></div><div class="toggle" id="qAuto" onclick="toggleQuick('autopilot')"><div class="q">¿Jugaste en autopilot?</div><div class="a">—</div></div><div class="toggle" id="qJg" onclick="toggleQuick('jg')"><div class="q">¿Trackeaste bien al rival más importante?</div><div class="a">—</div></div><div class="toggle" id="qMap" onclick="toggleQuick('map')"><div class="q">¿Miraste el mapa cada 5s?</div><div class="a">—</div></div></div><div class="title" style="margin-top:16px"><h2>Checklist post-partida</h2></div><div class="checks">${checkHtml}</div><div class="title" style="margin-top:16px"><h2>Errores y notas</h2></div><div class="form"><div class="f s6"><label>Error recurrente detectado</label><select id="gRecurring"><option value="">Selecciona un error</option>${data.recurringErrors.map((e) => `<option>${e}</option>`).join('')}</select></div><div class="f s6"><label>Agregar errores nuevos</label><input id="gNewRecurring" placeholder="Escribe uno y presiona Enter" onkeydown="handleRecurringErrorKeydown(event)"><div id="pendingRecurringErrors" class="sheet-pills" style="margin-top:8px"></div></div><div class="f s12"><label>Ajuste para la próxima sesión</label><textarea id="gImprove"></textarea></div><div class="f s12"><label>Comentarios</label><textarea id="gComments"></textarea></div><div class="f s12"><label>Coach video / VOD</label><input id="gCoach" placeholder="URL"></div></div><div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:14px"><button class="btn" onclick="saveGame()">Guardar partida</button><button class="soft" onclick="resetForm()">Limpiar</button></div></div>`
         $('tab-importar').innerHTML =
-          `<div class="grid g2"><div class="card"><div class="title"><h2>Conexión de Cuenta</h2><span>Cuenta local</span></div><div class="form"><div class="f s4"><label>Nombre</label><input id="pGameName"></div><div class="f s2"><label>Tag</label><input id="pTagLine"></div><div class="f s3"><label>Servidor</label><select id="pServer">${SERVERS.map((s) => `<option value="${s}">${s}</option>`).join('')}</select></div><div class="f s6 compact-field"><label>Rango actual</label><select id="pRank" onchange="updateAccountPreview()">${RANKS.map((r) => `<option value="${r}">${RANK_LABEL[r]}</option>`).join('')}</select></div><div class="f s6" style="display:grid;place-items:center"><label>Emblema actual</label><img id="accountRankPreview" class="rank-badge" src="${rankImg(data.profile.rank)}" alt=""></div></div><div class="note" style="margin-top:12px">Esto funciona como sesión local. Puedes guardar varias cuentas, cambiar entre perfiles y abrir tu cuenta en OPGG cuando haya una activa.</div><div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:12px"><button class="btn cta" onclick="saveProfile()">Guardar / Conectar</button></div></div><div class="card"><div class="title"><h2>Cuentas Guardadas</h2><span>Switch rápido</span></div><div class="list" id="accountsBox"></div></div></div>`
+          `<div class="grid g2"><div class="card"><div class="title"><h2>Conexión de Cuenta</h2><span>Cuenta local</span></div><div class="form"><div class="f s4"><label>Nombre</label><input id="pGameName"></div><div class="f s2"><label>Tag</label><input id="pTagLine"></div><div class="f s3"><label>Servidor</label><select id="pServer">${SERVERS.map((s) => `<option value="${s}">${s}</option>`).join('')}</select></div><div class="f s4 compact-field"><label>Rango actual</label><select id="pRank" onchange="updateAccountPreview()">${RANKS.map((r) => `<option value="${r}">${RANK_LABEL[r]}</option>`).join('')}</select></div><div class="f s4 compact-field" id="pDivisionWrap"><label>División</label><select id="pDivision"><option value="I">I</option><option value="II">II</option><option value="III">III</option><option value="IV">IV</option><option value="--">--</option></select></div><div class="f s4 compact-field"><label>Meta de rango</label><select id="pGoalRank">${RANKS.map((r) => `<option value="${r}">${RANK_LABEL[r]}</option>`).join('')}</select></div><div class="f s6" style="display:grid;place-items:center"><label>Emblema actual</label><img id="accountRankPreview" class="rank-badge" src="${rankImg(data.profile.rank)}" alt=""></div></div><div class="note" style="margin-top:12px">Esto funciona como sesión local. Puedes guardar varias cuentas, cambiar entre perfiles y abrir tu cuenta en OPGG cuando haya una activa.</div><div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:12px"><button class="btn cta" onclick="saveProfile()">Guardar / Conectar</button></div></div><div class="card"><div class="title"><h2>Cuentas Guardadas</h2><span>Switch rápido</span></div><div class="list" id="accountsBox"></div></div></div>`
         $('tab-historial').innerHTML =
-          `<div class="card"><div class="title"><h2>Rendimiento personal</h2><span>Todas tus partidas</span></div><div class="filters"><select class="select-pill" id="hFilter" onchange="renderHistory()"><option value="all">Todos</option><option value="win">Victorias</option><option value="loss">Derrotas</option></select><select class="select-pill" id="hChampFilter" onchange="renderHistory()"><option value="all">Todos los campeones</option>${data.champions.map((c) => `<option value="${c}">${c}</option>`).join('')}</select><select class="select-pill" id="hRoleFilter" onchange="renderHistory()"><option value="all">Todos los roles</option><option value="TOP">Top</option><option value="JUNGLE">Jungla</option><option value="MIDDLE">Mid</option><option value="BOTTOM">Bot</option><option value="UTILITY">Support</option></select><input class="select-pill" id="hDateFrom" type="date" onchange="renderHistory()"><input class="select-pill" id="hDateTo" type="date" onchange="renderHistory()"><div style="margin-left:auto;display:flex;gap:8px;flex-shrink:0"><button class="soft" onclick="exportHistoryWorkbook()">Exportar</button><button class="danger" onclick="clearAll()">Limpiar historial</button></div></div><div class="list" id="historyBox"></div></div>`
-        $('tab-matchups').innerHTML =
-          `<div class="card"><div class="title"><h2>Matchups</h2><span>Importa hojas de Excel y navega entre ellas</span></div><div class="sheet-toolbar"><input class="hidden-file" id="matchupFile" type="file" accept=".xlsx,.xls" onchange="importMatchupWorkbook(event)"><button class="btn" onclick="document.getElementById('matchupFile')?.click()">📄 Elegir Matchups</button><button class="danger" onclick="clearMatchups()">Borrar matchups</button></div><div id="matchupContent"></div></div>`
+          `<div class="card"><div class="title"><h2>Historial de partidas</h2><span>Todas tus partidas</span></div><div class="filters"><select class="select-pill" id="hFilter" onchange="renderHistory()"><option value="all">Todos</option><option value="win">Victorias</option><option value="loss">Derrotas</option></select><select class="select-pill" id="hChampFilter" onchange="renderHistory()"><option value="all">Todos los campeones</option>${data.champions.map((c) => `<option value="${c}">${c}</option>`).join('')}</select><select class="select-pill" id="hRoleFilter" onchange="renderHistory()"><option value="all">Todos los roles</option><option value="TOP">Top</option><option value="JUNGLE">Jungla</option><option value="MIDDLE">Mid</option><option value="BOTTOM">Bot</option><option value="UTILITY">Support</option></select><input class="select-pill" id="hDateFrom" type="date" onchange="renderHistory()"><input class="select-pill" id="hDateTo" type="date" onchange="renderHistory()"><div style="margin-left:auto;display:flex;gap:8px;flex-shrink:0"><button class="soft" onclick="exportHistoryWorkbook()">Exportar</button><button class="danger" onclick="clearAll()">Limpiar historial</button></div></div><div class="list" id="historyBox"></div></div>`
+        $('tab-stats').innerHTML = `<div id="statsContent"><div class="card"><div class="small" style="text-align:center;padding:40px;color:var(--muted)">Cargando estadísticas...</div></div></div>`
+        $('tab-matchups').innerHTML = `<div class="card"><div class="title"><h2>Matchups</h2><span>Tu base de conocimiento</span></div>
+          <div style="background:rgba(255,138,76,.06);border:1px solid rgba(255,138,76,.2);border-radius:14px;padding:14px 16px;margin-bottom:14px;display:flex;gap:12px;align-items:flex-start">
+            <span style="font-size:20px;flex-shrink:0">💡</span>
+            <div>
+              <div style="font-size:13px;font-weight:800;color:#ff8a4c;margin-bottom:4px">¿Cómo funciona?</div>
+              <div style="font-size:12px;color:rgba(255,255,255,.65);line-height:1.7">Sube un archivo <b style="color:var(--text)">.xlsx</b> o <b style="color:var(--text)">.xls</b>. <b style="color:#ff8a4c">Las columnas que pongas en la primera fila son las que aparecen aquí</b> — puedes crear columnas como <em>Campeón</em>, <em>Dificultad</em>, <em>Línea</em>, <em>Notas</em>, <em>Build</em> o lo que necesites. Cada hoja del Excel será una pestaña separada.</div>
+            </div>
+          </div>
+          <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:14px">
+            <label class="btn cta" style="cursor:pointer">
+              ⬆ Subir Excel
+              <input type="file" accept=".xlsx,.xls" onchange="importMatchupWorkbook(event)" style="display:none">
+            </label>
+            <button class="danger" onclick="clearMatchups()">Limpiar todo</button>
+          </div>
+          <div id="matchupContent"></div>
+        </div>`
         $('tab-tips').innerHTML = renderTips()
         $('tab-guias').innerHTML = `<div class="card"><div class="title"><h2>Guías</h2><span>Videos y recursos por categoría</span></div><div class="form" style="margin-bottom:0"><div class="f s8"><label>URL del video (YouTube u otro)</label><input id="guideUrl" type="url" placeholder="https://youtube.com/watch?v=..." oninput="onGuideUrlInput()"></div><div class="f s4"><label>Categoría</label><select id="guideCat">${GUIDE_CATEGORIES.map((c) => `<option value="${c.key}">${c.label}</option>`).join('')}</select></div><div class="f s8"><label>Título</label><input id="guideTitle" placeholder="Nombre de la guía o video"></div><div class="f s4" style="display:flex;align-items:end"><button class="btn" style="width:100%;height:38px" onclick="saveGuide()">Guardar</button></div><div class="f s12"><label>Notas (opcional)</label><input id="guideNotes" placeholder="Concepto clave o para qué sirve esta guía"></div></div><div id="guideUrlPreview" class="guide-url-preview"></div><div style="margin-top:16px;padding-top:14px;border-top:1px solid var(--line)" id="guidesContent"></div></div>`
         renderGuides()
@@ -2552,7 +2735,7 @@
           server: $('pServer').value,
           role: data.profile.role || 'JUNGLE',
           rank: $('pRank').value,
-          goal: data.profile.goal || 'MASTER',
+          goal: $("pGoalRank")?.value || data.profile.goal || 'MASTER',
           pool: [],
         }
         const id = accountId(data.profile)
@@ -2613,6 +2796,87 @@
           $('accountRankPreview').src = rankImg(data.profile.rank)
         syncMobileMenu()
       }
+      function absLp(g) {
+        const tIdx = RANKS.indexOf(g.tier)
+        if (tIdx < 0) return 0
+        const divMap = { IV: 0, III: 1, II: 2, I: 3, '--': 0 }
+        const dIdx = divMap[g.division] ?? 0
+        if (tIdx >= 7) return tIdx * 400 + Math.max(0, Number(g.lp) || 0)
+        return tIdx * 400 + dIdx * 100 + Math.min(99, Math.max(0, Number(g.lp) || 0))
+      }
+      function rankFromAbsLp(lp) {
+        const tIdx = Math.min(Math.floor(lp / 400), RANKS.length - 1)
+        const tier = RANKS[Math.max(0, tIdx)]
+        if (tIdx >= 7) return RANK_LABEL[tier]
+        const divNames = ['IV', 'III', 'II', 'I']
+        const dIdx = Math.min(3, Math.floor((lp % 400) / 100))
+        return `${RANK_LABEL[tier]} ${divNames[dIdx]}`
+      }
+      function getStreak(games) {
+        if (!games.length) return null
+        const sorted = [...games].sort((a, b) =>
+          b.date !== a.date ? b.date.localeCompare(a.date) : (b.id || 0) - (a.id || 0)
+        )
+        const type = sorted[0].result
+        let count = 0
+        for (const g of sorted) {
+          if (g.result === type) count++
+          else break
+        }
+        return { type, count }
+      }
+      function todaySession(games) {
+        const today = new Date().toISOString().slice(0, 10)
+        const tg = games.filter((g) => g.date === today)
+        const wins = tg.filter((g) => g.result === 'win').length
+        const lpNet = tg.reduce(
+          (s, g) => s + (g.result === 'win' ? 1 : -1) * (Number(g.lp) || 0),
+          0
+        )
+        return { total: tg.length, wins, losses: tg.length - wins, lpNet }
+      }
+      function renderLpChart() {
+        const games = myGames()
+          .slice()
+          .sort((a, b) =>
+            a.date !== b.date ? a.date.localeCompare(b.date) : (a.id || 0) - (b.id || 0)
+          )
+        if (games.length < 2)
+          return '<div class="small" style="text-align:center;padding:24px 0;color:var(--muted)">Juega al menos 2 partidas para ver el gráfico de LP.</div>'
+        const pts = games.map((g) => absLp(g))
+        const minY = Math.min(...pts),
+          maxY = Math.max(...pts)
+        const range = maxY - minY || 100
+        const W = 600,
+          H = 150,
+          px = 52,
+          py = 14
+        const cw = W - px - 12,
+          ch = H - py * 2
+        const xs = pts.map((_, i) =>
+          px + (pts.length === 1 ? cw / 2 : (i / (pts.length - 1)) * cw)
+        )
+        const ys = pts.map((p) => py + (1 - (p - minY) / range) * ch)
+        const linePath = xs
+          .map((x, i) => `${i === 0 ? 'M' : 'L'}${x.toFixed(1)},${ys[i].toFixed(1)}`)
+          .join(' ')
+        const areaPath = `${linePath} L${xs[xs.length - 1].toFixed(1)},${H - py} L${px},${H - py} Z`
+        const dots = games
+          .map(
+            (g, i) =>
+              `<circle cx="${xs[i].toFixed(1)}" cy="${ys[i].toFixed(1)}" r="${games.length > 40 ? 2 : 3.5}" fill="${g.result === 'win' ? '#57f287' : '#ff5b5b'}" stroke="rgba(0,0,0,.35)" stroke-width="1"/>`
+          )
+          .join('')
+        const gridLines = [0, 0.25, 0.5, 0.75, 1]
+          .map((t) => {
+            const lpVal = Math.round(minY + t * range)
+            const y = (py + (1 - t) * ch).toFixed(1)
+            const label = rankFromAbsLp(lpVal)
+            return `<line x1="${px}" y1="${y}" x2="${W - 12}" y2="${y}" stroke="rgba(255,255,255,.05)" stroke-width="1"/><text x="${(px - 4).toFixed(0)}" y="${(Number(y) + 3.5).toFixed(1)}" fill="rgba(255,255,255,.22)" font-size="8.5" font-family="sans-serif" text-anchor="end">${label}</text>`
+          })
+          .join('')
+        return `<svg viewBox="0 0 ${W} ${H}" width="100%" style="display:block;overflow:visible"><defs><linearGradient id="lpGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="rgba(255,91,91,.3)"/><stop offset="100%" stop-color="rgba(255,91,91,0)"/></linearGradient></defs>${gridLines}<path d="${areaPath}" fill="url(#lpGrad)"/><path d="${linePath}" fill="none" stroke="rgba(255,91,91,.85)" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>${dots}</svg>`
+      }
       function renderDashboard() {
         if (!hasActiveProfile()) {
           if ($('todayFocus')) $('todayFocus').textContent = ''
@@ -2629,11 +2893,127 @@
         $('kpiWR').textContent = games.length
           ? `${pct(wins, games.length)}%`
           : '--'
-        $('kpiFlow').textContent = games.length
-          ? `${pct(flows, games.length)}%`
-          : '--'
-        $('kpiCs').textContent = csAvg ? csAvg.toFixed(1) : '--'
+        $('kpiFlow') && ($('kpiFlow').textContent = games.length ? `${pct(flows, games.length)}%` : '--')
+        $('kpiCs') && ($('kpiCs').textContent = csAvg ? csAvg.toFixed(1) : '--')
+        // Streak KPI
+        const streak = getStreak(games)
+        const streakEl = $('kpiStreak')
+        const streakLbl = $('kpiStreakLabel')
+        if (streakEl && streak) {
+          const icon = streak.type === 'win' ? '🔥' : '❄️'
+          streakEl.textContent = `${icon} ${streak.count}`
+          streakEl.style.color = streak.type === 'win' ? 'var(--green)' : 'var(--red)'
+          if (streakLbl) streakLbl.textContent = streak.type === 'win' ? 'Racha victorias' : 'Racha derrotas'
+        } else if (streakEl) {
+          streakEl.textContent = '--'
+          streakEl.style.color = ''
+        }
+        // Last 20 WR
+        const last20 = games.slice(0, 20)
+        const last20W = last20.filter((g) => g.result === 'win').length
+        const last20WR = last20.length ? pct(last20W, last20.length) : null
+        const allWR = games.length ? pct(wins, games.length) : null
+        const l20El = $('kpiLast20')
+        if (l20El) {
+          if (last20WR !== null) {
+            const diff = allWR !== null ? last20WR - allWR : 0
+            const trendCls = diff > 2 ? 'trend-up' : diff < -2 ? 'trend-down' : 'trend-eq'
+            const trendArrow = diff > 2 ? '↑' : diff < -2 ? '↓' : '→'
+            l20El.style.color = last20WR >= 50 ? 'var(--green)' : 'var(--red)'
+            l20El.innerHTML = `${last20WR}%<span class="trend-pill ${trendCls}">${trendArrow} ${Math.abs(diff)}%</span>`
+          } else {
+            l20El.textContent = '--'
+          }
+        }
+        // Streak banner
+        const bannerEl = $('streakBanner')
+        if (bannerEl) {
+          if (streak && streak.count >= 2) {
+            const isWin = streak.type === 'win'
+            bannerEl.className = `streak-banner ${isWin ? 'win-streak' : 'loss-streak'}`
+            const msg = isWin
+              ? '¡En racha! Sigue enfocado y con el mismo mental.'
+              : streak.count >= 3
+              ? 'Racha negativa — considera tomar un break. Jugar en tilt empeora el MMR.'
+              : 'Mantén la cabeza fría y juega una partida a la vez.'
+            bannerEl.innerHTML = `<span class="streak-icon">${isWin ? '🔥' : '⚠️'}</span><div><strong>${streak.count} ${isWin ? 'victorias seguidas' : 'derrotas seguidas'}</strong><span style="display:block;font-size:12px;font-weight:600;margin-top:3px;opacity:.85">${msg}</span></div>`
+          } else {
+            bannerEl.className = 'hidden'
+          }
+        }
+        // Today session
+        const sess = todaySession(games)
+        const sessionRowEl = $('sessionRow')
+        if (sessionRowEl) {
+          if (sess.total > 0) {
+            sessionRowEl.classList.remove('hidden')
+            if ($('sessGames')) $('sessGames').textContent = `${sess.wins}V ${sess.losses}D`
+            const sessWREl = $('sessWR')
+            if (sessWREl) {
+              const wr = pct(sess.wins, sess.total)
+              sessWREl.textContent = `${wr}%`
+              sessWREl.style.color = wr >= 50 ? 'var(--green)' : 'var(--red)'
+            }
+            const sessLPEl = $('sessLP')
+            if (sessLPEl) {
+              sessLPEl.textContent = (sess.lpNet >= 0 ? '+' : '') + sess.lpNet + ' LP'
+              sessLPEl.style.color = sess.lpNet >= 0 ? 'var(--green)' : 'var(--red)'
+            }
+          } else {
+            sessionRowEl.classList.add('hidden')
+          }
+        }
+        // LP Chart
+        const chartSec = $('lpChartSection')
+        const chartWrap = $('lpChartWrap')
+        if (chartSec && chartWrap) {
+          if (games.length >= 2) {
+            chartSec.classList.remove('hidden')
+            const lbl = $('lpChartLabel')
+            if (lbl) lbl.textContent = `${games.length} partidas`
+            chartWrap.innerHTML = renderLpChart()
+          } else {
+            chartSec.classList.add('hidden')
+          }
+        }
         $('todayFocus').textContent = ''
+        // Goal progress
+        const goalEl = $('goalContent')
+        if (goalEl) {
+          const curRank = data.profile.rank || 'IRON'
+          const goalRank = data.profile.goal || 'MASTER'
+          const curIdx = RANKS.indexOf(curRank)
+          const goalIdx = RANKS.indexOf(goalRank)
+          if (curIdx >= 0 && goalIdx > curIdx) {
+            const pctGoal = Math.round((curIdx / goalIdx) * 100)
+            const tiersLeft = goalIdx - curIdx
+            const avgLpPerGame = (() => {
+              if (games.length < 3) return null
+              const last = games.slice(0, Math.min(20, games.length))
+              const lpVals = last.map((g) => absLp(g)).filter((v) => v > 0)
+              if (lpVals.length < 2) return null
+              const delta = (lpVals[0] - lpVals[lpVals.length - 1])
+              const perGame = delta / (lpVals.length - 1)
+              if (perGame === 0) return null
+              const lpToGoal = goalIdx * 400 - absLp(games[0])
+              return lpToGoal > 0 ? Math.round(lpToGoal / Math.abs(perGame)) : null
+            })()
+            goalEl.innerHTML = `<div style="display:flex;align-items:center;gap:16px;margin-bottom:14px">
+              <div style="text-align:center"><img src="${rankImg(curRank)}" style="width:52px;height:52px;object-fit:contain"><div style="font-size:11px;color:var(--muted);margin-top:4px">${RANK_LABEL[curRank]}</div></div>
+              <div style="flex:1">
+                <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin-bottom:6px"><span>Ahora</span><span>Meta</span></div>
+                <div style="height:10px;border-radius:999px;background:rgba(255,255,255,.08);overflow:hidden"><div style="height:100%;width:${pctGoal}%;background:linear-gradient(90deg,#ff5454,#ff8a4c);border-radius:999px;transition:width .5s"></div></div>
+                <div style="display:flex;justify-content:space-between;font-size:11px;margin-top:5px"><span style="color:#ff8a4c;font-weight:800">${pctGoal}% del camino</span><span style="color:var(--muted)">${tiersLeft} tier${tiersLeft !== 1 ? 's' : ''} restante${tiersLeft !== 1 ? 's' : ''}</span></div>
+                ${avgLpPerGame !== null ? `<div style="font-size:11px;color:var(--muted);margin-top:4px">Estimado: ~${avgLpPerGame} partidas al ritmo actual</div>` : ''}
+              </div>
+              <div style="text-align:center"><img src="${rankImg(goalRank)}" style="width:52px;height:52px;object-fit:contain;opacity:.6"><div style="font-size:11px;color:var(--muted);margin-top:4px">${RANK_LABEL[goalRank]}</div></div>
+            </div>`
+          } else if (curIdx >= goalIdx && goalIdx >= 0) {
+            goalEl.innerHTML = `<div style="font-size:13px;font-weight:800;color:var(--green);text-align:center;padding:14px 0">¡Meta alcanzada! ${RANK_LABEL[goalRank]} ✓ — Actualiza tu meta en Cuenta.</div>`
+          } else {
+            goalEl.innerHTML = `<div class="small" style="text-align:center;padding:12px 0">Configura tu meta de rango en la sección Cuenta.</div>`
+          }
+        }
         updateNavVisibility()
       }
       function renderAccounts() {
@@ -2998,28 +3378,6 @@
               .map(([l, v]) => bar(l, v, topErrors[0][1], 'red'))
               .join('')
           : '<div class="small">Sin errores guardados todavía.</div>'
-        const enemyStats = {}
-        g.forEach((x) => {
-          if (!x.enemy) return
-          enemyStats[x.enemy] ??= { games: 0, wins: 0 }
-          enemyStats[x.enemy].games++
-          if (x.result === 'win') enemyStats[x.enemy].wins++
-        })
-        const topEnemies = Object.entries(enemyStats)
-          .sort((a, b) => b[1].games - a[1].games)
-          .slice(0, 7)
-        $('matchupBars').innerHTML = topEnemies.length
-          ? topEnemies
-              .map(([l, v]) =>
-                bar(
-                  `${l} · ${pct(v.wins, v.games)}% WR`,
-                  v.games,
-                  topEnemies[0][1].games,
-                  'amber'
-                )
-              )
-              .join('')
-          : '<div class="small">Sin matchups suficientes.</div>'
         const champStats = {}
         g.forEach((x) => {
           champStats[x.champ] ??= { games: 0, wins: 0 }
@@ -3053,6 +3411,57 @@
         $('moodBars').innerHTML = moods.length
           ? moods.map(([l, v]) => bar(l, v, moods[0][1], 'blue')).join('')
           : '<div class="small">Sin moods registrados.</div>'
+        // Role WR breakdown
+        const roleOrder = ['TOP', 'JUNGLE', 'MIDDLE', 'BOTTOM', 'UTILITY']
+        const roleStats = {}
+        g.forEach((x) => {
+          const r = x.role || 'JUNGLE'
+          roleStats[r] ??= { games: 0, wins: 0 }
+          roleStats[r].games++
+          if (x.result === 'win') roleStats[r].wins++
+        })
+        const roleColors = { TOP: '#c3b6ff', JUNGLE: '#57f287', MIDDLE: '#8ab4ff', BOTTOM: '#ffc098', UTILITY: '#ffb3d6' }
+        const roleWrEl = $('roleWrBars')
+        if (roleWrEl) {
+          const rows = roleOrder
+            .filter((r) => roleStats[r])
+            .map((r) => {
+              const { games: gm, wins: w } = roleStats[r]
+              const wr = pct(w, gm)
+              const color = roleColors[r] || 'var(--text)'
+              return `<div class="role-wr-row"><span class="role-wr-label" style="color:${color}">${ROLE_LABEL[r] || r}</span><div class="barWrap"><div class="bar" style="width:${Math.max(4, wr)}%;background:${color};opacity:.75"></div></div><span class="role-wr-val">${wr}% <span style="font-size:10px">(${gm})</span></span></div>`
+            })
+          roleWrEl.innerHTML = rows.length
+            ? `<div class="role-wr-grid">${rows.join('')}</div>`
+            : '<div class="small">Sin datos de rol.</div>'
+        }
+      }
+      function renderGameChecks(g) {
+        if (!g.checks || !Object.keys(g.checks).length) return ''
+        const allItems = Object.entries(CHECKS).flatMap(([, items]) => items)
+        const answeredCount = allItems.filter(([id]) => g.checks[id] !== undefined && g.checks[id] !== null).length
+        if (!answeredCount) return ''
+        const total = allItems.length
+        const passed = allItems.filter(([id]) => g.checks[id] === true).length
+        const pctVal = Math.round((passed / total) * 100)
+        const scoreColor = pctVal >= 75 ? 'var(--green)' : pctVal >= 50 ? '#ff8a4c' : 'var(--red)'
+        const sections = Object.entries(CHECKS)
+          .map(([section, items]) => {
+            const itemsHtml = items
+              .map(([id, label]) => {
+                const v = g.checks[id]
+                const isTrue = v === true
+                const isNull = v === undefined || v === null
+                const color = isTrue ? '#57f287' : isNull ? 'rgba(255,255,255,.18)' : 'rgba(255,91,91,.65)'
+                const textColor = isTrue ? 'var(--text)' : 'rgba(255,255,255,.32)'
+                const icon = isTrue ? '✓' : '✗'
+                return `<div style="display:flex;align-items:baseline;gap:6px;padding:3px 0"><span style="font-size:12px;font-weight:900;color:${color};flex-shrink:0;line-height:1">${icon}</span><span style="font-size:12px;color:${textColor};line-height:1.4">${label}</span></div>`
+              })
+              .join('')
+            return `<div style="padding:10px 12px;border-radius:12px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.05)"><div style="font-size:9px;font-weight:900;text-transform:uppercase;letter-spacing:.12em;color:rgba(255,91,91,.55);margin-bottom:6px">${CHECK_LABELS[section] || section}</div>${itemsHtml}</div>`
+          })
+          .join('')
+        return `<div style="margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,255,255,.05)"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px"><span style="font-size:10px;font-weight:900;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.38)">Checklist post-partida</span><span style="font-size:13px;font-weight:900;color:${scoreColor}">${passed}/${total} — ${pctVal}%</span></div><div style="display:grid;gap:6px">${sections}</div></div>`
       }
       function boolBox(icon, label, value, goodIsTrue) {
         if (value === null || value === undefined) return ''
@@ -3118,7 +3527,7 @@
           ? items
               .map(
                 (g) =>
-                  `<div class="game"><div class="gameTop"><div class="res ${g.result}">${g.result === 'win' ? 'Victoria' : 'Derrota'}</div><div><div style="display:flex;gap:10px;align-items:center"><div style="display:flex;align-items:center;gap:5px"><img class="champ-preview" src="${champImg(g.champ)}" alt="${g.champ}"><div class="vs-badge">VS</div><img class="champ-preview" src="${champImg(g.enemy)}" alt="${g.enemy}"></div><div><h4 style="font-size:12px;color:var(--muted);font-weight:700;letter-spacing:.08em;text-transform:uppercase">${ROLE_LABEL[g.role] || g.role}</h4><div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:4px"><span class="tag date">${g.date}</span><span class="tag rank">${RANK_LABEL[g.tier] || g.tier} ${g.division === '--' ? '' : g.division}</span>${lpTag(g.result, g.lp)}<span class="tag metric">${fmtDur(g.durationSec||0)}</span></div></div></div></div></div><div class="stat-cells">${statCell('kills', g.kills, 'Kills')}${statCell('deaths', g.deaths, 'Deaths')}${statCell('assists', g.assists, 'Assists')}${statCell('cs', g.csMin, 'CS/min')}${statCell('wards', g.wards, 'Wards')}${statCell('pinks', g.pinks, 'Pinks')}</div><div style="margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,255,255,.05)">${g.moodStart || g.moodEnd ? `<div style="display:grid;grid-template-columns:1fr auto 1fr;gap:6px;align-items:center;margin-bottom:8px"><div class="bool-box" style="text-align:center;padding:8px 6px"><span style="font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:.07em;color:rgba(255,255,255,.35);display:block;margin-bottom:4px">Inicio</span><span class="tag ${moodClass(g.moodStart)}" style="justify-content:center;display:inline-flex">😐 ${g.moodStart||'—'}</span></div><span style="font-size:14px;color:var(--muted);text-align:center">→</span><div class="bool-box" style="text-align:center;padding:8px 6px"><span style="font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:.07em;color:rgba(255,255,255,.35);display:block;margin-bottom:4px">Final</span><span class="tag ${moodClass(g.moodEnd)}" style="justify-content:center;display:inline-flex">${g.moodEnd||'—'}</span></div></div>` : ''}${(g.flow !== null && g.flow !== undefined) || (g.autopilot !== null && g.autopilot !== undefined) || (g.map5 !== null && g.map5 !== undefined) || (g.trackedJg !== null && g.trackedJg !== undefined) ? `<div class="bool-boxes">${boolBox('⚡', 'En Flow', g.flow, true)}${boolBox('🤖', 'Jugué en\nAutopilot', g.autopilot, false)}${boolBox('🗺', 'Revisé\nel Mapa', g.map5, true)}${boolBox('🎯', 'Trackeé\nal JG rival', g.trackedJg, true)}</div>` : ''}</div>${
+                  `<div class="game"><div class="gameTop"><div class="res ${g.result}">${g.result === 'win' ? 'Victoria' : 'Derrota'}</div><div><div style="display:flex;gap:10px;align-items:center"><div style="display:flex;align-items:center;gap:5px"><img class="champ-preview" src="${champImg(g.champ)}" alt="${g.champ}"><div class="vs-badge">VS</div><img class="champ-preview" src="${champImg(g.enemy)}" alt="${g.enemy}"></div><div><h4 style="font-size:12px;color:var(--muted);font-weight:700;letter-spacing:.08em;text-transform:uppercase">${ROLE_LABEL[g.role] || g.role}</h4><div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:4px"><span class="tag date">${g.date}</span><span class="tag rank">${RANK_LABEL[g.tier] || g.tier} ${g.division === '--' ? '' : g.division}</span>${lpTag(g.result, g.lp)}<span class="tag metric">${fmtDur(g.durationSec||0)}</span></div></div></div></div></div><div class="stat-cells">${statCell('kills', g.kills, 'Kills')}${statCell('deaths', g.deaths, 'Deaths')}${statCell('assists', g.assists, 'Assists')}${statCell('cs', g.csMin, 'CS/min')}${statCell('wards', g.wards, 'Wards')}${statCell('pinks', g.pinks, 'Pinks')}</div><div style="margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,255,255,.05)">${g.moodStart || g.moodEnd ? `<div style="display:grid;grid-template-columns:1fr auto 1fr;gap:6px;align-items:center;margin-bottom:8px"><div class="bool-box" style="text-align:center;padding:8px 6px"><span style="font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:.07em;color:rgba(255,255,255,.35);display:block;margin-bottom:4px">Inicio</span><span class="tag ${moodClass(g.moodStart)}" style="justify-content:center;display:inline-flex">😐 ${g.moodStart||'—'}</span></div><span style="font-size:14px;color:var(--muted);text-align:center">→</span><div class="bool-box" style="text-align:center;padding:8px 6px"><span style="font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:.07em;color:rgba(255,255,255,.35);display:block;margin-bottom:4px">Final</span><span class="tag ${moodClass(g.moodEnd)}" style="justify-content:center;display:inline-flex">${g.moodEnd||'—'}</span></div></div>` : ''}${(g.flow !== null && g.flow !== undefined) || (g.autopilot !== null && g.autopilot !== undefined) || (g.map5 !== null && g.map5 !== undefined) || (g.trackedJg !== null && g.trackedJg !== undefined) ? `<div class="bool-boxes">${boolBox('⚡', 'En Flow', g.flow, true)}${boolBox('🤖', 'Jugué en\nAutopilot', g.autopilot, false)}${boolBox('🗺', 'Revisé\nel Mapa', g.map5, true)}${boolBox('🎯', 'Trackeé\nal JG rival', g.trackedJg, true)}</div>` : ''}</div>${renderGameChecks(g)}${
                     (g.recurringErrors || []).filter(Boolean).length
                       ? `<div style="margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,255,255,.05)"><div style="font-size:10px;font-weight:900;letter-spacing:.12em;text-transform:uppercase;color:#ff5b5b;margin-bottom:7px">⚠ Errores detectados</div><div style="display:grid;gap:6px">${(
                           g.recurringErrors || []
@@ -3415,138 +3824,348 @@
           : ''
         box.innerHTML = pills + grid + pager
       }
+      function renderStats() {
+        const box = $('statsContent')
+        if (!box) return
+        const games = myGames()
+        if (!games.length) {
+          box.innerHTML = '<div class="card"><div class="small" style="text-align:center;padding:40px;color:var(--muted)">Registra partidas para ver tus estadísticas aquí.</div></div>'
+          return
+        }
+        const wins = games.filter((g) => g.result === 'win').length
+        const losses = games.length - wins
+        const wr = Math.round((wins / games.length) * 100)
+
+        // LP progression data (last 40 games, chronological)
+        const lpGames = [...games].slice(-40)
+        const lpLabels = lpGames.map((g, i) => `#${games.length - lpGames.length + i + 1}`)
+        const lpValues = lpGames.map((g) => absLp(g))
+
+        // WR by champion (min 2 games)
+        const champMap = {}
+        games.forEach((g) => {
+          if (!champMap[g.champ]) champMap[g.champ] = { w: 0, t: 0 }
+          champMap[g.champ].t++
+          if (g.result === 'win') champMap[g.champ].w++
+        })
+        const champEntries = Object.entries(champMap)
+          .filter(([, v]) => v.t >= 2)
+          .sort((a, b) => b[1].t - a[1].t)
+          .slice(0, 7)
+        const champLabels = champEntries.map(([c]) => c)
+        const champWRs = champEntries.map(([, v]) => Math.round((v.w / v.t) * 100))
+        const champGames = champEntries.map(([, v]) => v.t)
+
+        // WR by role
+        const roles = ['TOP', 'JUNGLE', 'MIDDLE', 'BOTTOM', 'UTILITY']
+        const roleLabels = roles.map((r) => ROLE_LABEL[r] || r)
+        const roleWRs = roles.map((r) => {
+          const rg = games.filter((g) => g.role === r)
+          if (!rg.length) return null
+          return Math.round((rg.filter((g) => g.result === 'win').length / rg.length) * 100)
+        })
+
+        // WR by mood start
+        const moods = ['Excelente', 'Bien', 'Normal', 'Cansado', 'Tiltado']
+        const moodLabels = moods
+        const moodWRs = moods.map((m) => {
+          const mg = games.filter((g) => g.moodStart === m)
+          if (!mg.length) return null
+          return Math.round((mg.filter((g) => g.result === 'win').length / mg.length) * 100)
+        })
+
+        // Recurring errors frequency
+        const errMap = {}
+        games.forEach((g) => {
+          (g.recurringErrors || []).filter(Boolean).forEach((e) => {
+            errMap[e] = (errMap[e] || 0) + 1
+          })
+        })
+        const errEntries = Object.entries(errMap).sort((a, b) => b[1] - a[1]).slice(0, 6)
+        const errLabels = errEntries.map(([e]) => e.length > 28 ? e.slice(0, 26) + '…' : e)
+        const errCounts = errEntries.map(([, c]) => c)
+
+        box.innerHTML = `
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px">
+            <div class="card" style="grid-column:1/-1">
+              <div class="title"><h2>Progresión de LP</h2><span>${lpGames.length} partidas</span></div>
+              <div style="position:relative;height:200px"><canvas id="chartLp"></canvas></div>
+            </div>
+            <div class="card">
+              <div class="title"><h2>Win / Loss</h2><span>${games.length} totales</span></div>
+              <div style="position:relative;height:200px;display:flex;justify-content:center"><canvas id="chartDonut"></canvas></div>
+            </div>
+            <div class="card">
+              <div class="title"><h2>WR por rol</h2></div>
+              <div style="position:relative;height:200px"><canvas id="chartRole"></canvas></div>
+            </div>
+            ${champLabels.length ? `<div class="card">
+              <div class="title"><h2>WR por campeón</h2><span>mín. 2 partidas</span></div>
+              <div style="position:relative;height:${Math.max(180, champLabels.length * 36)}px"><canvas id="chartChamp"></canvas></div>
+            </div>` : ''}
+            ${moods.some((m) => games.some((g) => g.moodStart === m)) ? `<div class="card">
+              <div class="title"><h2>WR por mood inicial</h2></div>
+              <div style="position:relative;height:200px"><canvas id="chartMood"></canvas></div>
+            </div>` : ''}
+            ${errLabels.length ? `<div class="card" style="grid-column:1/-1">
+              <div class="title"><h2>Errores más frecuentes</h2></div>
+              <div style="position:relative;height:${Math.max(160, errLabels.length * 38)}px"><canvas id="chartErr"></canvas></div>
+            </div>` : ''}
+          </div>`
+
+        // Destroy old chart instances
+        Object.values(statsCharts).forEach((c) => { try { c.destroy() } catch (_) {} })
+        statsCharts = {}
+
+        const chartDefaults = {
+          plugins: { legend: { labels: { color: '#9e9ea8', font: { size: 11 } } } },
+          scales: {}
+        }
+        const gridColor = 'rgba(255,255,255,.06)'
+        const tickColor = '#9e9ea8'
+
+        // LP line chart
+        if ($('chartLp')) {
+          statsCharts.lp = new Chart($('chartLp'), {
+            type: 'line',
+            data: {
+              labels: lpLabels,
+              datasets: [{
+                label: 'LP absoluto',
+                data: lpValues,
+                borderColor: '#ff5454',
+                backgroundColor: 'rgba(255,84,84,.12)',
+                borderWidth: 2,
+                pointRadius: lpValues.length > 20 ? 2 : 4,
+                pointBackgroundColor: lpValues.map((v, i) => {
+                  if (i === 0) return '#9e9ea8'
+                  return lpValues[i] >= lpValues[i - 1] ? '#57f287' : '#ff5b5b'
+                }),
+                fill: true,
+                tension: 0.35
+              }]
+            },
+            options: {
+              responsive: true, maintainAspectRatio: false,
+              plugins: { legend: { display: false }, tooltip: {
+                callbacks: { label: (ctx) => {
+                  const g = lpGames[ctx.dataIndex]
+                  return ` ${RANK_LABEL[g?.tier] || ''} ${g?.division || ''} ${g?.lp || ''}LP`
+                }}
+              }},
+              scales: {
+                x: { ticks: { color: tickColor, maxTicksLimit: 8, font: { size: 10 } }, grid: { color: gridColor } },
+                y: { ticks: { color: tickColor, font: { size: 10 }, callback: (v) => rankFromAbsLp(v) }, grid: { color: gridColor } }
+              }
+            }
+          })
+        }
+
+        // Win/Loss doughnut
+        if ($('chartDonut')) {
+          statsCharts.donut = new Chart($('chartDonut'), {
+            type: 'doughnut',
+            data: {
+              labels: ['Victorias', 'Derrotas'],
+              datasets: [{ data: [wins, losses], backgroundColor: ['rgba(87,242,135,.75)', 'rgba(255,91,91,.65)'], borderWidth: 0, hoverOffset: 6 }]
+            },
+            options: {
+              responsive: true, maintainAspectRatio: false,
+              plugins: {
+                legend: { position: 'bottom', labels: { color: '#9e9ea8', padding: 14, font: { size: 11 } } },
+                tooltip: { callbacks: { label: (ctx) => ` ${ctx.label}: ${ctx.raw} (${Math.round(ctx.raw / games.length * 100)}%)` } }
+              },
+              cutout: '65%'
+            }
+          })
+        }
+
+        // WR by role bar
+        if ($('chartRole')) {
+          const filteredRoles = roles.filter((_, i) => roleWRs[i] !== null)
+          const filteredLabels = filteredRoles.map((r) => ROLE_LABEL[r] || r)
+          const filteredWRs = filteredRoles.map((r) => {
+            const rg = games.filter((g) => g.role === r)
+            return Math.round((rg.filter((g) => g.result === 'win').length / rg.length) * 100)
+          })
+          statsCharts.role = new Chart($('chartRole'), {
+            type: 'bar',
+            data: {
+              labels: filteredLabels,
+              datasets: [{
+                label: 'WR %',
+                data: filteredWRs,
+                backgroundColor: filteredWRs.map((v) => v >= 55 ? 'rgba(87,242,135,.65)' : v >= 45 ? 'rgba(255,138,76,.65)' : 'rgba(255,91,91,.65)'),
+                borderRadius: 8, borderSkipped: false
+              }]
+            },
+            options: {
+              responsive: true, maintainAspectRatio: false,
+              plugins: { legend: { display: false }, tooltip: { callbacks: { label: (ctx) => ` ${ctx.raw}% WR` } } },
+              scales: {
+                x: { ticks: { color: tickColor, font: { size: 11 } }, grid: { color: gridColor } },
+                y: { min: 0, max: 100, ticks: { color: tickColor, font: { size: 10 }, callback: (v) => v + '%' }, grid: { color: gridColor } }
+              }
+            }
+          })
+        }
+
+        // WR by champion horizontal bar
+        if ($('chartChamp') && champLabels.length) {
+          statsCharts.champ = new Chart($('chartChamp'), {
+            type: 'bar',
+            data: {
+              labels: champLabels,
+              datasets: [{
+                label: 'WR %',
+                data: champWRs,
+                backgroundColor: champWRs.map((v) => v >= 55 ? 'rgba(87,242,135,.65)' : v >= 45 ? 'rgba(255,138,76,.65)' : 'rgba(255,91,91,.65)'),
+                borderRadius: 6, borderSkipped: false
+              }]
+            },
+            options: {
+              indexAxis: 'y',
+              responsive: true, maintainAspectRatio: false,
+              plugins: {
+                legend: { display: false },
+                tooltip: { callbacks: { label: (ctx) => ` ${ctx.raw}% WR (${champGames[ctx.dataIndex]} partidas)` } }
+              },
+              scales: {
+                x: { min: 0, max: 100, ticks: { color: tickColor, font: { size: 10 }, callback: (v) => v + '%' }, grid: { color: gridColor } },
+                y: { ticks: { color: tickColor, font: { size: 11 } }, grid: { color: 'transparent' } }
+              }
+            }
+          })
+        }
+
+        // WR by mood
+        if ($('chartMood')) {
+          const filteredMoods = moods.filter((m) => games.some((g) => g.moodStart === m))
+          const filteredMoodWRs = filteredMoods.map((m) => {
+            const mg = games.filter((g) => g.moodStart === m)
+            return Math.round((mg.filter((g) => g.result === 'win').length / mg.length) * 100)
+          })
+          statsCharts.mood = new Chart($('chartMood'), {
+            type: 'bar',
+            data: {
+              labels: filteredMoods,
+              datasets: [{
+                label: 'WR %',
+                data: filteredMoodWRs,
+                backgroundColor: filteredMoodWRs.map((v) => v >= 55 ? 'rgba(87,242,135,.65)' : v >= 45 ? 'rgba(255,138,76,.65)' : 'rgba(255,91,91,.65)'),
+                borderRadius: 8, borderSkipped: false
+              }]
+            },
+            options: {
+              responsive: true, maintainAspectRatio: false,
+              plugins: { legend: { display: false }, tooltip: { callbacks: { label: (ctx) => ` ${ctx.raw}% WR` } } },
+              scales: {
+                x: { ticks: { color: tickColor, font: { size: 11 } }, grid: { color: gridColor } },
+                y: { min: 0, max: 100, ticks: { color: tickColor, font: { size: 10 }, callback: (v) => v + '%' }, grid: { color: gridColor } }
+              }
+            }
+          })
+        }
+
+        // Recurring errors bar
+        if ($('chartErr') && errLabels.length) {
+          statsCharts.err = new Chart($('chartErr'), {
+            type: 'bar',
+            data: {
+              labels: errLabels,
+              datasets: [{
+                label: 'Frecuencia',
+                data: errCounts,
+                backgroundColor: 'rgba(255,91,91,.6)',
+                borderRadius: 6, borderSkipped: false
+              }]
+            },
+            options: {
+              indexAxis: 'y',
+              responsive: true, maintainAspectRatio: false,
+              plugins: { legend: { display: false }, tooltip: { callbacks: { label: (ctx) => ` ${ctx.raw} veces` } } },
+              scales: {
+                x: { ticks: { color: tickColor, font: { size: 10 }, stepSize: 1 }, grid: { color: gridColor } },
+                y: { ticks: { color: tickColor, font: { size: 11 } }, grid: { color: 'transparent' } }
+              }
+            }
+          })
+        }
+      }
+
       function renderMatchups() {
         const box = $('matchupContent')
         if (!box) return
         if (!data.matchupSheets.length) {
-          box.innerHTML =
-            '<div class="small">Sube un archivo de Excel y cada hoja aparecerá aquí como un matchup separado.</div>'
+          box.innerHTML = '<div class="small" style="padding:24px 0;text-align:center;color:var(--muted)">Aún no has subido ningún Excel. Usa el botón de arriba para importar tu base de matchups.</div>'
           return
         }
-        const current =
-          data.matchupSheets.find(
-            (sheet) => sheet.id === data.activeMatchupId
-          ) || data.matchupSheets[0]
-        if (current && data.activeMatchupId !== current.id) {
-          data.activeMatchupId = current.id
-          save()
-        }
+        const current = data.matchupSheets.find((s) => s.id === data.activeMatchupId) || data.matchupSheets[0]
+        if (current && data.activeMatchupId !== current.id) { data.activeMatchupId = current.id; save() }
         const headers = current.rows?.[0] || []
         const bodyRows = current.rows?.slice(1) || []
-        const headerKeys = headers.map((cell) =>
-          String(cell ?? '')
-            .toLowerCase()
-            .normalize('NFD')
-            .replace(/[\u0300-\u036f]/g, '')
-            .trim()
-        )
-        const nameIndex = headerKeys.findIndex(
-          (key) =>
-            key.includes('champ') ||
-            key.includes('campeon') ||
-            key.includes('nombre')
-        )
-        const laneIndex = headerKeys.findIndex(
-          (key) =>
-            key.includes('linea') || key.includes('lane') || key.includes('rol')
-        )
-        const diffIndex = headerKeys.findIndex(
-          (key) => key.includes('dific') || key.includes('difficulty')
-        )
+        const normalize = (s) => String(s ?? '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').trim()
+        const headerKeys = headers.map(normalize)
+        const laneIndex = headerKeys.findIndex((k) => k.includes('linea') || k.includes('lane') || k.includes('rol'))
+        const diffIndex = headerKeys.findIndex((k) => k.includes('dific') || k.includes('difficulty') || k.includes('nivel'))
         const query = data.matchupFilters?.query || ''
         const laneFilter = data.matchupFilters?.lane || 'all'
         const diffFilter = data.matchupFilters?.diff || 'all'
         const filteredRows = bodyRows.filter((row) => {
-          const nameText = String(
-            nameIndex >= 0 ? (row?.[nameIndex] ?? '') : ''
-          ).toLowerCase()
-          const laneText = String(
-            laneIndex >= 0 ? (row?.[laneIndex] ?? '') : ''
-          ).toLowerCase()
-          const diffText = String(
-            diffIndex >= 0 ? (row?.[diffIndex] ?? '') : ''
-          )
-          const queryOk = !query || nameText.includes(query)
-          const laneOk = laneFilter === 'all' || laneText === laneFilter
-          const diffOk =
-            diffFilter === 'all' ||
-            String(Number.parseFloat(diffText) || '') === diffFilter
-          return queryOk && laneOk && diffOk
+          const allText = row.map((c) => normalize(c)).join(' ')
+          const laneText = laneIndex >= 0 ? normalize(row?.[laneIndex]) : ''
+          const diffText = diffIndex >= 0 ? String(row?.[diffIndex] ?? '').trim() : ''
+          return (!query || allText.includes(query.toLowerCase())) &&
+            (laneFilter === 'all' || laneText === laneFilter) &&
+            (diffFilter === 'all' || diffText === diffFilter)
         })
-        const laneOptions = [
-          ...new Set(
-            bodyRows
-              .map((row) =>
-                String(laneIndex >= 0 ? (row?.[laneIndex] ?? '') : '').trim()
-              )
-              .filter(Boolean)
-          ),
-        ]
-        const diffOptions = Array.from({ length: 9 }, (_, index) =>
-          (1 + index * 0.5).toFixed(1).replace('.0', '')
-        )
-        const renderCell = (headerKey, value) => {
+        const laneOptions = [...new Set(bodyRows.map((r) => String(laneIndex >= 0 ? (r?.[laneIndex] ?? '') : '').trim()).filter(Boolean))]
+        const diffOptions = [...new Set(bodyRows.map((r) => String(diffIndex >= 0 ? (r?.[diffIndex] ?? '') : '').trim()).filter(Boolean))].sort()
+        const renderCell = (key, value) => {
           const text = String(value ?? '').trim()
-          if (!text) return ''
-          if (headerKey.includes('champ') || headerKey.includes('campeon')) {
-            return `<div class="matchup-champ" title="${text}"><img src="${champImg(text)}" alt="${text}"></div>`
+          if (!text) return '<span style="color:rgba(255,255,255,.2)">—</span>'
+          if (key.includes('champ') || key.includes('campeon') || key.includes('nombre')) {
+            return `<div class="matchup-champ" title="${text}"><img src="${champImg(text)}" alt="${text}" onerror="this.src='https://res.cloudinary.com/dfr9zlu8d/image/upload/v1777329733/supro-logo_rvavuy.jpg'"><div style="font-size:11px;color:var(--muted);margin-top:4px;text-align:center;max-width:72px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${text}</div></div>`
           }
-          if (headerKey.includes('dific') || headerKey.includes('difficulty')) {
-            const rawLevel = Number.parseFloat(text) || 1
-            const level = Math.max(1, Math.min(10, Math.ceil(rawLevel)))
-            return `<span class="matchup-pill diff-${level}">${text}</span>`
+          if (key.includes('dific') || key.includes('difficulty') || key.includes('nivel')) {
+            const n = Number.parseFloat(text) || 1
+            const lvl = Math.max(1, Math.min(10, Math.ceil(n)))
+            return `<span class="matchup-pill diff-${lvl}">${text}</span>`
           }
-          if (
-            headerKey.includes('linea') ||
-            headerKey.includes('lane') ||
-            headerKey.includes('rol')
-          ) {
-            const lane = text.toLowerCase()
-            return `<span class="matchup-pill lane-${lane}">${text}</span>`
+          if (key.includes('linea') || key.includes('lane') || key.includes('rol')) {
+            return `<span class="matchup-pill lane-${text.toLowerCase()}">${text}</span>`
           }
-          return `<div style="min-width:320px;line-height:1.7;white-space:pre-wrap">${text}</div>`
+          return `<div style="max-width:340px;line-height:1.7;white-space:pre-wrap;font-size:13px">${text}</div>`
         }
-        box.innerHTML = `
-          <div class="sheet-pills">
-            ${data.matchupSheets
-              .map(
-                (sheet) =>
-                  `<button class="sheet-pill ${sheet.id === current.id ? 'active' : ''}" onclick="setActiveMatchup('${sheet.id}')">${sheet.sheetName}</button>`
-              )
-              .join('')}
-          </div>
-          <div class="matchup-filters">
-            <input class="select-pill" id="matchupSearch" placeholder="Buscar campeón" value="${query.replace(/"/g, '&quot;')}" oninput="setMatchupSearch(this.value)">
-            <select class="select-pill" id="matchupLaneFilter" onchange="setMatchupLaneFilter(this.value)">
+        const sheetTabs = data.matchupSheets.length > 1
+          ? `<div class="sheet-pills">${data.matchupSheets.map((s) => `<button class="sheet-pill ${s.id === current.id ? 'active' : ''}" onclick="setActiveMatchup('${s.id}')">${s.sheetName}</button>`).join('')}</div>`
+          : ''
+        const laneSelect = laneOptions.length
+          ? `<select class="select-pill" id="matchupLaneFilter" onchange="setMatchupLaneFilter(this.value)">
               <option value="all">Todas las líneas</option>
-              ${laneOptions.map((lane) => `<option value="${lane.toLowerCase()}" ${laneFilter === lane.toLowerCase() ? 'selected' : ''}>${lane}</option>`).join('')}
-            </select>
-            <select class="select-pill" id="matchupDiffFilter" onchange="setMatchupDiffFilter(this.value)">
+              ${laneOptions.map((l) => `<option value="${l.toLowerCase()}" ${laneFilter === l.toLowerCase() ? 'selected' : ''}>${l}</option>`).join('')}
+            </select>`
+          : ''
+        const diffSelect = diffOptions.length
+          ? `<select class="select-pill" id="matchupDiffFilter" onchange="setMatchupDiffFilter(this.value)">
               <option value="all">Todas las dificultades</option>
-              ${diffOptions.map((diff) => `<option value="${diff}" ${diffFilter === diff ? 'selected' : ''}>${diff}</option>`).join('')}
-            </select>
+              ${diffOptions.map((d) => `<option value="${d}" ${diffFilter === d ? 'selected' : ''}>${d}</option>`).join('')}
+            </select>`
+          : ''
+        const tableHtml = filteredRows.length === 0
+          ? '<div class="small" style="padding:24px;text-align:center;color:var(--muted)">No hay resultados para esa búsqueda.</div>'
+          : `<div class="table-wrap"><table class="sheet-table">
+              <thead><tr>${headers.map((h) => `<th>${h ?? '—'}</th>`).join('')}</tr></thead>
+              <tbody>${filteredRows.map((row) => `<tr>${headers.map((_, i) => `<td>${renderCell(headerKeys[i], row?.[i])}</td>`).join('')}</tr>`).join('')}</tbody>
+            </table></div>`
+        box.innerHTML = sheetTabs + `<div class="matchup-filters">
+          <input class="select-pill" id="matchupSearch" placeholder="🔍 Buscar en la tabla..." value="${query.replace(/"/g, '&quot;')}" oninput="setMatchupSearch(this.value)" style="flex:1;min-width:160px">
+          ${laneSelect}${diffSelect}
+          <div style="margin-left:auto;display:flex;gap:8px;align-items:center;flex-shrink:0">
+            <span style="font-size:12px;color:var(--muted)">${filteredRows.length} / ${bodyRows.length} filas</span>
+            <button class="danger" onclick="deleteMatchupSheet('${current.id}')">Eliminar hoja</button>
           </div>
-          <div style="display:flex;justify-content:flex-end;margin-bottom:12px"><button class="danger" onclick="deleteMatchupSheet('${current.id}')">Eliminar</button></div>
-          <div class="table-wrap">
-            <table class="sheet-table">
-              <thead>
-                <tr>${headers.map((cell) => `<th>${cell ?? '—'}</th>`).join('')}</tr>
-              </thead>
-              <tbody>
-                ${filteredRows
-                  .map(
-                    (row) =>
-                      `<tr>${headers
-                        .map(
-                          (_, index) =>
-                            `<td>${renderCell(headerKeys[index], row?.[index])}</td>`
-                        )
-                        .join('')}</tr>`
-                  )
-                  .join('')}
-              </tbody>
-            </table>
-          </div>`
+        </div>` + tableHtml
       }
       function setMatchupSearch(value) {
         data.matchupFilters.query = String(value || '').toLowerCase()
@@ -3662,6 +4281,7 @@
           'partida',
           'importar',
           'historial',
+          'stats',
           'matchups',
           'tips',
           'guias',
@@ -3679,6 +4299,7 @@
         toggleMobileMenu(false)
         if (tab === 'historial') renderHistory()
         if (tab === 'importar') renderImported()
+        if (tab === 'stats') renderStats()
         if (tab === 'matchups') renderMatchups()
         if (tab === 'guias') renderGuides()
       }
@@ -3727,6 +4348,7 @@
         renderDashboard()
         renderHistory()
         renderProgress()
+        renderStats()
         renderMatchups()
         renderAccounts()
         updateNavVisibility()
