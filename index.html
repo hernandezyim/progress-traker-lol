@@ -145,7 +145,8 @@
         text-align: center;
       }
       .chip.profile {
-        min-width: auto;
+        min-width: 0;
+        max-width: 420px;
         justify-content: center;
         gap: 8px;
         padding: 6px 14px;
@@ -393,28 +394,30 @@
         font-size: 12px;
         line-height: 1.35;
       }
-      .toggle .a {
-        font-size: 22px;
-        font-weight: 900;
+      .toggle-actions {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+        margin-top: 12px;
+      }
+      .toggle-btn {
+        min-height: 44px;
+        border-radius: 14px;
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.08);
         color: var(--muted);
-        margin-top: 10px;
+        font-size: 14px;
+        font-weight: 900;
+        cursor: pointer;
       }
-      .toggle.goodYes,
-      .toggle.goodNo {
-        border-color: rgba(74, 222, 128, 0.45);
-        background: rgba(74, 222, 128, 0.08);
-      }
-      .toggle.goodYes .a,
-      .toggle.goodNo .a {
+      .toggle-btn.active.yes {
+        background: rgba(74, 222, 128, 0.14);
+        border-color: rgba(74, 222, 128, 0.42);
         color: var(--green);
       }
-      .toggle.badYes,
-      .toggle.badNo {
-        border-color: rgba(248, 113, 113, 0.45);
-        background: rgba(248, 113, 113, 0.08);
-      }
-      .toggle.badYes .a,
-      .toggle.badNo .a {
+      .toggle-btn.active.no {
+        background: rgba(248, 113, 113, 0.14);
+        border-color: rgba(248, 113, 113, 0.42);
         color: var(--red);
       }
       .btn,
@@ -436,6 +439,11 @@
         background: var(--panel2);
         color: var(--text);
         border: 1px solid var(--line);
+      }
+      .soft.outline-red {
+        background: transparent;
+        border-color: rgba(255, 91, 91, 0.34);
+        color: #ff9d9d;
       }
       .danger {
         background: #2a1015;
@@ -685,6 +693,201 @@
         border-radius: 16px;
         border: 1px solid var(--line);
         background: rgba(255, 255, 255, 0.02);
+      }
+      .champions-shell {
+        display: grid;
+        gap: 14px;
+        padding-bottom: 104px;
+      }
+      .champion-search-card {
+        background:
+          radial-gradient(
+            circle at top right,
+            rgba(255, 91, 91, 0.12),
+            transparent 28%
+          ),
+          linear-gradient(180deg, var(--panel), #10131d);
+      }
+      .champion-search-bar {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        align-items: end;
+      }
+      .champion-search-field {
+        flex: 1 1 280px;
+        min-width: 220px;
+      }
+      .champion-search-field input {
+        width: 100%;
+      }
+      .champion-search-hint {
+        margin-top: 10px;
+        font-size: 12px;
+        color: var(--muted);
+        line-height: 1.6;
+      }
+      .champion-state {
+        padding: 18px;
+        border-radius: 18px;
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.015));
+        border: 1px solid rgba(255, 255, 255, 0.06);
+      }
+      .champion-state.error {
+        border-color: rgba(255, 91, 91, 0.28);
+        background: rgba(255, 91, 91, 0.08);
+      }
+      .champion-state strong {
+        display: block;
+        font-size: 14px;
+        margin-bottom: 6px;
+      }
+      .champion-state span {
+        display: block;
+        font-size: 12px;
+        color: var(--muted);
+        line-height: 1.6;
+      }
+      .champion-overview {
+        position: relative;
+        overflow: hidden;
+        min-height: 240px;
+        display: grid;
+        align-items: end;
+      }
+      .champion-overview::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background:
+          linear-gradient(180deg, rgba(6, 8, 12, 0.12), rgba(6, 8, 12, 0.92)),
+          var(--champion-splash, linear-gradient(135deg, #121214, #151a22));
+        background-size: cover;
+        background-position: center center;
+        opacity: 0.95;
+      }
+      .champion-overview-inner {
+        position: relative;
+        z-index: 1;
+        display: grid;
+        grid-template-columns: 124px minmax(0, 1fr);
+        gap: 18px;
+        align-items: end;
+      }
+      .champion-portrait {
+        width: 124px;
+        height: 124px;
+        border-radius: 24px;
+        object-fit: cover;
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        box-shadow: 0 16px 36px rgba(0, 0, 0, 0.32);
+        background: rgba(255, 255, 255, 0.04);
+      }
+      .champion-overview-copy h3 {
+        font-size: 32px;
+        line-height: 1.02;
+        margin-bottom: 0;
+      }
+      .champion-spell-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 14px;
+      }
+      .champion-spell-card {
+        position: relative;
+        background: linear-gradient(180deg, #12151d, #0f1218);
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        border-radius: 18px;
+        padding: 16px;
+      }
+      .champion-spell-card.key-spell {
+        border-color: rgba(255, 91, 91, 0.72);
+        box-shadow: 0 0 0 1px rgba(255, 91, 91, 0.18), 0 14px 32px rgba(255, 91, 91, 0.12);
+      }
+      .champion-spell-badge {
+        position: absolute;
+        top: 12px;
+        right: 12px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 5px 9px;
+        border-radius: 999px;
+        background: linear-gradient(135deg, #ff5454, #ff8a4c);
+        color: #fff;
+        font-size: 10px;
+        font-weight: 900;
+        letter-spacing: 0.08em;
+        box-shadow: 0 8px 20px rgba(255, 91, 91, 0.22);
+      }
+      .champion-spell-head {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+        margin-bottom: 12px;
+      }
+      .champion-spell-icon {
+        width: 58px;
+        height: 58px;
+        border-radius: 16px;
+        object-fit: cover;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        flex-shrink: 0;
+      }
+      .champion-spell-slot {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 28px;
+        height: 28px;
+        border-radius: 999px;
+        background: rgba(255, 91, 91, 0.14);
+        color: #ff8f8f;
+        font-size: 12px;
+        font-weight: 900;
+        margin-bottom: 6px;
+      }
+      .champion-spell-head h4 {
+        font-size: 16px;
+        margin-bottom: 4px;
+      }
+      .champion-spell-stats {
+        display: grid;
+        gap: 8px;
+        margin-top: 14px;
+      }
+      .champion-spell-stat {
+        padding: 10px 12px;
+        border-radius: 14px;
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+      }
+      .champion-spell-stat label {
+        display: block;
+        margin-bottom: 5px;
+        font-size: 10px;
+        font-weight: 900;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: #ff8a8a;
+      }
+      .champion-spell-stat div {
+        font-size: 12px;
+        color: var(--text);
+        line-height: 1.55;
+        word-break: break-word;
+      }
+      .champion-spell-stat.cooldown-stat {
+        background: linear-gradient(180deg, rgba(255, 91, 91, 0.14), rgba(255, 91, 91, 0.06));
+        border-color: rgba(255, 91, 91, 0.2);
+        box-shadow: 0 10px 26px rgba(255, 91, 91, 0.08);
+      }
+      .champion-spell-stat.cooldown-stat div {
+        font-size: 20px;
+        line-height: 1.2;
+        font-weight: 900;
+        color: #fff5f5;
+        letter-spacing: 0.02em;
       }
       table.sheet-table {
         width: 100%;
@@ -1046,7 +1249,7 @@
         margin: 0 auto;
         padding: 8px 10px calc(8px + env(safe-area-inset-bottom));
         display: grid;
-        grid-template-columns: repeat(8, minmax(0, 1fr));
+        grid-template-columns: repeat(10, minmax(0, 1fr));
         gap: 4px;
       }
       .nav button {
@@ -1214,6 +1417,16 @@
         z-index: 40;
         opacity: 0;
       }
+      .toast.success {
+        background: linear-gradient(135deg, #102018, #143326);
+        border-color: rgba(87, 242, 135, 0.24);
+        color: #eafff0;
+      }
+      .toast.error {
+        background: linear-gradient(135deg, #261116, #35151b);
+        border-color: rgba(255, 91, 91, 0.24);
+        color: #ffe6e6;
+      }
       .toast.show {
         transform: translateY(0);
         opacity: 1;
@@ -1308,7 +1521,11 @@
         cursor: pointer;
         outline: none;
         padding: 2px 4px;
-        max-width: 200px;
+        min-width: 240px;
+        max-width: 320px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
       /* HEADER CONSISTENT HEIGHTS */
       .logout-btn {
@@ -1618,6 +1835,108 @@
         gap: 10px;
         margin-top: 14px;
       }
+      .session-empty {
+        margin-top: 14px;
+        padding: 18px 20px;
+        border-radius: 18px;
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.015));
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        color: #c7c7cf;
+        font-size: 13px;
+        font-weight: 700;
+        text-align: center;
+      }
+      .goal-shell {
+        display: grid;
+        gap: 16px;
+      }
+      .goal-top {
+        display: grid;
+        grid-template-columns: 1fr auto 1fr;
+        align-items: center;
+        gap: 16px;
+      }
+      .goal-rank {
+        display: grid;
+        gap: 8px;
+        justify-items: center;
+        text-align: center;
+      }
+      .goal-rank.goal-current {
+        justify-items: start;
+        text-align: left;
+      }
+      .goal-rank.goal-target {
+        justify-items: end;
+        text-align: right;
+      }
+      .goal-rank img {
+        width: 68px;
+        height: 68px;
+        object-fit: contain;
+        filter: drop-shadow(0 6px 18px rgba(255, 77, 77, 0.18));
+      }
+      .goal-rank-label {
+        font-size: 10px;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--muted);
+        font-weight: 900;
+      }
+      .goal-rank-name {
+        font-size: 18px;
+        font-weight: 900;
+        color: var(--text);
+      }
+      .goal-center {
+        min-width: 160px;
+        text-align: center;
+      }
+      .goal-percent {
+        font-size: 34px;
+        font-weight: 900;
+        color: #fff6f6;
+        line-height: 1;
+      }
+      .goal-percent-copy {
+        margin-top: 6px;
+        font-size: 11px;
+        color: #ffb4b4;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        font-weight: 900;
+      }
+      .goal-progress {
+        height: 14px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.08);
+        overflow: hidden;
+      }
+      .goal-progress-fill {
+        height: 100%;
+        border-radius: 999px;
+        background: linear-gradient(90deg, #ff5454, #ff8a4c);
+      }
+      .goal-bottom {
+        display: grid;
+        gap: 8px;
+        text-align: center;
+      }
+      .goal-tiers {
+        font-size: 13px;
+        color: #d7d7df;
+        font-weight: 800;
+      }
+      .goal-estimate {
+        font-size: 12px;
+        color: var(--muted);
+      }
+      .stats-empty-note {
+        margin-top: 14px;
+        text-align: center;
+        font-size: 12px;
+        color: rgba(255, 255, 255, 0.52);
+      }
       /* LP CHART */
       .lp-chart-wrap {
         padding: 4px 0 0;
@@ -1744,10 +2063,22 @@
           flex-shrink: 0;
         }
         .navIn {
-          padding: 6px 4px calc(6px + env(safe-area-inset-bottom));
-          gap: 1px;
+          max-width: none;
+          margin: 0;
+          padding: 6px 8px calc(6px + env(safe-area-inset-bottom));
+          display: flex;
+          gap: 6px;
+          overflow-x: auto;
+          overflow-y: hidden;
+          -webkit-overflow-scrolling: touch;
+          scrollbar-width: none;
+        }
+        .navIn::-webkit-scrollbar {
+          display: none;
         }
         .nav button {
+          flex: 0 0 auto;
+          min-width: 70px;
           padding: 8px 2px;
           border-radius: 10px;
         }
@@ -1758,8 +2089,24 @@
           font-size: 9px;
           letter-spacing: 0.03em;
         }
+        .champion-overview-inner {
+          grid-template-columns: 1fr;
+          align-items: start;
+        }
+        .champion-portrait {
+          width: 96px;
+          height: 96px;
+        }
+        .champion-overview-copy h3 {
+          font-size: 24px;
+        }
         .session-row {
           grid-template-columns: repeat(3, 1fr);
+        }
+      }
+      @media (max-width: 600px) {
+        .game-stat-field {
+          grid-column: span 4;
         }
       }
     </style>
@@ -1816,7 +2163,6 @@
             </svg>
             🩸 • SUƤRƐMO SƐRVƐR • 🩸
           </a>
-          <button id="langToggleBtn" onclick="toggleLang()" style="background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);color:var(--muted);border-radius:8px;padding:5px 10px;font-size:11px;font-weight:800;letter-spacing:.06em;cursor:pointer;flex-shrink:0">ES</button>
           <div
             class="chip profile"
             id="profileChip"
@@ -1850,7 +2196,9 @@
       <section id="tab-historial" class="hidden"></section>
       <section id="tab-stats" class="hidden"></section>
       <section id="tab-matchups" class="hidden"></section>
+      <section id="tab-campeones" class="hidden"></section>
       <section id="tab-tips" class="hidden"></section>
+      <section id="tab-recursos" class="hidden"></section>
       <section id="tab-guias" class="hidden"></section>
 
       <div class="nav">
@@ -1865,7 +2213,9 @@
           </button>
           <button data-tab="stats"><b>◎</b><span data-i18n="nav_stats">Stats</span></button>
           <button data-tab="matchups"><b>⚔</b><span data-i18n="nav_matchups">Matchups</span></button>
+          <button data-tab="campeones"><b>♞</b><span data-i18n="nav_campeones">Campeones</span></button>
           <button data-tab="tips"><b>✎</b><span data-i18n="nav_tips">Tips</span></button>
+          <button data-tab="recursos"><b>✦</b><span data-i18n="nav_recursos">Recursos</span></button>
           <button data-tab="guias"><b>▶</b><span data-i18n="nav_guias">Guías</span></button>
         </div>
       </div>
@@ -1924,8 +2274,14 @@
             <button class="mobile-nav-btn" data-mobile-tab="matchups">
               <span>⚔</span><span>Matchups</span>
             </button>
+            <button class="mobile-nav-btn" data-mobile-tab="campeones">
+              <span>♞</span><span>Campeones</span>
+            </button>
             <button class="mobile-nav-btn" data-mobile-tab="tips">
               <span>✎</span><span>Tips</span>
+            </button>
+            <button class="mobile-nav-btn" data-mobile-tab="recursos">
+              <span>✦</span><span>Recursos</span>
             </button>
             <button class="mobile-nav-btn" data-mobile-tab="guias">
               <span>▶</span><span>Guías</span>
@@ -2425,7 +2781,7 @@
         es: {
           nav_inicio:'Inicio', nav_partida:'Partida', nav_cuenta:'Cuenta',
           nav_rendimiento:'Rendimiento', nav_stats:'Stats', nav_matchups:'Matchups',
-          nav_tips:'Tips', nav_guias:'Guías',
+          nav_campeones:'Campeones', nav_tips:'Tips', nav_recursos:'Recursos', nav_guias:'Guías',
           kpi_wins:'Victorias', kpi_losses:'Derrotas', kpi_wr:'Win Rate',
           kpi_games:'Partidas', kpi_streak:'Racha', kpi_last20:'WR últimas 20',
           kpi_today:'Sesión hoy', kpi_today_wr:'WR sesión', kpi_today_lp:'LP sesión',
@@ -2435,7 +2791,7 @@
         en: {
           nav_inicio:'Home', nav_partida:'Game', nav_cuenta:'Account',
           nav_rendimiento:'History', nav_stats:'Stats', nav_matchups:'Matchups',
-          nav_tips:'Tips', nav_guias:'Guides',
+          nav_campeones:'Champions', nav_tips:'Tips', nav_recursos:'Resources', nav_guias:'Guides',
           kpi_wins:'Wins', kpi_losses:'Losses', kpi_wr:'Win Rate',
           kpi_games:'Games', kpi_streak:'Streak', kpi_last20:'Last 20 WR',
           kpi_today:"Today", kpi_today_wr:'Session WR', kpi_today_lp:'Session LP',
@@ -2507,6 +2863,20 @@
       let guideFilter = 'all'
       let guidePage = 1
       let statsCharts = {}
+      const DDRAGON_VERSION = '14.24.1'
+      const DDRAGON_LOCALE = 'es_ES'
+      let championDirectory = []
+      let championDirectoryById = {}
+      let championLookup = {}
+      let championCatalogPromise = null
+      let championDetailCache = {}
+      let championExplorerState = {
+        query: '',
+        loading: false,
+        error: '',
+        selectedId: '',
+        detail: null,
+      }
       const PREDEFINED_GUIDES = [
         { id: 1001, url: 'https://www.youtube.com/watch?v=VUBUhBMzjvw', title: 'Motivacion LOL (League Of Legends)', category: 'general', notes: '' },
         { id: 1002, url: 'https://www.youtube.com/watch?v=Aj-sN4F4Jz4', title: '✅ Descúbre tu ROL IDEAL de League of Legends 2025', category: 'general', notes: '' },
@@ -2602,8 +2972,16 @@
               .map((v) => v.trim())
               .filter(Boolean)
           if (!data.profile.server) data.profile.server = 'LAN'
+          if (!data.profile.goal) data.profile.goal = 'MASTER'
           if (!Array.isArray(data.accounts)) data.accounts = []
+          data.accounts = data.accounts.map((account) => ({
+            ...account,
+            goal: account.goal || data.profile.goal || 'MASTER',
+          }))
           if (!Array.isArray(data.guides)) data.guides = []
+          data.matchupSheets = dedupeMatchupSheetsByName(
+            Array.isArray(data.matchupSheets) ? data.matchupSheets : []
+          )
           const existingIds = new Set(data.guides.map((g) => g.id))
           const missing = PREDEFINED_GUIDES.filter((g) => !existingIds.has(g.id))
           if (missing.length) data.guides = [...data.guides, ...missing.map((g) => ({ ...g }))]
@@ -2613,10 +2991,16 @@
         localStorage.setItem(KEY, JSON.stringify(data))
       }
       const $ = (id) => document.getElementById(id)
-      function toast(t) {
+      let toastTimer = null
+      function toast(t, variant = '', duration = 1800) {
         $('toast').textContent = t
+        $('toast').className = `toast${variant ? ` ${variant}` : ''}`
         $('toast').classList.add('show')
-        setTimeout(() => $('toast').classList.remove('show'), 1800)
+        clearTimeout(toastTimer)
+        toastTimer = setTimeout(() => {
+          $('toast').classList.remove('show')
+          $('toast').className = 'toast'
+        }, duration)
       }
       function pct(a, b) {
         return b ? Math.round((a / b) * 100) : 0
@@ -2629,12 +3013,169 @@
         const s = sec % 60 || 0
         return `${m}m ${String(s).padStart(2, '0')}s`
       }
+      function parseDurationInput(value) {
+        const match = String(value || '').trim().match(/^(\d{1,3}):([0-5]\d)$/)
+        if (!match) return null
+        return Number(match[1]) * 60 + Number(match[2])
+      }
+      function formatDurationInput(sec) {
+        const total = Math.max(0, Number(sec) || 0)
+        const m = Math.floor(total / 60)
+        const s = total % 60
+        return `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`
+      }
       function createOptions(arr, selected = '') {
         return arr
           .map(
             (v) => `<option ${v === selected ? 'selected' : ''}>${v}</option>`
           )
           .join('')
+      }
+      function escapeHtml(value) {
+        return String(value ?? '')
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;')
+          .replace(/'/g, '&#39;')
+      }
+      function normalizeChampionQuery(value) {
+        return String(value || '')
+          .normalize('NFD')
+          .replace(/[\u0300-\u036f]/g, '')
+          .replace(/[^a-z0-9]/gi, '')
+          .toLowerCase()
+      }
+      function setChampionLookupEntry(key, id) {
+        const normalized = normalizeChampionQuery(key)
+        if (normalized) championLookup[normalized] = id
+      }
+      function formatChampionText(value) {
+        const withBreaks = String(value || '')
+          .replace(/<br\s*\/?>/gi, '\n')
+          .replace(/<\/p>/gi, '\n')
+          .replace(/<\/li>/gi, '\n')
+          .replace(/<li>/gi, '• ')
+          .replace(/\{\{\s*([^}]+)\s*\}\}/g, '$1')
+        const stripped = withBreaks.replace(/<[^>]+>/g, '')
+        return escapeHtml(stripped.trim()).replace(/\n+/g, '<br>')
+      }
+      function buildChampionDirectory(champs) {
+        championLookup = {}
+        championDirectory = champs
+          .map((champ) => ({
+            id: champ.id,
+            key: champ.key,
+            name: champ.name,
+            title: champ.title,
+            image: champ.image?.full || `${champ.id}.png`,
+          }))
+          .sort((a, b) => a.name.localeCompare(b.name, 'es'))
+        championDirectoryById = Object.fromEntries(
+          championDirectory.map((champ) => [champ.id, champ])
+        )
+        championDirectory.forEach((champ) => {
+          setChampionLookupEntry(champ.id, champ.id)
+          setChampionLookupEntry(champ.name, champ.id)
+          setChampionLookupEntry(champ.key, champ.id)
+        })
+      }
+      function championCatalogOptionsHtml() {
+        return championDirectory
+          .map(
+            (champ) =>
+              `<option value="${escapeHtml(champ.name)}">${escapeHtml(champ.name)} · ${escapeHtml(champ.title)}</option>`
+          )
+          .join('')
+      }
+      function getChampionExplorerContent() {
+        if (championExplorerState.loading) {
+          return `<div class="champion-state"><strong>Cargando campeón...</strong><span>Consultando Data Dragon y preparando habilidades, costos y cooldowns.</span></div>`
+        }
+        if (championExplorerState.error) {
+          return `<div class="champion-state error"><strong>No pude encontrar ese campeón.</strong><span>${escapeHtml(championExplorerState.error)}</span></div>`
+        }
+        if (!championExplorerState.detail) {
+          return `<div class="champion-state"><strong>Explora un campeón</strong><span>Busca por nombre normal o escribe variantes como <b>Miss Fortune</b>, <b>MissFortune</b> o <b>Twisted Fate</b>. SUPRO resolverá automáticamente el nombre correcto para la URL.</span></div>`
+        }
+        const champion = championExplorerState.detail
+        const directoryData = championDirectoryById[champion.id] || {}
+        const splash = `url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/${champion.id}_0.jpg')`
+        const portrait = `https://ddragon.leagueoflegends.com/cdn/${DDRAGON_VERSION}/img/champion/${directoryData.image || champion.image?.full || `${champion.id}.png`}`
+        const abilityCards = [
+          ...((champion.passive?.cooldownBurn &&
+          champion.passive.cooldownBurn !== '0' &&
+          champion.passive.cooldownBurn !== '0/0/0/0/0')
+            ? [{
+                slot: 'P',
+                name: champion.passive?.name || 'Pasiva',
+                icon: `https://ddragon.leagueoflegends.com/cdn/${DDRAGON_VERSION}/img/passive/${champion.passive?.image?.full || ''}`,
+                cooldown: champion.passive.cooldownBurn,
+                isKey:
+                  (parseCooldownLevelOne(champion.passive.cooldownBurn) || 0) >
+                  60,
+              }]
+            : []),
+          ...(champion.spells || []).map((spell, index) => ({
+            slot: ['Q', 'W', 'E', 'R'][index] || `S${index + 1}`,
+            name: spell.name,
+            icon: `https://ddragon.leagueoflegends.com/cdn/${DDRAGON_VERSION}/img/spell/${spell.image?.full || ''}`,
+            cooldown:
+              spell.cooldownBurn && spell.cooldownBurn !== '0'
+                ? spell.cooldownBurn
+                : 'Sin enfriamiento',
+            isKey: (parseCooldownLevelOne(spell.cooldownBurn) || 0) > 60,
+          })),
+        ]
+          .map((ability) => {
+            const statBlocks = []
+            if (ability.cooldown) {
+              statBlocks.push(
+                `<div class="champion-spell-stat cooldown-stat"><label>Cooldown por nivel</label><div>${escapeHtml(ability.cooldown)}</div></div>`
+              )
+            }
+            return `<div class="champion-spell-card${ability.isKey ? ' key-spell' : ''}">
+              ${ability.isKey ? `<span class="champion-spell-badge">CLAVE</span>` : ''}
+              <div class="champion-spell-head">
+                <img class="champion-spell-icon" src="${ability.icon}" alt="${escapeHtml(ability.name)}" onerror="this.src='${champImg(champion.name)}'">
+                <div>
+                  <span class="champion-spell-slot">${escapeHtml(ability.slot)}</span>
+                  <h4>${escapeHtml(ability.name)}</h4>
+                </div>
+              </div>
+              ${statBlocks.length ? `<div class="champion-spell-stats">${statBlocks.join('')}</div>` : ''}
+            </div>`
+          })
+          .join('')
+        return `<div class="champions-shell">
+          <div class="card champion-overview" style="--champion-splash:${splash}">
+            <div class="champion-overview-inner">
+              <img class="champion-portrait" src="${portrait}" alt="${escapeHtml(champion.name)}" onerror="this.src='${champImg(champion.name)}'">
+              <div class="champion-overview-copy">
+                <h3>${escapeHtml(champion.name)}</h3>
+              </div>
+            </div>
+          </div>
+          <div class="champion-spell-grid">${abilityCards}</div>
+        </div>`
+      }
+      function renderChampionExplorer() {
+        const tab = $('tab-campeones')
+        if (!tab) return
+        tab.innerHTML = `<div class="champions-shell">
+          <div class="card champion-search-card">
+            <div class="title"><h2>Campeones</h2><span>Data Dragon · habilidades completas</span></div>
+            <div class="champion-search-bar">
+              <div class="f champion-search-field">
+                <label>Buscar campeón</label>
+                <input id="championSearchInput" list="championCatalogList" placeholder="Ej: Miss Fortune, Twisted Fate, Lee Sin" value="${escapeHtml(championExplorerState.query)}" oninput="championExplorerState.query=this.value" onkeydown="handleChampionSearchKeydown(event)">
+                <datalist id="championCatalogList">${championCatalogOptionsHtml()}</datalist>
+              </div>
+              <button class="btn cta" type="button" onclick="searchChampionExplorer()">${championExplorerState.loading ? 'Buscando...' : 'Buscar'}</button>
+            </div>
+          </div>
+          ${getChampionExplorerContent()}
+        </div>`
       }
       function accountId(p) {
         return `${(p.gameName || '').toLowerCase()}#${(p.tagLine || '').toLowerCase()}@${p.server || 'LAN'}`
@@ -2669,6 +3210,24 @@
         const sign = result === 'win' ? '+' : '-'
         return `<span class="tag ${result === 'win' ? 'lp-plus' : 'lp-minus'}">${sign}${Math.abs(Number(lp) || 0)} LP</span>`
       }
+      function parseCooldownLevelOne(cooldownText) {
+        const first = String(cooldownText || '')
+          .split('/')
+          .map((part) => Number(String(part).replace(',', '.').trim()))
+          .find((value) => Number.isFinite(value))
+        return first ?? null
+      }
+      function dedupeMatchupSheetsByName(sheets) {
+        const seen = new Set()
+        return (sheets || []).filter((sheet) => {
+          const key = String(sheet?.sheetName || '')
+            .trim()
+            .toLowerCase()
+          if (!key || seen.has(key)) return false
+          seen.add(key)
+          return true
+        })
+      }
       function updateNavVisibility() {
         const active = hasActiveProfile()
         document
@@ -2682,12 +3241,17 @@
       function renderTips() {
         return `<div class="card"><div class="title"><h2>Tips</h2><span>Macro, draft y mentalidad</span></div><div class="tips-wrap">${TIPS.map((phase) => `<div class="tip-phase"><div class="tip-head"><h3>${phase.phase}</h3><div class="tip-count">${phase.items.length} tips</div></div><div class="tip-list">${phase.items.map(([concept, rule, moment]) => `<div class="tip-item"><div class="tip-top"><span class="tag rank">${moment}</span><strong>${concept}</strong></div><div class="tip-copy">${rule}</div></div>`).join('')}</div></div>`).join('')}</div></div>`
       }
+      function renderResourcesTab() {
+        return `<div class="card"><div class="title"><h2>Recursos</h2><span>Herramientas y referencias</span></div><div class="grid g2"><div class="resource"><div><strong>Santo Grial de Grymm</strong><div class="small">PDF base del método para compartir con el clan.</div></div><a class="btn cta" href="https://drive.google.com/file/d/1abmbZSzuCdm_E9n6g1XIpDflbBMfzr2q/view" target="_blank" rel="noopener noreferrer">Ver guía</a></div><div class="resource"><div><strong>LoLalytics</strong><div class="small">Campeones OP del parche, builds y win rates.</div></div><button class="soft" onclick="window.open('https://lolalytics.com/','_blank')">Abrir</button></div><div class="resource"><div><strong>Probuilds</strong><div class="small">Builds reales de pro players.</div></div><button class="soft" onclick="window.open('https://probuildstats.com/','_blank')">Abrir</button></div><div class="resource"><div><strong>OP.GG</strong><div class="small">Stats, builds y perfiles por Riot ID + Tag.</div></div><button class="soft" onclick="window.open('https://op.gg/','_blank')">Abrir</button></div><div class="resource"><div><strong>U.GG</strong><div class="small">Tier list, builds y matchup data.</div></div><button class="soft" onclick="window.open('https://u.gg/','_blank')">Abrir</button></div><div class="resource"><div><strong>LOL Tactics Planner</strong><div class="small">Planear jugadas en el mapa.</div></div><button class="soft" onclick="window.open('https://planner.loltactics.gg/','_blank')">Abrir</button></div><div class="resource"><div><strong>DRAF</strong><div class="small">Pensar compos y draft.</div></div><button class="soft" onclick="window.open('https://draf.gg/','_blank')">Abrir</button></div><div class="resource"><div><strong>Biblioteca de Tips</strong><div class="small">Toda la macro, draft y mentalidad en una pantalla aparte.</div></div><button class="soft" onclick="switchTab('tips')">Abrir</button></div></div></div>`
+      }
       function renderBase() {
+        const totalGames = hasActiveProfile() ? myGames().length : 0
+        const showHeroIntro = !hasActiveProfile() || totalGames < 5
         $('tab-inicio').innerHTML = `
-    <div class="card hero"><div class="hero-grid"><div><div class="title"><span id="todayFocus">Conecta una cuenta y empieza a trackear</span></div><h3>Analiza tus ranked con más intención.</h3><p>Una herramienta para cualquier jugador que quiera revisar partidas, detectar patrones y construir progreso con criterio.</p><p class="small" style="margin-top:10px">${T('hero_sub')}</p><div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:14px">${hasActiveProfile() ? '' : `<button class="btn cta" onclick="switchTab('importar')">Conectar cuenta</button>`}</div></div></div></div>
-    ${hasActiveProfile() ? `<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px"><div class="kpi"><div class="v" id="kpiWins" style="color:var(--green)">--</div><div class="l" data-i18n="kpi_wins">${T('kpi_wins')}</div></div><div class="kpi"><div class="v" id="kpiLosses" style="color:var(--red)">--</div><div class="l" data-i18n="kpi_losses">${T('kpi_losses')}</div></div><div class="kpi"><div class="v" id="kpiWR" style="color:var(--green)">--</div><div class="l" data-i18n="kpi_wr">${T('kpi_wr')}</div></div><div class="kpi"><div class="v" id="kpiGames">--</div><div class="l" data-i18n="kpi_games">${T('kpi_games')}</div></div><div class="kpi" style="position:relative"><div class="v" id="kpiStreak">--</div><div class="l" id="kpiStreakLabel" data-i18n="kpi_streak">${T('kpi_streak')}</div></div><div class="kpi"><div class="v" id="kpiLast20" style="font-size:22px">--</div><div class="l" data-i18n="kpi_last20">${T('kpi_last20')}</div></div></div><div id="streakBanner"></div><div id="sessionRow" class="session-row hidden"><div class="kpi"><div class="v" id="sessGames" style="font-size:20px">0V 0D</div><div class="l" data-i18n="kpi_today">${T('kpi_today')}</div></div><div class="kpi"><div class="v" id="sessWR" style="font-size:20px">0%</div><div class="l" data-i18n="kpi_today_wr">${T('kpi_today_wr')}</div></div><div class="kpi"><div class="v" id="sessLP" style="font-size:20px">+0</div><div class="l" data-i18n="kpi_today_lp">${T('kpi_today_lp')}</div></div></div><div id="lpChartSection" class="card hidden" style="margin-top:14px"><div class="title"><h2>Progreso LP</h2><span id="lpChartLabel" style="color:var(--muted);font-size:12px"></span></div><div class="lp-chart-wrap" id="lpChartWrap"></div></div>` : ''}
+    ${showHeroIntro ? `<div class="card hero"><div class="hero-grid"><div><div class="title"><span id="todayFocus">Conecta una cuenta y empieza a trackear</span></div><h3>Analiza tus ranked con más intención.</h3><p>Una herramienta para cualquier jugador que quiera revisar partidas, detectar patrones y construir progreso con criterio.</p><p class="small" style="margin-top:10px">${T('hero_sub')}</p><div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:14px">${hasActiveProfile() ? '' : `<button class="btn cta" onclick="switchTab('importar')">Conectar cuenta</button>`}</div></div></div></div>` : `<div id="todayFocus" class="hidden"></div>`}
+    ${hasActiveProfile() ? `<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px"><div class="kpi"><div class="v" id="kpiWins" style="color:var(--green)">--</div><div class="l" data-i18n="kpi_wins">${T('kpi_wins')}</div></div><div class="kpi"><div class="v" id="kpiLosses" style="color:var(--red)">--</div><div class="l" data-i18n="kpi_losses">${T('kpi_losses')}</div></div><div class="kpi"><div class="v" id="kpiWR" style="color:var(--green)">--</div><div class="l" data-i18n="kpi_wr">${T('kpi_wr')}</div></div><div class="kpi"><div class="v" id="kpiGames">--</div><div class="l" data-i18n="kpi_games">${T('kpi_games')}</div></div><div class="kpi" style="position:relative"><div class="v" id="kpiStreak">--</div><div class="l" id="kpiStreakLabel" data-i18n="kpi_streak">${T('kpi_streak')}</div></div><div class="kpi"><div class="v" id="kpiLast20" style="font-size:22px">--</div><div class="l" data-i18n="kpi_last20">${T('kpi_last20')}</div></div></div><div id="streakBanner"></div><div id="sessionRow" class="session-row hidden"><div class="kpi"><div class="v" id="sessGames" style="font-size:20px">0V 0D</div><div class="l" data-i18n="kpi_today">${T('kpi_today')}</div></div><div class="kpi"><div class="v" id="sessWR" style="font-size:20px">0%</div><div class="l" data-i18n="kpi_today_wr">${T('kpi_today_wr')}</div></div><div class="kpi"><div class="v" id="sessLP" style="font-size:20px">+0</div><div class="l" data-i18n="kpi_today_lp">${T('kpi_today_lp')}</div></div></div><div id="sessionEmpty" class="session-empty hidden">Sin sesión activa hoy</div><div id="lpChartSection" class="card hidden" style="margin-top:14px"><div class="title"><h2>Progreso LP</h2><span id="lpChartLabel" style="color:var(--muted);font-size:12px"></span></div><div class="lp-chart-wrap" id="lpChartWrap"></div></div>` : ''}
     ${hasActiveProfile() ? `<div class="card" style="margin-top:14px" id="goalCard"><div class="title"><h2>Meta de rango</h2><span style="font-size:12px;color:var(--muted)">Editable en Cuenta</span></div><div id="goalContent"></div></div>` : ''}
-    <div class="card" style="margin-top:14px"><div class="title"><h2>Recursos</h2><span>Herramientas y referencias</span></div><div class="grid g2"><div class="resource"><div><strong>Santo Grial de Grymm</strong><div class="small">PDF base del método para compartir con el clan.</div></div><a class="btn cta" href="https://drive.google.com/file/d/1abmbZSzuCdm_E9n6g1XIpDflbBMfzr2q/view" target="_blank" rel="noopener noreferrer">Ver guía</a></div><div class="resource"><div><strong>LoLalytics</strong><div class="small">Campeones OP del parche, builds y win rates.</div></div><button class="soft" onclick="window.open('https://lolalytics.com/','_blank')">Abrir</button></div><div class="resource"><div><strong>Probuilds</strong><div class="small">Builds reales de pro players.</div></div><button class="soft" onclick="window.open('https://probuildstats.com/','_blank')">Abrir</button></div><div class="resource"><div><strong>OP.GG</strong><div class="small">Stats, builds y perfiles por Riot ID + Tag.</div></div><button class="soft" onclick="window.open('https://op.gg/','_blank')">Abrir</button></div><div class="resource"><div><strong>U.GG</strong><div class="small">Tier list, builds y matchup data.</div></div><button class="soft" onclick="window.open('https://u.gg/','_blank')">Abrir</button></div><div class="resource"><div><strong>LOL Tactics Planner</strong><div class="small">Planear jugadas en el mapa.</div></div><button class="soft" onclick="window.open('https://planner.loltactics.gg/','_blank')">Abrir</button></div><div class="resource"><div><strong>DRAF</strong><div class="small">Pensar compos y draft.</div></div><button class="soft" onclick="window.open('https://draf.gg/','_blank')">Abrir</button></div><div class="resource"><div><strong>Biblioteca de Tips</strong><div class="small">Toda la macro, draft y mentalidad en una pantalla aparte.</div></div><button class="soft" onclick="switchTab('tips')">Abrir</button></div></div></div>`
+        `
         const checkHtml = Object.entries(CHECKS)
           .map(
             ([k, items]) =>
@@ -2695,11 +3259,11 @@
           )
           .join('')
         $('tab-partida').innerHTML =
-          `<div class="card"><div class="title"><h2>Registrar partida</h2></div><div class="seg" style="margin-bottom:14px"><button id="btnWin" onclick="setResult('win')">Victoria</button><button id="btnLoss" onclick="setResult('loss')">Derrota</button></div><div class="form"><div class="f s3"><label>Fecha</label><input id="gDate" type="date"></div><div class="f s3"><label>Mood inicial</label><select id="gMoodStart">${createOptions(MOODS)}</select></div><div class="f s3"><label>Mood final</label><select id="gMoodEnd">${createOptions(MOODS)}</select></div><div class="f s3"><label>Rol</label><select id="gRole"><option value="TOP">TOP</option><option value="JUNGLE">JG</option><option value="MIDDLE">MID</option><option value="BOTTOM">ADC</option><option value="UTILITY">SUP</option></select></div><div class="f s6 champ-f"><label>Mi campeón</label><div class="champ-row"><select id="gChamp" onchange="updateChampionPreview()"></select><img id="gChampPreview" class="champ-preview" src="https://res.cloudinary.com/dfr9zlu8d/image/upload/v1777329733/supro-logo_rvavuy.jpg" alt=""></div></div><div class="f s6 champ-f"><label>Campeón enemigo</label><div class="champ-row"><select id="gEnemy" onchange="updateChampionPreview()"></select><img id="gEnemyPreview" class="champ-preview" src="https://res.cloudinary.com/dfr9zlu8d/image/upload/v1777329733/supro-logo_rvavuy.jpg" alt=""></div></div><div class="f s4 compact-field"><label>Elo</label><select id="gTier" onchange="updateTierFields()">${RANKS.map((r) => `<option value="${r}">${RANK_LABEL[r]}</option>`).join('')}</select></div><div class="f s4 compact-field" id="gDivisionWrap"><label>División</label><select id="gDivision"><option value="I">I</option><option value="II">II</option><option value="III">III</option><option value="IV">IV</option><option value="--">--</option></select></div><div class="f s4 compact-field"><label>LP</label><input id="gLp" type="number" min="0" max="60" placeholder="55"></div><div class="f s2 compact-field"><label>Kills</label><input id="gKills" type="number" min="0"></div><div class="f s2 compact-field"><label>Deaths</label><input id="gDeaths" type="number" min="0"></div><div class="f s2 compact-field"><label>Assists</label><input id="gAssists" type="number" min="0"></div><div class="f s2 compact-field"><label>CS/min</label><input id="gCs" type="number" min="0" step="0.1"></div><div class="f s2 compact-field"><label>Wards</label><input id="gWards" type="number" min="0"></div><div class="f s2 compact-field"><label>Pinks</label><input id="gPinks" type="number" min="0"></div><div class="f s2 compact-field"><label>Duración min</label><input id="gDurMin" type="number" min="0" max="99"></div><div class="f s2 compact-field"><label>Duración seg</label><input id="gDurSec" type="number" min="0" max="59"></div></div><div class="title" style="margin-top:16px"><h2>Autoevaluación rápida</h2></div><div class="toggles"><div class="toggle" id="qFlow" onclick="toggleQuick('flow')"><div class="q">¿Estabas en flow?</div><div class="a">—</div></div><div class="toggle" id="qAuto" onclick="toggleQuick('autopilot')"><div class="q">¿Jugaste en autopilot?</div><div class="a">—</div></div><div class="toggle" id="qJg" onclick="toggleQuick('jg')"><div class="q">¿Trackeaste bien al rival más importante?</div><div class="a">—</div></div><div class="toggle" id="qMap" onclick="toggleQuick('map')"><div class="q">¿Miraste el mapa cada 5s?</div><div class="a">—</div></div></div><div class="title" style="margin-top:16px"><h2>Checklist post-partida</h2></div><div class="checks">${checkHtml}</div><div class="title" style="margin-top:16px"><h2>Errores y notas</h2></div><div class="form"><div class="f s6"><label>Error recurrente detectado</label><select id="gRecurring"><option value="">Selecciona un error</option>${data.recurringErrors.map((e) => `<option>${e}</option>`).join('')}</select></div><div class="f s6"><label>Agregar errores nuevos</label><input id="gNewRecurring" placeholder="Escribe uno y presiona Enter" onkeydown="handleRecurringErrorKeydown(event)"><div id="pendingRecurringErrors" class="sheet-pills" style="margin-top:8px"></div></div><div class="f s12"><label>Ajuste para la próxima sesión</label><textarea id="gImprove"></textarea></div><div class="f s12"><label>Comentarios</label><textarea id="gComments"></textarea></div><div class="f s12"><label>Coach video / VOD</label><input id="gCoach" placeholder="URL"></div></div><div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:14px"><button class="btn" onclick="saveGame()">Guardar partida</button><button class="soft" onclick="resetForm()">Limpiar</button></div></div>`
+          `<div class="card"><div class="title"><h2>Registrar partida</h2></div><div class="seg" style="margin-bottom:14px"><button id="btnWin" onclick="setResult('win')">Victoria</button><button id="btnLoss" onclick="setResult('loss')">Derrota</button></div><div class="form"><div class="f s3"><label>Fecha</label><input id="gDate" type="date"></div><div class="f s3"><label>Mood inicial</label><select id="gMoodStart">${createOptions(MOODS)}</select></div><div class="f s3"><label>Mood final</label><select id="gMoodEnd">${createOptions(MOODS)}</select></div><div class="f s3"><label>Rol</label><select id="gRole"><option value="TOP">TOP</option><option value="JUNGLE">JG</option><option value="MIDDLE">MID</option><option value="BOTTOM">ADC</option><option value="UTILITY">SUP</option></select></div><div class="f s6 champ-f"><label>Mi campeón</label><div class="champ-row"><select id="gChamp" onchange="updateChampionPreview()"></select><img id="gChampPreview" class="champ-preview" src="https://res.cloudinary.com/dfr9zlu8d/image/upload/v1777329733/supro-logo_rvavuy.jpg" alt=""></div></div><div class="f s6 champ-f"><label>Campeón enemigo</label><div class="champ-row"><select id="gEnemy" onchange="updateChampionPreview()"></select><img id="gEnemyPreview" class="champ-preview" src="https://res.cloudinary.com/dfr9zlu8d/image/upload/v1777329733/supro-logo_rvavuy.jpg" alt=""></div></div><div class="f s4 compact-field"><label>Elo</label><select id="gTier" onchange="updateTierFields()">${RANKS.map((r) => `<option value="${r}">${RANK_LABEL[r]}</option>`).join('')}</select></div><div class="f s4 compact-field" id="gDivisionWrap"><label>División</label><select id="gDivision"><option value="I">I</option><option value="II">II</option><option value="III">III</option><option value="IV">IV</option><option value="--">--</option></select></div><div class="f s4 compact-field"><label>LP</label><input id="gLp" type="number" min="0" max="60" placeholder="55"></div><div class="f s2 compact-field game-stat-field"><label>Kills</label><input id="gKills" type="number" min="0"></div><div class="f s2 compact-field game-stat-field"><label>Deaths</label><input id="gDeaths" type="number" min="0"></div><div class="f s2 compact-field game-stat-field"><label>Assists</label><input id="gAssists" type="number" min="0"></div><div class="f s2 compact-field game-stat-field"><label>CS/min</label><input id="gCs" type="number" min="0" step="0.1"></div><div class="f s2 compact-field game-stat-field"><label>Wards</label><input id="gWards" type="number" min="0"></div><div class="f s2 compact-field game-stat-field"><label>Pinks</label><input id="gPinks" type="number" min="0"></div><div class="f s4 compact-field"><label>Duración mm:ss</label><input id="gDuration" type="text" inputmode="numeric" placeholder="38:56"></div></div><div class="title" style="margin-top:16px"><h2>Autoevaluación rápida</h2></div><div class="toggles"><div class="toggle" id="qFlow"><div class="q">¿Estabas en flow?</div><div class="toggle-actions"><button type="button" class="toggle-btn yes" data-key="flow" data-value="yes" onclick="setQuick('flow', true)">Sí</button><button type="button" class="toggle-btn no" data-key="flow" data-value="no" onclick="setQuick('flow', false)">No</button></div></div><div class="toggle" id="qAuto"><div class="q">¿Jugaste en autopilot?</div><div class="toggle-actions"><button type="button" class="toggle-btn yes" data-key="autopilot" data-value="yes" onclick="setQuick('autopilot', true)">Sí</button><button type="button" class="toggle-btn no" data-key="autopilot" data-value="no" onclick="setQuick('autopilot', false)">No</button></div></div><div class="toggle" id="qJg"><div class="q">¿Trackeaste bien al rival más importante?</div><div class="toggle-actions"><button type="button" class="toggle-btn yes" data-key="jg" data-value="yes" onclick="setQuick('jg', true)">Sí</button><button type="button" class="toggle-btn no" data-key="jg" data-value="no" onclick="setQuick('jg', false)">No</button></div></div><div class="toggle" id="qMap"><div class="q">¿Miraste el mapa cada 5s?</div><div class="toggle-actions"><button type="button" class="toggle-btn yes" data-key="map" data-value="yes" onclick="setQuick('map', true)">Sí</button><button type="button" class="toggle-btn no" data-key="map" data-value="no" onclick="setQuick('map', false)">No</button></div></div></div><div class="title" style="margin-top:16px"><h2>Checklist post-partida</h2></div><div class="checks">${checkHtml}</div><div class="title" style="margin-top:16px"><h2>Errores y notas</h2></div><div class="form"><div class="f s6"><label>Error recurrente detectado</label><select id="gRecurring"><option value="">Selecciona un error</option>${data.recurringErrors.map((e) => `<option>${e}</option>`).join('')}</select></div><div class="f s6"><label>Agregar errores nuevos</label><input id="gNewRecurring" placeholder="Escribe uno y presiona Enter" onkeydown="handleRecurringErrorKeydown(event)"><div id="pendingRecurringErrors" class="sheet-pills" style="margin-top:8px"></div></div><div class="f s12"><label>Ajuste para la próxima sesión</label><textarea id="gImprove"></textarea></div><div class="f s12"><label>Comentarios</label><textarea id="gComments"></textarea></div><div class="f s12"><label>Coach video / VOD</label><input id="gCoach" placeholder="URL"></div></div><div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:14px"><button class="btn" onclick="saveGame()">Guardar partida</button><button class="soft" onclick="resetForm()">Limpiar</button></div></div>`
         $('tab-importar').innerHTML =
           `<div class="grid g2"><div class="card"><div class="title"><h2>Conexión de Cuenta</h2><span>Cuenta local</span></div><div class="form"><div class="f s4"><label>Nombre</label><input id="pGameName"></div><div class="f s2"><label>Tag</label><input id="pTagLine"></div><div class="f s3"><label>Servidor</label><select id="pServer">${SERVERS.map((s) => `<option value="${s}">${s}</option>`).join('')}</select></div><div class="f s4 compact-field"><label>Rango actual</label><select id="pRank" onchange="updateAccountPreview()">${RANKS.map((r) => `<option value="${r}">${RANK_LABEL[r]}</option>`).join('')}</select></div><div class="f s4 compact-field" id="pDivisionWrap"><label>División</label><select id="pDivision"><option value="I">I</option><option value="II">II</option><option value="III">III</option><option value="IV">IV</option><option value="--">--</option></select></div><div class="f s4 compact-field"><label>Meta de rango</label><select id="pGoalRank">${RANKS.map((r) => `<option value="${r}">${RANK_LABEL[r]}</option>`).join('')}</select></div><div class="f s6" style="display:grid;place-items:center"><label>Emblema actual</label><img id="accountRankPreview" class="rank-badge" src="${rankImg(data.profile.rank)}" alt=""></div></div><div class="note" style="margin-top:12px">Esto funciona como sesión local. Puedes guardar varias cuentas, cambiar entre perfiles y abrir tu cuenta en OPGG cuando haya una activa.</div><div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:12px"><button class="btn cta" onclick="saveProfile()">Guardar / Conectar</button></div></div><div class="card"><div class="title"><h2>Cuentas Guardadas</h2><span>Switch rápido</span></div><div class="list" id="accountsBox"></div></div></div>`
         $('tab-historial').innerHTML =
-          `<div class="card"><div class="title"><h2>Historial de partidas</h2><span>Todas tus partidas</span></div><div class="filters"><select class="select-pill" id="hFilter" onchange="renderHistory()"><option value="all">Todos</option><option value="win">Victorias</option><option value="loss">Derrotas</option></select><select class="select-pill" id="hChampFilter" onchange="renderHistory()"><option value="all">Todos los campeones</option>${data.champions.map((c) => `<option value="${c}">${c}</option>`).join('')}</select><select class="select-pill" id="hRoleFilter" onchange="renderHistory()"><option value="all">Todos los roles</option><option value="TOP">Top</option><option value="JUNGLE">Jungla</option><option value="MIDDLE">Mid</option><option value="BOTTOM">Bot</option><option value="UTILITY">Support</option></select><input class="select-pill" id="hDateFrom" type="date" onchange="renderHistory()"><input class="select-pill" id="hDateTo" type="date" onchange="renderHistory()"><div style="margin-left:auto;display:flex;gap:8px;flex-shrink:0"><button class="soft" onclick="exportHistoryWorkbook()">Exportar</button><button class="danger" onclick="clearAll()">Limpiar historial</button></div></div><div class="list" id="historyBox"></div></div>`
+          `<div class="card"><div class="title"><h2>Historial de partidas</h2><span>Todas tus partidas</span></div><div class="filters"><select class="select-pill" id="hFilter" onchange="renderHistory()"><option value="all">Todos</option><option value="win">Victorias</option><option value="loss">Derrotas</option></select><select class="select-pill" id="hChampFilter" onchange="renderHistory()"><option value="all">Todos los campeones</option>${data.champions.map((c) => `<option value="${c}">${c}</option>`).join('')}</select><select class="select-pill" id="hRoleFilter" onchange="renderHistory()"><option value="all">Todos los roles</option><option value="TOP">Top</option><option value="JUNGLE">Jungla</option><option value="MIDDLE">Mid</option><option value="BOTTOM">Bot</option><option value="UTILITY">Support</option></select><input class="select-pill" id="hDateFrom" type="date" onchange="renderHistory()"><input class="select-pill" id="hDateTo" type="date" onchange="renderHistory()"><div style="margin-left:auto;display:flex;gap:8px;flex-shrink:0"><button class="soft outline-red" onclick="exportHistoryWorkbook()">Exportar</button><button class="danger" onclick="clearAll()">Limpiar historial</button></div></div><div class="list" id="historyBox"></div></div>`
         $('tab-stats').innerHTML = `<div id="statsContent"><div class="card"><div class="small" style="text-align:center;padding:40px;color:var(--muted)">Cargando estadísticas...</div></div></div>`
         $('tab-matchups').innerHTML = `<div class="card"><div class="title"><h2>Matchups</h2><span>Tu base de conocimiento</span></div>
           <div style="background:rgba(255,138,76,.06);border:1px solid rgba(255,138,76,.2);border-radius:14px;padding:14px 16px;margin-bottom:14px;display:flex;gap:12px;align-items:flex-start">
@@ -2718,7 +3282,9 @@
           </div>
           <div id="matchupContent"></div>
         </div>`
+        renderChampionExplorer()
         $('tab-tips').innerHTML = renderTips()
+        $('tab-recursos').innerHTML = renderResourcesTab()
         $('tab-guias').innerHTML = `<div class="card"><div class="title"><h2>Guías</h2><span>Videos y recursos por categoría</span></div><div class="form" style="margin-bottom:0"><div class="f s8"><label>URL del video (YouTube u otro)</label><input id="guideUrl" type="url" placeholder="https://youtube.com/watch?v=..." oninput="onGuideUrlInput()"></div><div class="f s4"><label>Categoría</label><select id="guideCat">${GUIDE_CATEGORIES.map((c) => `<option value="${c.key}">${c.label}</option>`).join('')}</select></div><div class="f s8"><label>Título</label><input id="guideTitle" placeholder="Nombre de la guía o video"></div><div class="f s4" style="display:flex;align-items:end"><button class="btn" style="width:100%;height:38px" onclick="saveGuide()">Guardar</button></div><div class="f s12"><label>Notas (opcional)</label><input id="guideNotes" placeholder="Concepto clave o para qué sirve esta guía"></div></div><div id="guideUrlPreview" class="guide-url-preview"></div><div style="margin-top:16px;padding-top:14px;border-top:1px solid var(--line)" id="guidesContent"></div></div>`
         renderGuides()
       }
@@ -2765,6 +3331,7 @@
         if ($('pTagLine')) $('pTagLine').value = data.profile.tagLine || ''
         if ($('pServer')) $('pServer').value = data.profile.server || 'LAN'
         if ($('pRank')) $('pRank').value = data.profile.rank
+        if ($('pGoalRank')) $('pGoalRank').value = data.profile.goal || 'MASTER'
         if ($('profileChip')) {
           if (hasActiveProfile()) {
             const rankImgEl = `<img src="${rankImg(data.profile.rank)}" style="width:52px;height:52px;object-fit:contain;flex-shrink:0;filter:drop-shadow(0 2px 10px rgba(255,77,77,.35));transform:scale(1.18);transform-origin:center">`
@@ -2944,9 +3511,11 @@
         // Today session
         const sess = todaySession(games)
         const sessionRowEl = $('sessionRow')
+        const sessionEmptyEl = $('sessionEmpty')
         if (sessionRowEl) {
           if (sess.total > 0) {
             sessionRowEl.classList.remove('hidden')
+            sessionEmptyEl?.classList.add('hidden')
             if ($('sessGames')) $('sessGames').textContent = `${sess.wins}V ${sess.losses}D`
             const sessWREl = $('sessWR')
             if (sessWREl) {
@@ -2961,6 +3530,7 @@
             }
           } else {
             sessionRowEl.classList.add('hidden')
+            sessionEmptyEl?.classList.remove('hidden')
           }
         }
         // LP Chart
@@ -2998,15 +3568,28 @@
               const lpToGoal = goalIdx * 400 - absLp(games[0])
               return lpToGoal > 0 ? Math.round(lpToGoal / Math.abs(perGame)) : null
             })()
-            goalEl.innerHTML = `<div style="display:flex;align-items:center;gap:16px;margin-bottom:14px">
-              <div style="text-align:center"><img src="${rankImg(curRank)}" style="width:52px;height:52px;object-fit:contain"><div style="font-size:11px;color:var(--muted);margin-top:4px">${RANK_LABEL[curRank]}</div></div>
-              <div style="flex:1">
-                <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin-bottom:6px"><span>Ahora</span><span>Meta</span></div>
-                <div style="height:10px;border-radius:999px;background:rgba(255,255,255,.08);overflow:hidden"><div style="height:100%;width:${pctGoal}%;background:linear-gradient(90deg,#ff5454,#ff8a4c);border-radius:999px;transition:width .5s"></div></div>
-                <div style="display:flex;justify-content:space-between;font-size:11px;margin-top:5px"><span style="color:#ff8a4c;font-weight:800">${pctGoal}% del camino</span><span style="color:var(--muted)">${tiersLeft} tier${tiersLeft !== 1 ? 's' : ''} restante${tiersLeft !== 1 ? 's' : ''}</span></div>
-                ${avgLpPerGame !== null ? `<div style="font-size:11px;color:var(--muted);margin-top:4px">Estimado: ~${avgLpPerGame} partidas al ritmo actual</div>` : ''}
+            goalEl.innerHTML = `<div class="goal-shell">
+              <div class="goal-top">
+                <div class="goal-rank goal-current">
+                  <span class="goal-rank-label">Actual</span>
+                  <img src="${rankImg(curRank)}" alt="${RANK_LABEL[curRank]}">
+                  <div class="goal-rank-name">${RANK_LABEL[curRank]}</div>
+                </div>
+                <div class="goal-center">
+                  <div class="goal-percent">${pctGoal}%</div>
+                  <div class="goal-percent-copy">del camino</div>
+                </div>
+                <div class="goal-rank goal-target">
+                  <span class="goal-rank-label">Objetivo</span>
+                  <img src="${rankImg(goalRank)}" alt="${RANK_LABEL[goalRank]}" style="opacity:.72">
+                  <div class="goal-rank-name">${RANK_LABEL[goalRank]}</div>
+                </div>
               </div>
-              <div style="text-align:center"><img src="${rankImg(goalRank)}" style="width:52px;height:52px;object-fit:contain;opacity:.6"><div style="font-size:11px;color:var(--muted);margin-top:4px">${RANK_LABEL[goalRank]}</div></div>
+              <div class="goal-progress"><div class="goal-progress-fill" style="width:${pctGoal}%"></div></div>
+              <div class="goal-bottom">
+                <div class="goal-tiers">${tiersLeft} tier${tiersLeft !== 1 ? 's' : ''} restante${tiersLeft !== 1 ? 's' : ''}</div>
+                ${avgLpPerGame !== null ? `<div class="goal-estimate">Estimado: ~${avgLpPerGame} partidas al ritmo actual</div>` : ''}
+              </div>
             </div>`
           } else if (curIdx >= goalIdx && goalIdx >= 0) {
             goalEl.innerHTML = `<div style="font-size:13px;font-weight:800;color:var(--green);text-align:center;padding:14px 0">¡Meta alcanzada! ${RANK_LABEL[goalRank]} ✓ — Actualiza tu meta en Cuenta.</div>`
@@ -3128,29 +3711,22 @@
         $('btnLoss').classList.toggle('active', result === 'loss')
         $('btnLoss').classList.toggle('loss', result === 'loss')
       }
-      function toggleQuick(key) {
-        const vals = [null, true, false]
-        form.quick[key] = vals[(vals.indexOf(form.quick[key]) + 1) % 3]
+      function setQuick(key, value) {
+        form.quick[key] = value
         renderQuick()
       }
       function renderQuick() {
-        const map = {
-          flow: ['qFlow', false],
-          autopilot: ['qAuto', true],
-          jg: ['qJg', false],
-          map: ['qMap', false],
-        }
-        Object.entries(map).forEach(([k, [id, invert]]) => {
-          const el = $(id)
-          el.className = 'toggle'
-          const a = el.querySelector('.a')
-          const v = form.quick[k]
-          a.textContent = v === null ? '—' : v ? 'Sí' : 'No'
-          if (v === null) return
-          const good = invert ? !v : v
-          el.classList.add(
-            good ? (v ? 'goodYes' : 'goodNo') : v ? 'badYes' : 'badNo'
-          )
+        const map = ['flow', 'autopilot', 'jg', 'map']
+        map.forEach((key) => {
+          const v = form.quick[key]
+          document
+            .querySelectorAll(`.toggle-btn[data-key="${key}"]`)
+            .forEach((btn) => {
+              const shouldBeActive =
+                (btn.dataset.value === 'yes' && v === true) ||
+                (btn.dataset.value === 'no' && v === false)
+              btn.classList.toggle('active', shouldBeActive)
+            })
         })
       }
       function captureGameFields() {
@@ -3171,8 +3747,7 @@
               cs: $('gCs').value,
               wards: $('gWards').value,
               pinks: $('gPinks').value,
-              durMin: $('gDurMin').value,
-              durSec: $('gDurSec').value,
+              duration: $('gDuration').value,
               recurring: $('gRecurring').value,
               newRecurring: $('gNewRecurring').value,
               pendingRecurringErrors: [...form.pendingRecurringErrors],
@@ -3199,8 +3774,7 @@
         $('gCs').value = v.cs
         $('gWards').value = v.wards
         $('gPinks').value = v.pinks
-        $('gDurMin').value = v.durMin
-        $('gDurSec').value = v.durSec
+        $('gDuration').value = v.duration
         $('gRecurring').value = v.recurring
         $('gNewRecurring').value = v.newRecurring
         form.pendingRecurringErrors = [...(v.pendingRecurringErrors || [])]
@@ -3291,7 +3865,21 @@
         renderPendingRecurringErrors()
       }
       function saveGame() {
-        if (!form.result) return toast('Selecciona victoria o derrota')
+        if (!form.result)
+          return toast('Selecciona victoria o derrota', 'error', 2600)
+        const durationSec = parseDurationInput($('gDuration').value)
+        if (!$('gDate').value || !$('gChamp').value || !$('gEnemy').value)
+          return toast(
+            'Completa fecha, tu campeón y el campeón enemigo.',
+            'error',
+            2600
+          )
+        if (!durationSec)
+          return toast(
+            'La duración debe estar en formato mm:ss, por ejemplo 38:56.',
+            'error',
+            2600
+          )
         const newErr = $('gNewRecurring').value.trim(),
           selectedErr = $('gRecurring').value,
           errors = [
@@ -3323,9 +3911,7 @@
           csMin: Number($('gCs').value || 0),
           wards: Number($('gWards').value || 0),
           pinks: Number($('gPinks').value || 0),
-          durationSec:
-            Number($('gDurMin').value || 0) * 60 +
-            Number($('gDurSec').value || 0),
+          durationSec,
           flow: form.quick.flow,
           autopilot: form.quick.autopilot,
           trackedJg: form.quick.jg,
@@ -3339,7 +3925,7 @@
         data.games.unshift(game)
         save()
         resetForm()
-        toast('Partida guardada')
+        toast('Partida guardada correctamente ✓', 'success', 2600)
       }
       function bar(label, value, max, color = '') {
         return `<div class="barRow"><div class="barHead"><span>${label}</span><span>${value}</span></div><div class="barWrap"><div class="bar ${color}" style="width:${max ? Math.max(8, Math.round((value / max) * 100)) : 0}%"></div></div></div>`
@@ -3641,17 +4227,21 @@
         toast('Excel exportado')
       }
       async function fetchChampionList() {
-        try {
+        if (championDirectory.length) return championDirectory
+        if (championCatalogPromise) return championCatalogPromise
+        championCatalogPromise = (async () => {
           const res = await fetch(
-            'https://ddragon.leagueoflegends.com/cdn/15.8.1/data/en_US/champion.json'
+            `https://ddragon.leagueoflegends.com/cdn/${DDRAGON_VERSION}/data/${DDRAGON_LOCALE}/champion.json`
           )
+          if (!res.ok) throw new Error('No se pudo cargar la lista de campeones.')
           const json = await res.json()
-          const champs = Object.values(json.data)
-          data.champions = champs.map((x) => x.name).sort()
+          const champs = Object.values(json.data || {})
+          buildChampionDirectory(champs)
+          data.champions = championDirectory.map((champ) => champ.name)
           data.championImages = Object.fromEntries(
-            champs.map((x) => [
-              x.name,
-              `https://ddragon.leagueoflegends.com/cdn/15.8.1/img/champion/${x.image.full}`,
+            championDirectory.map((champ) => [
+              champ.name,
+              `https://ddragon.leagueoflegends.com/cdn/${DDRAGON_VERSION}/img/champion/${champ.image}`,
             ])
           )
           save()
@@ -3663,7 +4253,81 @@
           renderHistory()
           renderProgress()
           renderAccounts()
-        } catch {}
+          return championDirectory
+        })()
+        try {
+          return await championCatalogPromise
+        } catch {
+          championCatalogPromise = null
+          renderChampionExplorer()
+          return championDirectory
+        }
+      }
+      async function ensureChampionCatalog() {
+        if (championDirectory.length) return championDirectory
+        const champions = await fetchChampionList()
+        if (!champions.length) {
+          throw new Error(
+            'No se pudo cargar la lista oficial de campeones desde Data Dragon.'
+          )
+        }
+        return champions
+      }
+      function handleChampionSearchKeydown(event) {
+        if (event.key !== 'Enter') return
+        event.preventDefault()
+        searchChampionExplorer(event.target.value)
+      }
+      async function searchChampionExplorer(forceValue) {
+        const query = String(forceValue ?? $('championSearchInput')?.value ?? championExplorerState.query).trim()
+        championExplorerState.query = query
+        championExplorerState.error = ''
+        championExplorerState.loading = true
+        renderChampionExplorer()
+        if (!query) {
+          championExplorerState.loading = false
+          championExplorerState.detail = null
+          championExplorerState.selectedId = ''
+          championExplorerState.error = 'Escribe el nombre de un campeón para buscarlo.'
+          renderChampionExplorer()
+          return
+        }
+        try {
+          await ensureChampionCatalog()
+          const championId = championLookup[normalizeChampionQuery(query)]
+          if (!championId) {
+            championExplorerState.loading = false
+            championExplorerState.detail = null
+            championExplorerState.selectedId = ''
+            championExplorerState.error = `No encontré "${query}" en la lista oficial de Riot.`
+            renderChampionExplorer()
+            return
+          }
+          championExplorerState.selectedId = championId
+          if (!championDetailCache[championId]) {
+            const res = await fetch(
+              `https://ddragon.leagueoflegends.com/cdn/${DDRAGON_VERSION}/data/${DDRAGON_LOCALE}/champion/${championId}.json`
+            )
+            if (!res.ok) {
+              throw new Error('Riot no devolvió datos para ese campeón.')
+            }
+            const json = await res.json()
+            championDetailCache[championId] = json.data?.[championId] || null
+          }
+          championExplorerState.detail = championDetailCache[championId]
+          championExplorerState.error = championExplorerState.detail
+            ? ''
+            : 'La respuesta llegó vacía. Intenta de nuevo en unos segundos.'
+        } catch (error) {
+          championExplorerState.detail = null
+          championExplorerState.selectedId = ''
+          championExplorerState.error =
+            error?.message ||
+            'Hubo un problema al consultar Data Dragon. Revisa tu conexión e intenta otra vez.'
+        } finally {
+          championExplorerState.loading = false
+          renderChampionExplorer()
+        }
       }
       async function loadMatches() {
         const base = $('iProxy').value.trim(),
@@ -3911,7 +4575,8 @@
               <div class="title"><h2>Errores más frecuentes</h2></div>
               <div style="position:relative;height:${Math.max(160, errLabels.length * 38)}px"><canvas id="chartErr"></canvas></div>
             </div>` : ''}
-          </div>`
+          </div>
+          ${games.length < 5 ? `<div class="stats-empty-note">Registra más partidas para ver estadísticas completas</div>` : ''}`
 
         // Destroy old chart instances
         Object.values(statsCharts).forEach((c) => { try { c.destroy() } catch (_) {} })
@@ -3926,6 +4591,7 @@
 
         // LP line chart
         if ($('chartLp')) {
+          let lastLpAxisLabel = null
           statsCharts.lp = new Chart($('chartLp'), {
             type: 'line',
             data: {
@@ -3955,7 +4621,12 @@
               }},
               scales: {
                 x: { ticks: { color: tickColor, maxTicksLimit: 8, font: { size: 10 } }, grid: { color: gridColor } },
-                y: { ticks: { color: tickColor, font: { size: 10 }, callback: (v) => rankFromAbsLp(v) }, grid: { color: gridColor } }
+                y: { ticks: { color: tickColor, font: { size: 10 }, callback: (v) => {
+                  const label = rankFromAbsLp(v)
+                  if (label === lastLpAxisLabel) return ''
+                  lastLpAxisLabel = label
+                  return label
+                } }, grid: { color: gridColor } }
               }
             }
           })
@@ -4102,16 +4773,26 @@
         }
         const current = data.matchupSheets.find((s) => s.id === data.activeMatchupId) || data.matchupSheets[0]
         if (current && data.activeMatchupId !== current.id) { data.activeMatchupId = current.id; save() }
-        const headers = current.rows?.[0] || []
+        const rawHeaders = current.rows?.[0] || []
         const bodyRows = current.rows?.slice(1) || []
         const normalize = (s) => String(s ?? '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').trim()
+        const visibleIndices = rawHeaders.map((_, index) => index).filter((index) => {
+          const headerText = String(rawHeaders[index] ?? '').trim()
+          const hasMeaningfulValue = bodyRows.some((row) => {
+            const text = String(row?.[index] ?? '').trim()
+            return text && text !== '—' && text !== '-'
+          })
+          return headerText || hasMeaningfulValue
+        })
+        const headers = visibleIndices.map((index) => rawHeaders[index])
+        const rows = bodyRows.map((row) => visibleIndices.map((index) => row?.[index] ?? ''))
         const headerKeys = headers.map(normalize)
         const laneIndex = headerKeys.findIndex((k) => k.includes('linea') || k.includes('lane') || k.includes('rol'))
         const diffIndex = headerKeys.findIndex((k) => k.includes('dific') || k.includes('difficulty') || k.includes('nivel'))
         const query = data.matchupFilters?.query || ''
         const laneFilter = data.matchupFilters?.lane || 'all'
         const diffFilter = data.matchupFilters?.diff || 'all'
-        const filteredRows = bodyRows.filter((row) => {
+        const filteredRows = rows.filter((row) => {
           const allText = row.map((c) => normalize(c)).join(' ')
           const laneText = laneIndex >= 0 ? normalize(row?.[laneIndex]) : ''
           const diffText = diffIndex >= 0 ? String(row?.[diffIndex] ?? '').trim() : ''
@@ -4119,8 +4800,8 @@
             (laneFilter === 'all' || laneText === laneFilter) &&
             (diffFilter === 'all' || diffText === diffFilter)
         })
-        const laneOptions = [...new Set(bodyRows.map((r) => String(laneIndex >= 0 ? (r?.[laneIndex] ?? '') : '').trim()).filter(Boolean))]
-        const diffOptions = [...new Set(bodyRows.map((r) => String(diffIndex >= 0 ? (r?.[diffIndex] ?? '') : '').trim()).filter(Boolean))].sort()
+        const laneOptions = [...new Set(rows.map((r) => String(laneIndex >= 0 ? (r?.[laneIndex] ?? '') : '').trim()).filter(Boolean))]
+        const diffOptions = [...new Set(rows.map((r) => String(diffIndex >= 0 ? (r?.[diffIndex] ?? '') : '').trim()).filter(Boolean))].sort()
         const renderCell = (key, value) => {
           const text = String(value ?? '').trim()
           if (!text) return '<span style="color:rgba(255,255,255,.2)">—</span>'
@@ -4162,7 +4843,7 @@
           <input class="select-pill" id="matchupSearch" placeholder="🔍 Buscar en la tabla..." value="${query.replace(/"/g, '&quot;')}" oninput="setMatchupSearch(this.value)" style="flex:1;min-width:160px">
           ${laneSelect}${diffSelect}
           <div style="margin-left:auto;display:flex;gap:8px;align-items:center;flex-shrink:0">
-            <span style="font-size:12px;color:var(--muted)">${filteredRows.length} / ${bodyRows.length} filas</span>
+            <span style="font-size:12px;color:var(--muted)">${filteredRows.length} / ${rows.length} filas</span>
             <button class="danger" onclick="deleteMatchupSheet('${current.id}')">Eliminar hoja</button>
           </div>
         </div>` + tableHtml
@@ -4238,13 +4919,17 @@
               rows,
             }
           }).filter((sheet) => sheet.rows.length)
-          data.matchupSheets = [...data.matchupSheets, ...importedSheets]
+          const beforeCount = data.matchupSheets.length
+          data.matchupSheets = dedupeMatchupSheetsByName([
+            ...data.matchupSheets,
+            ...importedSheets,
+          ])
           if (!data.activeMatchupId && importedSheets[0])
             data.activeMatchupId = importedSheets[0].id
           save()
           renderMatchups()
           event.target.value = ''
-          toast(`${importedSheets.length} hojas importadas`)
+          toast(`${data.matchupSheets.length - beforeCount} hojas importadas`)
         } catch {
           toast('No pude leer ese Excel')
         }
@@ -4269,8 +4954,7 @@
         $('gWards').value = m.wards ?? m.info?.wardsPlaced ?? 0
         $('gPinks').value = m.pinks ?? m.info?.detectorWardsPlaced ?? 0
         const d = m.durationSec ?? m.info?.gameDuration ?? 0
-        $('gDurMin').value = Math.floor(d / 60)
-        $('gDurSec').value = d % 60
+        $('gDuration').value = formatDurationInput(d)
         toast('Campos autollenados')
       }
       function switchTab(tab) {
@@ -4283,7 +4967,9 @@
           'historial',
           'stats',
           'matchups',
+          'campeones',
           'tips',
+          'recursos',
           'guias',
         ].forEach((t) => {
           $(`tab-${t}`).classList.toggle('hidden', t !== tab)
@@ -4301,6 +4987,7 @@
         if (tab === 'importar') renderImported()
         if (tab === 'stats') renderStats()
         if (tab === 'matchups') renderMatchups()
+        if (tab === 'campeones') renderChampionExplorer()
         if (tab === 'guias') renderGuides()
       }
       function toggleMobileMenu(force) {
