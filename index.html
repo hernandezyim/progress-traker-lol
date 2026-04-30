@@ -39,7 +39,7 @@
           linear-gradient(180deg, #0b0b0d, #090909);
         background-attachment: fixed;
         color: var(--text);
-        padding-bottom: 84px;
+        padding-bottom: 104px;
       }
       .wrap {
         max-width: 1100px;
@@ -264,6 +264,394 @@
         border-radius: 24px;
         border: 1px solid rgba(248, 113, 113, 0.24);
         box-shadow: 0 0 30px rgba(248, 113, 113, 0.14);
+      }
+      .landing-shell,
+      .dashboard-shell {
+        display: grid;
+        gap: 14px;
+      }
+      .landing-hero {
+        overflow: hidden;
+        background:
+          radial-gradient(circle at top right, rgba(255, 91, 91, 0.18), transparent 28%),
+          radial-gradient(circle at bottom left, rgba(138, 180, 255, 0.12), transparent 24%),
+          linear-gradient(135deg, #120f13, #101828 58%, #0d1118);
+        border-color: rgba(255, 91, 91, 0.22);
+      }
+      .landing-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.8fr);
+        gap: 18px;
+        align-items: center;
+      }
+      .landing-copy h1 {
+        font-size: 42px;
+        line-height: 0.95;
+        margin-bottom: 12px;
+      }
+      .landing-copy p {
+        font-size: 14px;
+        color: #d5d8e1;
+        line-height: 1.7;
+        max-width: 62ch;
+      }
+      .landing-actions {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        margin-top: 18px;
+      }
+      .landing-badges {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        margin-top: 14px;
+      }
+      .landing-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 8px 12px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        font-size: 11px;
+        font-weight: 800;
+        color: #f3f4f8;
+      }
+      .landing-panel {
+        display: grid;
+        gap: 10px;
+        padding: 16px;
+        border-radius: 20px;
+        background: rgba(7, 10, 16, 0.58);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+      }
+      .landing-panel strong {
+        font-size: 12px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: #ff9d9d;
+      }
+      .landing-panel-item {
+        padding: 12px 14px;
+        border-radius: 16px;
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid rgba(255, 255, 255, 0.06);
+      }
+      .landing-panel-item b {
+        display: block;
+        font-size: 13px;
+        margin-bottom: 4px;
+      }
+      .landing-panel-item span {
+        display: block;
+        font-size: 12px;
+        color: var(--muted);
+        line-height: 1.5;
+      }
+      .landing-stats {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 10px;
+      }
+      .landing-stat {
+        padding: 14px;
+        border-radius: 18px;
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid rgba(255, 255, 255, 0.06);
+      }
+      .landing-stat strong {
+        display: block;
+        font-size: 26px;
+        line-height: 1;
+        margin-bottom: 6px;
+      }
+      .landing-stat span {
+        display: block;
+        font-size: 11px;
+        color: var(--muted);
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+      .landing-feature-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 12px;
+      }
+      .landing-feature {
+        padding: 16px;
+        border-radius: 18px;
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.015));
+        border: 1px solid rgba(255, 255, 255, 0.06);
+      }
+      .landing-feature strong {
+        display: block;
+        font-size: 13px;
+        margin-bottom: 6px;
+      }
+      .landing-feature span {
+        display: block;
+        font-size: 12px;
+        color: var(--muted);
+        line-height: 1.55;
+      }
+      .showcase-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 12px;
+      }
+      .showcase-card {
+        position: relative;
+        display: block;
+        min-height: 220px;
+        overflow: hidden;
+        border-radius: 22px;
+        border: 1px solid rgba(255, 255, 255, 0.07);
+        background: linear-gradient(180deg, #10131b, #0b0f16);
+        cursor: pointer;
+        text-align: left;
+        box-shadow:
+          inset 0 1px 0 rgba(255, 255, 255, 0.04),
+          0 18px 34px rgba(0, 0, 0, 0.26);
+      }
+      .showcase-card::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background:
+          linear-gradient(180deg, rgba(7, 10, 16, 0.18) 0%, rgba(7, 10, 16, 0.44) 44%, rgba(7, 10, 16, 0.92) 100%),
+          radial-gradient(circle at top left, rgba(255, 91, 91, 0.15), transparent 28%),
+          var(--showcase-art, linear-gradient(135deg, #10131b, #161b24));
+        background-size: cover;
+        background-position: center center;
+        transform: scale(1.02);
+        transition: transform 0.25s ease, filter 0.25s ease;
+      }
+      .showcase-card:hover::before {
+        transform: scale(1.06);
+        filter: saturate(1.08);
+      }
+      .showcase-card-body {
+        position: relative;
+        z-index: 1;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        padding: 18px;
+      }
+      .showcase-card-top {
+        position: absolute;
+        top: 16px;
+        left: 16px;
+        z-index: 1;
+        display: inline-flex;
+        padding: 6px 10px;
+        border-radius: 999px;
+        background: rgba(0, 0, 0, 0.28);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        font-size: 10px;
+        font-weight: 900;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: #ffd1d1;
+      }
+      .showcase-card h3 {
+        font-size: 24px;
+        line-height: 1;
+        margin-bottom: 8px;
+        color: #ffffff;
+        text-shadow: 0 10px 24px rgba(0, 0, 0, 0.72);
+      }
+      .showcase-card p {
+        font-size: 12px;
+        color: rgba(255, 255, 255, 0.88);
+        line-height: 1.6;
+        max-width: 34ch;
+        text-shadow: 0 8px 22px rgba(0, 0, 0, 0.68);
+      }
+      .showcase-card-cta {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        margin-top: 12px;
+        font-size: 11px;
+        color: #ffb3b3;
+        font-weight: 800;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+      }
+      .landing-section-card {
+        display: grid;
+        gap: 16px;
+      }
+      .landing-section-copy {
+        max-width: 64ch;
+      }
+      .landing-section-copy h3 {
+        font-size: 28px;
+        line-height: 1;
+        margin-bottom: 8px;
+      }
+      .landing-section-copy p {
+        font-size: 13px;
+        color: #d1d5de;
+        line-height: 1.75;
+      }
+      .landing-routine-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 12px;
+      }
+      .landing-routine-card {
+        padding: 18px;
+        border-radius: 20px;
+        background:
+          linear-gradient(180deg, rgba(255, 255, 255, 0.035), rgba(255, 255, 255, 0.02)),
+          rgba(8, 11, 18, 0.64);
+        border: 1px solid rgba(255, 255, 255, 0.07);
+      }
+      .landing-routine-step {
+        display: inline-flex;
+        align-items: center;
+        padding: 6px 10px;
+        border-radius: 999px;
+        background: rgba(248, 113, 113, 0.12);
+        border: 1px solid rgba(248, 113, 113, 0.18);
+        font-size: 10px;
+        font-weight: 900;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: #ffb4b4;
+      }
+      .landing-routine-card strong {
+        display: block;
+        margin: 14px 0 8px;
+        font-size: 18px;
+      }
+      .landing-routine-card p {
+        font-size: 12px;
+        line-height: 1.7;
+        color: var(--muted);
+      }
+      .landing-cta-card {
+        overflow: hidden;
+        background:
+          radial-gradient(circle at top right, rgba(255, 91, 91, 0.18), transparent 24%),
+          radial-gradient(circle at bottom left, rgba(91, 160, 255, 0.12), transparent 28%),
+          linear-gradient(135deg, #141018, #111824 58%, #0d1118);
+        border-color: rgba(255, 91, 91, 0.24);
+      }
+      .landing-cta-row {
+        display: grid;
+        grid-template-columns: minmax(0, 1.1fr) minmax(260px, 0.9fr);
+        gap: 18px;
+        align-items: center;
+      }
+      .landing-cta-row h3 {
+        font-size: 30px;
+        line-height: 1;
+        margin-bottom: 10px;
+      }
+      .landing-cta-row p {
+        font-size: 13px;
+        color: #d1d5de;
+        line-height: 1.8;
+        max-width: 60ch;
+      }
+      .landing-cta-list {
+        display: grid;
+        gap: 10px;
+      }
+      .landing-cta-item {
+        padding: 14px 16px;
+        border-radius: 18px;
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+      }
+      .landing-cta-item b {
+        display: block;
+        font-size: 13px;
+        margin-bottom: 4px;
+      }
+      .landing-cta-item span {
+        display: block;
+        font-size: 12px;
+        color: var(--muted);
+        line-height: 1.6;
+      }
+      .dashboard-hero {
+        display: grid;
+        grid-template-columns: minmax(0, 1.05fr) minmax(260px, 0.95fr);
+        gap: 18px;
+        background:
+          radial-gradient(circle at top right, rgba(255, 91, 91, 0.16), transparent 24%),
+          linear-gradient(135deg, #131016, #111824 58%, #0c1017);
+        border-color: rgba(255, 91, 91, 0.22);
+      }
+      .dashboard-hero-copy h1 {
+        font-size: 34px;
+        line-height: 1;
+        margin-bottom: 10px;
+      }
+      .dashboard-hero-copy p {
+        font-size: 13px;
+        color: #d3d7e0;
+        line-height: 1.7;
+      }
+      .dashboard-hero-actions {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        margin-top: 16px;
+      }
+      .dashboard-hero-meta {
+        display: grid;
+        gap: 10px;
+      }
+      .dashboard-rank-card {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+        padding: 14px;
+        border-radius: 18px;
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid rgba(255, 255, 255, 0.06);
+      }
+      .dashboard-rank-card img {
+        width: 72px;
+        height: 72px;
+        object-fit: contain;
+        filter: drop-shadow(0 6px 18px rgba(255, 77, 77, 0.18));
+      }
+      .dashboard-rank-card strong {
+        display: block;
+        font-size: 11px;
+        color: #ff9d9d;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        margin-bottom: 4px;
+      }
+      .dashboard-rank-card h3 {
+        font-size: 22px;
+        margin-bottom: 3px;
+      }
+      .dashboard-rank-card span {
+        display: block;
+        font-size: 12px;
+        color: var(--muted);
+      }
+      .dashboard-kpi-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 10px;
+      }
+      .dashboard-quick-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 12px;
       }
       .form {
         display: grid;
@@ -646,6 +1034,58 @@
         background: var(--panel2);
         border: 1px solid var(--line);
       }
+      .resource-main {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+        min-width: 0;
+        flex: 1;
+      }
+      .resource-favicon {
+        width: 32px;
+        height: 32px;
+        border-radius: 10px;
+        flex-shrink: 0;
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid rgba(255, 255, 255, 0.06);
+      }
+      .resource-copy {
+        min-width: 0;
+      }
+      .resource-copy strong {
+        display: block;
+        font-size: 14px;
+      }
+      .resource-copy .small {
+        margin-top: 4px;
+      }
+      .protected-shell {
+        display: grid;
+        place-items: center;
+        min-height: 280px;
+      }
+      .protected-card {
+        width: 100%;
+        max-width: 520px;
+        text-align: center;
+        background:
+          radial-gradient(
+            circle at top,
+            rgba(255, 91, 91, 0.14),
+            transparent 32%
+          ),
+          linear-gradient(180deg, var(--panel), #0f1422);
+      }
+      .protected-card h3 {
+        font-size: 24px;
+        margin-bottom: 8px;
+      }
+      .protected-card p {
+        font-size: 13px;
+        line-height: 1.6;
+        color: var(--muted);
+        margin-bottom: 16px;
+      }
       .sheet-toolbar {
         display: flex;
         gap: 10px;
@@ -916,6 +1356,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
+        min-height: 100%;
       }
       .matchup-champ img {
         width: 72px;
@@ -935,6 +1376,54 @@
         font-size: 13px;
         font-weight: 900;
         border: 1px solid rgba(255, 255, 255, 0.08);
+      }
+      .matchup-center {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100%;
+      }
+      .matchup-notes {
+        max-height: 120px;
+        overflow-y: auto;
+        padding-right: 6px;
+        line-height: 1.7;
+        white-space: pre-wrap;
+        font-size: 13px;
+      }
+      .matchup-grid-table {
+        border-collapse: separate;
+        border-spacing: 0;
+        min-width: 0;
+      }
+      .matchup-grid-table thead {
+        display: none;
+      }
+      .matchup-grid-table tbody {
+        display: grid;
+        gap: 10px;
+        padding: 12px;
+      }
+      .matchup-grid-table tbody tr {
+        display: grid;
+        grid-template-columns: 140px 160px minmax(0, 1fr);
+        gap: 12px;
+        align-items: center;
+        padding: 14px;
+        border-radius: 16px;
+        background: rgba(255, 255, 255, 0.02);
+        border: 1px solid rgba(255, 255, 255, 0.06);
+      }
+      .matchup-grid-table tbody td {
+        padding: 0;
+        border-bottom: none;
+      }
+      .matchup-notes::-webkit-scrollbar {
+        width: 6px;
+      }
+      .matchup-notes::-webkit-scrollbar-thumb {
+        background: rgba(255, 255, 255, 0.12);
+        border-radius: 999px;
       }
       .diff-1,
       .diff-2 {
@@ -1239,17 +1728,20 @@
         left: 0;
         right: 0;
         bottom: 0;
-        z-index: 30;
+        top: auto;
+        z-index: 1000;
         background: rgba(10, 10, 12, 0.97);
         border-top: 1px solid rgba(255, 91, 91, 0.14);
+        border-bottom: none;
         backdrop-filter: blur(12px);
+        margin: 0;
       }
       .navIn {
         max-width: 1100px;
         margin: 0 auto;
         padding: 8px 10px calc(8px + env(safe-area-inset-bottom));
         display: grid;
-        grid-template-columns: repeat(10, minmax(0, 1fr));
+        grid-template-columns: repeat(11, minmax(0, 1fr));
         gap: 4px;
       }
       .nav button {
@@ -1280,7 +1772,7 @@
         position: fixed;
         inset: 0;
         z-index: 40;
-        display: none;
+        display: none !important;
         background: rgba(4, 5, 8, 0.72);
         backdrop-filter: blur(8px);
       }
@@ -1643,6 +2135,7 @@
         aspect-ratio: 16 / 9;
         background: #08080a;
         overflow: hidden;
+        border-radius: 16px 16px 0 0;
       }
       .guide-thumb-wrap img {
         width: 100%;
@@ -1678,6 +2171,8 @@
         justify-content: center;
         font-size: 30px;
         text-decoration: none;
+        overflow: hidden;
+        border-radius: 16px 16px 0 0;
       }
       .guide-del-btn {
         position: absolute;
@@ -1813,6 +2308,38 @@
         font-size: 14px;
         animation: fadeSlide 0.3s ease;
       }
+      .tilt-banner {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 14px 16px;
+        border-radius: 16px;
+        margin-bottom: 14px;
+        background: rgba(255, 91, 91, 0.12);
+        border: 1px solid rgba(255, 91, 91, 0.3);
+        color: #ffd1d1;
+      }
+      .tilt-banner strong {
+        display: block;
+        font-size: 14px;
+        margin-bottom: 3px;
+      }
+      .tilt-banner span {
+        font-size: 12px;
+        color: rgba(255, 232, 232, 0.88);
+        line-height: 1.5;
+      }
+      .tilt-close {
+        width: 30px;
+        height: 30px;
+        border-radius: 999px;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        background: rgba(0, 0, 0, 0.18);
+        color: #fff;
+        cursor: pointer;
+        flex-shrink: 0;
+      }
       .streak-banner.win-streak {
         background: rgba(74, 222, 128, 0.1);
         border: 1px solid rgba(74, 222, 128, 0.3);
@@ -1834,6 +2361,9 @@
         grid-template-columns: repeat(3, 1fr);
         gap: 10px;
         margin-top: 14px;
+      }
+      .session-row.hidden {
+        display: none;
       }
       .session-empty {
         margin-top: 14px;
@@ -1931,6 +2461,215 @@
         font-size: 12px;
         color: var(--muted);
       }
+      .dashboard-secondary {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+        margin-top: 14px;
+      }
+      .streak-mini-card,
+      .most-played-card {
+        background: var(--panel2);
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        padding: 14px;
+      }
+      .streak-mini-card strong,
+      .most-played-card strong {
+        display: block;
+        font-size: 12px;
+        color: #ff8f8f;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        margin-bottom: 8px;
+      }
+      .streak-mini-main {
+        font-size: 30px;
+        font-weight: 900;
+        line-height: 1;
+      }
+      .streak-mini-copy {
+        margin-top: 8px;
+        font-size: 12px;
+        color: var(--muted);
+        line-height: 1.5;
+      }
+      .most-played-main {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+      }
+      .most-played-main img {
+        width: 68px;
+        height: 68px;
+        border-radius: 18px;
+        object-fit: cover;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+      }
+      .most-played-main h4 {
+        font-size: 20px;
+        line-height: 1.1;
+        margin-bottom: 6px;
+      }
+      .most-played-main span {
+        display: block;
+        font-size: 12px;
+        color: var(--muted);
+        line-height: 1.5;
+      }
+      .focus-card {
+        margin-bottom: 14px;
+      }
+      .focus-card strong {
+        display: block;
+        font-size: 12px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: #ff8f8f;
+        margin-bottom: 8px;
+      }
+      .focus-display {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+        align-items: center;
+      }
+      .focus-display p {
+        font-size: 15px;
+        line-height: 1.5;
+        color: #fff4f4;
+      }
+      .focus-input-row {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        align-items: flex-end;
+      }
+      .focus-input-row .f {
+        flex: 1 1 280px;
+      }
+      .forma-shell {
+        display: grid;
+        gap: 14px;
+      }
+      .forma-head h2 {
+        font-size: 13px;
+        color: #ff6b6b;
+        text-transform: uppercase;
+        letter-spacing: 0.16em;
+        font-variant-caps: all-small-caps;
+      }
+      .forma-head p {
+        margin-top: 8px;
+        font-size: 13px;
+        color: var(--muted);
+      }
+      .forma-grid-wrap {
+        overflow-x: auto;
+        padding-bottom: 8px;
+      }
+      .forma-grid {
+        display: grid;
+        grid-auto-flow: column;
+        grid-auto-columns: minmax(42px, 1fr);
+        gap: 10px;
+        min-width: max-content;
+      }
+      .forma-day {
+        display: grid;
+        gap: 8px;
+        align-content: start;
+      }
+      .forma-date {
+        font-size: 10px;
+        text-align: center;
+        color: var(--muted);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        line-height: 1.35;
+      }
+      .forma-stack {
+        display: grid;
+        gap: 6px;
+        justify-items: center;
+      }
+      .forma-cell {
+        width: 28px;
+        height: 28px;
+        border-radius: 9px;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        cursor: pointer;
+      }
+      .forma-cell.win {
+        background: rgba(87, 242, 135, 0.32);
+        border-color: rgba(87, 242, 135, 0.52);
+      }
+      .forma-cell.loss {
+        background: rgba(255, 91, 91, 0.3);
+        border-color: rgba(255, 91, 91, 0.5);
+      }
+      .forma-cell.empty {
+        background: rgba(255, 255, 255, 0.05);
+        border-color: rgba(255, 255, 255, 0.08);
+        cursor: default;
+      }
+      .forma-cell.active {
+        box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.18);
+      }
+      .forma-detail {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+      }
+      .forma-detail img {
+        width: 68px;
+        height: 68px;
+        border-radius: 18px;
+        object-fit: cover;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+      }
+      .forma-detail h4 {
+        font-size: 18px;
+        margin-bottom: 6px;
+      }
+      .forma-detail p {
+        font-size: 12px;
+        color: var(--muted);
+        line-height: 1.6;
+      }
+      .forma-metrics {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 10px;
+      }
+      .forma-metric {
+        padding: 14px;
+        border-radius: 16px;
+        background: var(--panel2);
+        border: 1px solid var(--line);
+      }
+      .forma-metric strong {
+        display: block;
+        font-size: 10px;
+        color: var(--muted);
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        margin-bottom: 8px;
+      }
+      .forma-metric span {
+        display: block;
+        font-size: 20px;
+        font-weight: 900;
+      }
+      .forma-trend-up {
+        color: var(--green);
+      }
+      .forma-trend-down {
+        color: var(--red);
+      }
+      .forma-trend-flat {
+        color: #f5f5f7;
+      }
       .stats-empty-note {
         margin-top: 14px;
         text-align: center;
@@ -1999,7 +2738,9 @@
         .g3,
         .g2,
         .guide,
-        .hero-grid {
+        .hero-grid,
+        .landing-grid,
+        .dashboard-hero {
           grid-template-columns: 1fr;
         }
         .hero-mark {
@@ -2022,10 +2763,23 @@
         .session-row {
           grid-template-columns: repeat(3, 1fr);
         }
+        .dashboard-secondary,
+        .forma-metrics,
+        .landing-feature-grid,
+        .landing-routine-grid,
+        .dashboard-kpi-grid,
+        .dashboard-quick-grid,
+        .showcase-grid,
+        .landing-stats {
+          grid-template-columns: 1fr;
+        }
+        .landing-cta-row {
+          grid-template-columns: 1fr;
+        }
       }
       @media (max-width: 640px) {
         body {
-          padding-bottom: 80px;
+          padding-bottom: 104px;
         }
         .header {
           position: sticky;
@@ -2055,12 +2809,17 @@
           display: none;
         }
         .menu-btn {
-          display: inline-flex;
-          position: absolute;
-          right: 16px;
-          top: 50%;
-          transform: translateY(-50%);
-          flex-shrink: 0;
+          display: none !important;
+        }
+        .nav {
+          position: fixed;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          top: auto;
+          margin: 0;
+          border-top: 1px solid rgba(255, 91, 91, 0.14);
+          border-bottom: none;
         }
         .navIn {
           max-width: none;
@@ -2103,10 +2862,18 @@
         .session-row {
           grid-template-columns: repeat(3, 1fr);
         }
+        .focus-display,
+        .forma-detail {
+          flex-direction: column;
+          align-items: flex-start;
+        }
       }
       @media (max-width: 600px) {
         .game-stat-field {
           grid-column: span 4;
+        }
+        .matchup-grid-table tbody tr {
+          grid-template-columns: 1fr;
         }
       }
     </style>
@@ -2195,6 +2962,7 @@
       <section id="tab-importar" class="hidden"></section>
       <section id="tab-historial" class="hidden"></section>
       <section id="tab-stats" class="hidden"></section>
+      <section id="tab-forma" class="hidden"></section>
       <section id="tab-matchups" class="hidden"></section>
       <section id="tab-campeones" class="hidden"></section>
       <section id="tab-tips" class="hidden"></section>
@@ -2206,12 +2974,13 @@
           <button class="active" data-tab="inicio">
             <b>⌂</b><span data-i18n="nav_inicio">Inicio</span>
           </button>
-          <button data-tab="partida"><b>✦</b><span data-i18n="nav_partida">Partida</span></button>
           <button data-tab="importar"><b>◈</b><span data-i18n="nav_cuenta">Cuenta</span></button>
+          <button data-tab="partida"><b>✦</b><span data-i18n="nav_partida">Partida</span></button>
           <button data-tab="historial">
             <b>☰</b><span data-i18n="nav_rendimiento">Rendimiento</span>
           </button>
           <button data-tab="stats"><b>◎</b><span data-i18n="nav_stats">Stats</span></button>
+          <button data-tab="forma"><b>▦</b><span data-i18n="nav_forma">Forma</span></button>
           <button data-tab="matchups"><b>⚔</b><span data-i18n="nav_matchups">Matchups</span></button>
           <button data-tab="campeones"><b>♞</b><span data-i18n="nav_campeones">Campeones</span></button>
           <button data-tab="tips"><b>✎</b><span data-i18n="nav_tips">Tips</span></button>
@@ -2259,17 +3028,20 @@
             <button class="mobile-nav-btn" data-mobile-tab="inicio">
               <span>⌂</span><span>Inicio</span>
             </button>
-            <button class="mobile-nav-btn" data-mobile-tab="partida">
-              <span>✦</span><span>Partida</span>
-            </button>
             <button class="mobile-nav-btn" data-mobile-tab="importar">
               <span>◈</span><span>Cuenta</span>
+            </button>
+            <button class="mobile-nav-btn" data-mobile-tab="partida">
+              <span>✦</span><span>Partida</span>
             </button>
             <button class="mobile-nav-btn" data-mobile-tab="historial">
               <span>☰</span><span>Rendimiento</span>
             </button>
             <button class="mobile-nav-btn" data-mobile-tab="stats">
               <span>◎</span><span>Stats</span>
+            </button>
+            <button class="mobile-nav-btn" data-mobile-tab="forma">
+              <span>▦</span><span>Forma</span>
             </button>
             <button class="mobile-nav-btn" data-mobile-tab="matchups">
               <span>⚔</span><span>Matchups</span>
@@ -2780,7 +3552,7 @@
       const STRINGS = {
         es: {
           nav_inicio:'Inicio', nav_partida:'Partida', nav_cuenta:'Cuenta',
-          nav_rendimiento:'Rendimiento', nav_stats:'Stats', nav_matchups:'Matchups',
+          nav_rendimiento:'Rendimiento', nav_stats:'Stats', nav_forma:'Forma', nav_matchups:'Matchups',
           nav_campeones:'Campeones', nav_tips:'Tips', nav_recursos:'Recursos', nav_guias:'Guías',
           kpi_wins:'Victorias', kpi_losses:'Derrotas', kpi_wr:'Win Rate',
           kpi_games:'Partidas', kpi_streak:'Racha', kpi_last20:'WR últimas 20',
@@ -2790,7 +3562,7 @@
         },
         en: {
           nav_inicio:'Home', nav_partida:'Game', nav_cuenta:'Account',
-          nav_rendimiento:'History', nav_stats:'Stats', nav_matchups:'Matchups',
+          nav_rendimiento:'History', nav_stats:'Stats', nav_forma:'Form', nav_matchups:'Matchups',
           nav_campeones:'Champions', nav_tips:'Tips', nav_recursos:'Resources', nav_guias:'Guides',
           kpi_wins:'Wins', kpi_losses:'Losses', kpi_wr:'Win Rate',
           kpi_games:'Games', kpi_streak:'Streak', kpi_last20:'Last 20 WR',
@@ -2852,6 +3624,8 @@
         activeMatchupId: '',
         matchupFilters: { query: '', lane: 'all', diff: 'all' },
         guides: [],
+        dailyFocus: { date: '', text: '' },
+        ui: { dismissedTiltLossCount: 0, dismissedTiltAnchorId: '' },
       }
       let form = {
         result: null,
@@ -2863,6 +3637,8 @@
       let guideFilter = 'all'
       let guidePage = 1
       let statsCharts = {}
+      let todayFocusEditing = false
+      let formaSelectedGameId = ''
       const DDRAGON_VERSION = '14.24.1'
       const DDRAGON_LOCALE = 'es_ES'
       let championDirectory = []
@@ -2978,6 +3754,21 @@
             ...account,
             goal: account.goal || data.profile.goal || 'MASTER',
           }))
+          if (
+            !data.dailyFocus ||
+            typeof data.dailyFocus !== 'object'
+          ) {
+            data.dailyFocus = { date: '', text: '' }
+          }
+          if (!data.ui || typeof data.ui !== 'object') {
+            data.ui = { dismissedTiltLossCount: 0, dismissedTiltAnchorId: '' }
+          }
+          if (!Number.isFinite(Number(data.ui.dismissedTiltLossCount))) {
+            data.ui.dismissedTiltLossCount = 0
+          }
+          if (typeof data.ui.dismissedTiltAnchorId !== 'string') {
+            data.ui.dismissedTiltAnchorId = ''
+          }
           if (!Array.isArray(data.guides)) data.guides = []
           data.matchupSheets = dedupeMatchupSheetsByName(
             Array.isArray(data.matchupSheets) ? data.matchupSheets : []
@@ -2991,6 +3782,144 @@
         localStorage.setItem(KEY, JSON.stringify(data))
       }
       const $ = (id) => document.getElementById(id)
+      const PROTECTED_TABS = new Set([
+        'historial',
+        'stats',
+        'forma',
+        'matchups',
+        'campeones',
+        'tips',
+        'guias',
+        'recursos',
+      ])
+      function todayIso() {
+        return new Date().toISOString().slice(0, 10)
+      }
+      function isProtectedTab(tab) {
+        return PROTECTED_TABS.has(tab)
+      }
+      function renderSectionLock(title) {
+        return `<div class="protected-shell"><div class="card protected-card"><div class="title" style="justify-content:center"><h2>${escapeHtml(title)}</h2></div><h3>Acceso bloqueado</h3><p>Configura tu cuenta en la sección Cuenta para acceder.</p><button class="btn cta" type="button" onclick="switchTab('importar')">Conectar cuenta</button></div></div>`
+      }
+      function ensureDailyFocusFresh() {
+        const today = todayIso()
+        if (data.dailyFocus?.date !== today) {
+          data.dailyFocus = { date: today, text: '' }
+          todayFocusEditing = false
+          save()
+        }
+      }
+      function getDailyFocusText() {
+        ensureDailyFocusFresh()
+        return String(data.dailyFocus?.text || '').trim()
+      }
+      function formatFormaDate(dateStr) {
+        const date = new Date(`${dateStr}T12:00:00`)
+        const raw = new Intl.DateTimeFormat('es-DO', {
+          weekday: 'short',
+          day: 'numeric',
+        }).format(date)
+        const cleaned = raw.replace('.', '')
+        return cleaned.charAt(0).toUpperCase() + cleaned.slice(1)
+      }
+      function getRegisteredDayStats(games) {
+        const uniqueDays = [...new Set(games.map((g) => g.date).filter(Boolean))].sort()
+        const today = todayIso()
+        let current = 0
+        if (uniqueDays.includes(today)) {
+          let cursor = new Date(`${today}T12:00:00`)
+          while (true) {
+            const key = cursor.toISOString().slice(0, 10)
+            if (!uniqueDays.includes(key)) break
+            current++
+            cursor.setDate(cursor.getDate() - 1)
+          }
+        }
+        let best = 0
+        let streak = 0
+        let prev = null
+        uniqueDays.forEach((day) => {
+          const currentDate = new Date(`${day}T12:00:00`)
+          if (!prev) {
+            streak = 1
+          } else {
+            const diff = Math.round((currentDate - prev) / 86400000)
+            streak = diff === 1 ? streak + 1 : 1
+          }
+          best = Math.max(best, streak)
+          prev = currentDate
+        })
+        return { current, best }
+      }
+      function getMostPlayedChampion(games) {
+        const map = {}
+        games.forEach((game) => {
+          if (!game.champ) return
+          map[game.champ] ??= { champ: game.champ, games: 0, wins: 0 }
+          map[game.champ].games++
+          if (game.result === 'win') map[game.champ].wins++
+        })
+        return Object.values(map).sort((a, b) => b.games - a.games || b.wins - a.wins)[0] || null
+      }
+      function getLossStreakCount(games) {
+        const streak = getStreak(games)
+        return streak?.type === 'loss' ? streak.count : 0
+      }
+      function dismissTiltBanner(lossCount) {
+        const latestGameId = String(myGames()?.[0]?.id || '')
+        data.ui.dismissedTiltLossCount = Math.max(
+          Number(data.ui.dismissedTiltLossCount) || 0,
+          Number(lossCount) || 0
+        )
+        data.ui.dismissedTiltAnchorId = latestGameId
+        save()
+        renderDashboard()
+      }
+      function renderTodayFocusBlock() {
+        const mount = $('todayFocusMount')
+        if (!mount) return
+        const focusText = getDailyFocusText()
+        const isEditing = todayFocusEditing || !focusText
+        mount.innerHTML = `<div class="card focus-card">
+          <strong>Enfoque de hoy</strong>
+          ${
+            isEditing
+              ? `<div class="focus-input-row">
+                  <div class="f">
+                    <label>Objetivo diario</label>
+                    <input id="todayFocusInput" type="text" placeholder="¿En qué vas a enfocarte esta sesión?" value="${escapeHtml(focusText)}">
+                  </div>
+                  <button class="btn" type="button" onclick="saveTodayFocus()">Guardar</button>
+                  ${
+                    focusText
+                      ? `<button class="soft" type="button" onclick="cancelTodayFocusEdit()">Cancelar</button>`
+                      : ''
+                  }
+                </div>`
+              : `<div class="focus-display">
+                  <p>${escapeHtml(focusText)}</p>
+                  <button class="soft" type="button" onclick="editTodayFocus()">Editar</button>
+                </div>`
+          }
+        </div>`
+      }
+      function saveTodayFocus() {
+        const value = $('todayFocusInput')?.value?.trim()
+        if (!value) return toast('Escribe tu enfoque de hoy.', 'error', 2400)
+        data.dailyFocus = { date: todayIso(), text: value }
+        todayFocusEditing = false
+        save()
+        renderTodayFocusBlock()
+        toast('Enfoque guardado')
+      }
+      function editTodayFocus() {
+        todayFocusEditing = true
+        renderTodayFocusBlock()
+      }
+      function cancelTodayFocusEdit() {
+        todayFocusEditing = false
+        renderTodayFocusBlock()
+      }
       let toastTimer = null
       function toast(t, variant = '', duration = 1800) {
         $('toast').textContent = t
@@ -3102,18 +4031,16 @@
         const directoryData = championDirectoryById[champion.id] || {}
         const splash = `url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/${champion.id}_0.jpg')`
         const portrait = `https://ddragon.leagueoflegends.com/cdn/${DDRAGON_VERSION}/img/champion/${directoryData.image || champion.image?.full || `${champion.id}.png`}`
+        const passiveCooldown = getPassiveCooldown(champion.passive)
         const abilityCards = [
-          ...((champion.passive?.cooldownBurn &&
-          champion.passive.cooldownBurn !== '0' &&
-          champion.passive.cooldownBurn !== '0/0/0/0/0')
+          ...(passiveCooldown
             ? [{
                 slot: 'P',
                 name: champion.passive?.name || 'Pasiva',
                 icon: `https://ddragon.leagueoflegends.com/cdn/${DDRAGON_VERSION}/img/passive/${champion.passive?.image?.full || ''}`,
-                cooldown: champion.passive.cooldownBurn,
+                cooldown: passiveCooldown,
                 isKey:
-                  (parseCooldownLevelOne(champion.passive.cooldownBurn) || 0) >
-                  60,
+                  (parseCooldownLevelOne(passiveCooldown) || 0) > 60,
               }]
             : []),
           ...(champion.spells || []).map((spell, index) => ({
@@ -3122,7 +4049,7 @@
             icon: `https://ddragon.leagueoflegends.com/cdn/${DDRAGON_VERSION}/img/spell/${spell.image?.full || ''}`,
             cooldown:
               spell.cooldownBurn && spell.cooldownBurn !== '0'
-                ? spell.cooldownBurn
+                ? normalizeCooldownValues(spell.cooldownBurn)
                 : 'Sin enfriamiento',
             isKey: (parseCooldownLevelOne(spell.cooldownBurn) || 0) > 60,
           })),
@@ -3162,6 +4089,10 @@
       function renderChampionExplorer() {
         const tab = $('tab-campeones')
         if (!tab) return
+        if (!hasActiveProfile()) {
+          tab.innerHTML = renderSectionLock('Campeones')
+          return
+        }
         tab.innerHTML = `<div class="champions-shell">
           <div class="card champion-search-card">
             <div class="title"><h2>Campeones</h2><span>Data Dragon · habilidades completas</span></div>
@@ -3217,6 +4148,39 @@
           .find((value) => Number.isFinite(value))
         return first ?? null
       }
+      function normalizeCooldownValues(value) {
+        if (Array.isArray(value)) {
+          const filtered = value
+            .map((part) => Number(String(part).replace(',', '.').trim()))
+            .filter((part) => Number.isFinite(part))
+          return filtered.length ? filtered.join(' / ') : ''
+        }
+        const text = String(value ?? '').trim()
+        if (!text) return ''
+        const parts = text
+          .split('/')
+          .map((part) => Number(String(part).replace(',', '.').trim()))
+          .filter((part) => Number.isFinite(part))
+        return parts.length ? parts.join(' / ') : text
+      }
+      function getPassiveCooldown(passive) {
+        const candidates = [
+          passive?.cooldownBurn,
+          passive?.cooldown,
+          passive?.cooldowns,
+          passive?.cooldownByLevel,
+        ]
+        for (const candidate of candidates) {
+          const normalized = normalizeCooldownValues(candidate)
+          if (!normalized) continue
+          const values = normalized
+            .split('/')
+            .map((part) => Number(String(part).replace(',', '.').trim()))
+            .filter((part) => Number.isFinite(part))
+          if (values.some((value) => value > 0)) return normalized
+        }
+        return ''
+      }
       function dedupeMatchupSheetsByName(sheets) {
         const seen = new Set()
         return (sheets || []).filter((sheet) => {
@@ -3229,43 +4193,402 @@
         })
       }
       function updateNavVisibility() {
-        const active = hasActiveProfile()
-        document
-          .querySelector('[data-tab="partida"]')
-          ?.classList.toggle('hidden', !active)
-        document
-          .querySelector('[data-tab="historial"]')
-          ?.classList.toggle('hidden', !active)
         syncMobileMenu()
       }
       function renderTips() {
         return `<div class="card"><div class="title"><h2>Tips</h2><span>Macro, draft y mentalidad</span></div><div class="tips-wrap">${TIPS.map((phase) => `<div class="tip-phase"><div class="tip-head"><h3>${phase.phase}</h3><div class="tip-count">${phase.items.length} tips</div></div><div class="tip-list">${phase.items.map(([concept, rule, moment]) => `<div class="tip-item"><div class="tip-top"><span class="tag rank">${moment}</span><strong>${concept}</strong></div><div class="tip-copy">${rule}</div></div>`).join('')}</div></div>`).join('')}</div></div>`
       }
       function renderResourcesTab() {
-        return `<div class="card"><div class="title"><h2>Recursos</h2><span>Herramientas y referencias</span></div><div class="grid g2"><div class="resource"><div><strong>Santo Grial de Grymm</strong><div class="small">PDF base del método para compartir con el clan.</div></div><a class="btn cta" href="https://drive.google.com/file/d/1abmbZSzuCdm_E9n6g1XIpDflbBMfzr2q/view" target="_blank" rel="noopener noreferrer">Ver guía</a></div><div class="resource"><div><strong>LoLalytics</strong><div class="small">Campeones OP del parche, builds y win rates.</div></div><button class="soft" onclick="window.open('https://lolalytics.com/','_blank')">Abrir</button></div><div class="resource"><div><strong>Probuilds</strong><div class="small">Builds reales de pro players.</div></div><button class="soft" onclick="window.open('https://probuildstats.com/','_blank')">Abrir</button></div><div class="resource"><div><strong>OP.GG</strong><div class="small">Stats, builds y perfiles por Riot ID + Tag.</div></div><button class="soft" onclick="window.open('https://op.gg/','_blank')">Abrir</button></div><div class="resource"><div><strong>U.GG</strong><div class="small">Tier list, builds y matchup data.</div></div><button class="soft" onclick="window.open('https://u.gg/','_blank')">Abrir</button></div><div class="resource"><div><strong>LOL Tactics Planner</strong><div class="small">Planear jugadas en el mapa.</div></div><button class="soft" onclick="window.open('https://planner.loltactics.gg/','_blank')">Abrir</button></div><div class="resource"><div><strong>DRAF</strong><div class="small">Pensar compos y draft.</div></div><button class="soft" onclick="window.open('https://draf.gg/','_blank')">Abrir</button></div><div class="resource"><div><strong>Biblioteca de Tips</strong><div class="small">Toda la macro, draft y mentalidad en una pantalla aparte.</div></div><button class="soft" onclick="switchTab('tips')">Abrir</button></div></div></div>`
+        const resources = [
+          {
+            title: 'Santo Grial de Grymm',
+            description: 'PDF base del método para estudiar y revisar partidas.',
+            href: 'https://drive.google.com/file/d/1abmbZSzuCdm_E9n6g1XIpDflbBMfzr2q/view',
+            domain: 'drive.google.com',
+            cta: 'Ver guía',
+          },
+          {
+            title: 'LoLalytics',
+            description: 'Campeones OP del parche, builds y win rates.',
+            href: 'https://lolalytics.com/',
+            domain: 'lolalytics.com',
+          },
+          {
+            title: 'Probuilds',
+            description: 'Builds reales de pro players.',
+            href: 'https://probuildstats.com/',
+            domain: 'probuildstats.com',
+          },
+          {
+            title: 'OP.GG',
+            description: 'Stats, builds y perfiles por Riot ID + Tag.',
+            href: 'https://op.gg/',
+            domain: 'op.gg',
+          },
+          {
+            title: 'U.GG',
+            description: 'Tier list, builds y matchup data.',
+            href: 'https://u.gg/',
+            domain: 'u.gg',
+          },
+          {
+            title: 'LOL Tactics Planner',
+            description: 'Planear jugadas en el mapa.',
+            href: 'https://planner.loltactics.gg/',
+            domain: 'planner.loltactics.gg',
+          },
+          {
+            title: 'DRAF',
+            description: 'Pensar compos y draft.',
+            href: 'https://draf.gg/',
+            domain: 'draf.gg',
+          },
+          {
+            title: 'Biblioteca de Tips',
+            description: 'Toda la macro, draft y mentalidad en una pantalla aparte.',
+            tab: 'tips',
+            domain: 'lolalytics.com',
+          },
+        ]
+        return `<div class="card"><div class="title"><h2>Recursos</h2><span>Herramientas y referencias</span></div><div class="grid g2">${resources
+          .map(
+            (resource) =>
+              `<div class="resource"><div class="resource-main"><img class="resource-favicon" src="https://www.google.com/s2/favicons?domain=${encodeURIComponent(resource.domain)}&sz=32" alt=""><div class="resource-copy"><strong>${escapeHtml(resource.title)}</strong><div class="small">${escapeHtml(resource.description)}</div></div></div>${
+                resource.tab
+                  ? `<button class="soft" onclick="switchTab('${resource.tab}')">Abrir</button>`
+                  : `<a class="${resource.cta ? 'btn cta' : 'soft'}" href="${resource.href}" target="_blank" rel="noopener noreferrer">${resource.cta || 'Abrir'}</a>`
+              }</div>`
+          )
+          .join('')}</div></div>`
+      }
+      function renderPublicLanding() {
+        const appCards = [
+          {
+            eyebrow: 'Tracking',
+            title: 'Partida',
+            copy: 'Guarda resultado, KDA, LP, enfoque y ajustes sin salir de tu rutina.',
+            tab: 'importar',
+            art: "url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/LeeSin_0.jpg')",
+          },
+          {
+            eyebrow: 'Lectura',
+            title: 'Dashboard',
+            copy: 'Visualiza sesiones, rachas, tilt, progreso LP y consistencia en un solo lugar.',
+            tab: 'importar',
+            art: "url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Yone_0.jpg')",
+          },
+          {
+            eyebrow: 'Playbook',
+            title: 'Campeones y Matchups',
+            copy: 'Consulta habilidades, cooldowns y matchups para reforzar decisiones antes de queuear.',
+            tab: 'importar',
+            art: "url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/TwistedFate_0.jpg')",
+          },
+        ]
+        const moduleCards = [
+          {
+            eyebrow: 'Forma',
+            title: 'Rendimiento reciente',
+            copy: 'Lee tu forma en 30 días, detecta rachas y entiende cómo vienen tus últimas sesiones.',
+            tab: 'importar',
+            art: "url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Vayne_0.jpg')",
+          },
+          {
+            eyebrow: 'Stats',
+            title: 'Patrones reales',
+            copy: 'WR por rol, moods, progresión de LP y lectura de tendencias con tu propio historial.',
+            tab: 'importar',
+            art: "url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Orianna_0.jpg')",
+          },
+          {
+            eyebrow: 'Scout',
+            title: 'Matchups',
+            copy: 'Ordena notas, dificultad, builds y detalles clave antes de volver a jugar el cruce.',
+            tab: 'importar',
+            art: "url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Fiora_0.jpg')",
+          },
+          {
+            eyebrow: 'Pool',
+            title: 'Campeones',
+            copy: 'Consulta habilidades, cooldowns y datos esenciales de cada campeón desde Riot.',
+            tab: 'importar',
+            art: "url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Sylas_0.jpg')",
+          },
+          {
+            eyebrow: 'Review',
+            title: 'Rendimiento',
+            copy: 'Vuelve al historial completo para revisar decisiones, notas y patrones repetidos.',
+            tab: 'importar',
+            art: "url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Ekko_0.jpg')",
+          },
+          {
+            eyebrow: 'Library',
+            title: 'Recursos y guias',
+            copy: 'Mantén tus referencias, study material y playbooks dentro de la misma rutina.',
+            tab: 'importar',
+            art: "url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Aphelios_0.jpg')",
+          },
+        ]
+        const libraryCards = [
+          {
+            eyebrow: 'Macro',
+            title: 'Tips accionables',
+            copy: 'Notas rápidas para entrar a la partida con recordatorios que sí puedes ejecutar.',
+            tab: 'importar',
+            art: "url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Ashe_0.jpg')",
+          },
+          {
+            eyebrow: 'Study',
+            title: 'Guias y playbooks',
+            copy: 'Agrupa marcos de decisión, PDFs y material de estudio sin romper tu flujo.',
+            tab: 'importar',
+            art: "url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Shen_0.jpg')",
+          },
+          {
+            eyebrow: 'Prep',
+            title: 'Recursos externos',
+            copy: 'Salta a analíticas, builds o referencias externas desde una base centralizada.',
+            tab: 'importar',
+            art: "url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/LeBlanc_0.jpg')",
+          },
+        ]
+        return `<div class="landing-shell">
+          <div class="card landing-hero">
+            <div class="landing-grid">
+              <div class="landing-copy">
+                <div class="title"><h2>SUPRO</h2><span>League of Legends improvement tracker</span></div>
+                <h1>Trackea tus ranked con intención, no por costumbre.</h1>
+                <p>SUPRO convierte cada partida en una revisión clara: resultado, patrones, rachas, enfoque diario, matchups y progreso real. Todo en una sola app simple, rápida y sin distracciones.</p>
+                <div class="landing-badges">
+                  <span class="landing-badge">Ranked journal</span>
+                  <span class="landing-badge">Dashboard personal</span>
+                  <span class="landing-badge">Revisión por sesión</span>
+                </div>
+                <div class="landing-actions">
+                  <button class="btn cta" type="button" onclick="switchTab('importar')">Conectar cuenta</button>
+                </div>
+              </div>
+              <div class="landing-panel">
+                <strong>Qué puedes hacer aquí</strong>
+                <div class="landing-panel-item"><b>Registrar partidas con contexto</b><span>Resultado, KDA, LP, enfoque, errores y ajuste para la próxima sesión.</span></div>
+                <div class="landing-panel-item"><b>Ver tu forma y tus rachas</b><span>Sesión de hoy, tilt detector, progreso LP y consistencia de registro.</span></div>
+                <div class="landing-panel-item"><b>Construir tu playbook</b><span>Matchups, campeones, tips, recursos y guías en la misma base.</span></div>
+              </div>
+            </div>
+          </div>
+          <div class="showcase-grid">${appCards
+            .map(
+              (card) =>
+                `<button type="button" class="showcase-card" style="--showcase-art:${card.art}" onclick="switchTab('${card.tab}')"><span class="showcase-card-top">${escapeHtml(card.eyebrow)}</span><div class="showcase-card-body"><h3>${escapeHtml(card.title)}</h3><p>${escapeHtml(card.copy)}</p></div></button>`
+            )
+            .join('')}</div>
+          <div class="landing-feature-grid">
+            <div class="landing-feature"><strong>Dashboard vivo</strong><span>Victorias, derrotas, WR, últimas sesiones y señales de fatiga visibles al instante.</span></div>
+            <div class="landing-feature"><strong>Preparación antes de queuear</strong><span>Define tu enfoque del día y entra a cada partida con una intención clara.</span></div>
+            <div class="landing-feature"><strong>Mejora acumulativa</strong><span>Menos memoria frágil, más evidencia real para detectar hábitos que sí cambian tu elo.</span></div>
+          </div>
+          <div class="card landing-section-card">
+            <div class="landing-section-copy">
+              <h3>Todo lo que vive dentro de SUPRO</h3>
+              <p>La app no se queda en guardar wins y losses. También te acompaña antes de queuear, durante la sesión y después de cada bloque con datos, lectura de forma, biblioteca de preparación y una base propia de decisiones.</p>
+            </div>
+            <div class="showcase-grid">${moduleCards
+              .map(
+                (card) =>
+                  `<button type="button" class="showcase-card" style="--showcase-art:${card.art}" onclick="switchTab('${card.tab}')"><span class="showcase-card-top">${escapeHtml(card.eyebrow)}</span><div class="showcase-card-body"><h3>${escapeHtml(card.title)}</h3><p>${escapeHtml(card.copy)}</p></div></button>`
+              )
+              .join('')}</div>
+          </div>
+          <div class="card landing-section-card">
+            <div class="landing-section-copy">
+              <h3>Una rutina completa para mejorar</h3>
+              <p>SUPRO está pensado como un ciclo simple: entras con intención, registras con contexto y vuelves a leer patrones cuando toca ajustar. Menos caos mental, más señales accionables.</p>
+            </div>
+            <div class="landing-routine-grid">
+              <div class="landing-routine-card">
+                <span class="landing-routine-step">Antes de jugar</span>
+                <strong>Entra con enfoque</strong>
+                <p>Define qué vas a entrenar hoy, consulta tus matchups clave y usa campeones, tips y recursos como preparación previa a la queue.</p>
+              </div>
+              <div class="landing-routine-card">
+                <span class="landing-routine-step">Después de la partida</span>
+                <strong>Guarda con contexto</strong>
+                <p>Resultado, KDA, LP, duración, errores, checklist y notas rápidas para que la revisión no dependa de memoria borrosa.</p>
+              </div>
+              <div class="landing-routine-card">
+                <span class="landing-routine-step">Durante la semana</span>
+                <strong>Revisa tendencias</strong>
+                <p>Vuelve al dashboard, detecta tilt, mira tu forma reciente y usa las stats para ver si realmente estás corrigiendo algo.</p>
+              </div>
+            </div>
+          </div>
+          <div class="card landing-section-card">
+            <div class="landing-section-copy">
+              <h3>Playbook, estudio y referencias</h3>
+              <p>No todo es solo registrar. También tienes un espacio para ordenar material de aprendizaje y convertirlo en una rutina más consistente alrededor de tu progreso.</p>
+            </div>
+            <div class="showcase-grid">${libraryCards
+              .map(
+                (card) =>
+                  `<button type="button" class="showcase-card" style="--showcase-art:${card.art}" onclick="switchTab('${card.tab}')"><span class="showcase-card-top">${escapeHtml(card.eyebrow)}</span><div class="showcase-card-body"><h3>${escapeHtml(card.title)}</h3><p>${escapeHtml(card.copy)}</p></div></button>`
+              )
+              .join('')}</div>
+          </div>
+          <div class="card landing-cta-card">
+            <div class="landing-cta-row">
+              <div>
+                <div class="title"><h2>Haz que cada ranked deje una señal</h2><span>Mejora con evidencia</span></div>
+                <h3>Conecta tu cuenta y convierte la rutina en progreso visible.</h3>
+                <p>Si ya estás jugando ranked, la app te ayuda a no perder lo importante entre sesiones: foco del día, forma reciente, matchups, patrones y decisiones que valen repetir o corregir.</p>
+                <div class="landing-actions">
+                  <button class="btn cta" type="button" onclick="switchTab('importar')">Conectar cuenta</button>
+                </div>
+              </div>
+              <div class="landing-cta-list">
+                <div class="landing-cta-item"><b>Dashboard con contexto</b><span>Rachas, tilt, LP, meta de rango y campeón más jugado en el mismo lugar.</span></div>
+                <div class="landing-cta-item"><b>Base propia de aprendizaje</b><span>Tips, guías, recursos y matchups organizados alrededor de tu forma real de jugar.</span></div>
+                <div class="landing-cta-item"><b>Registro que sí sirve</b><span>Menos relleno y más señales para entrar, revisar y ajustar la siguiente sesión.</span></div>
+              </div>
+            </div>
+          </div>
+        </div>`
+      }
+      function renderDashboardHome() {
+        const quickCards = [
+          {
+            eyebrow: 'Registrar',
+            title: 'Partida',
+            copy: 'Guarda rápido la siguiente ranked con foco, LP y revisión.',
+            tab: 'partida',
+            art: "url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Vi_0.jpg')",
+          },
+          {
+            eyebrow: 'Revisar',
+            title: 'Rendimiento',
+            copy: 'Abre tu historial completo y revisa patrones de forma más fría.',
+            tab: 'historial',
+            art: "url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Ekko_0.jpg')",
+          },
+          {
+            eyebrow: 'Profundizar',
+            title: 'Stats',
+            copy: 'Mide tendencia, consistencia y distribución de resultados en tu historial.',
+            tab: 'stats',
+            art: "url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Ahri_0.jpg')",
+          },
+          {
+            eyebrow: 'Forma',
+            title: 'Forma reciente',
+            copy: 'Lee tus últimos 30 días con rachas, días jugados y detalle por partida.',
+            tab: 'forma',
+            art: "url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Vayne_0.jpg')",
+          },
+          {
+            eyebrow: 'Scout',
+            title: 'Matchups',
+            copy: 'Ten tus notas, dificultad y lecturas listas antes de volver a jugar un cruce.',
+            tab: 'matchups',
+            art: "url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Fiora_0.jpg')",
+          },
+          {
+            eyebrow: 'Pool',
+            title: 'Campeones',
+            copy: 'Consulta habilidades y cooldowns clave sin salir de tu rutina de revisión.',
+            tab: 'campeones',
+            art: "url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Sylas_0.jpg')",
+          },
+          {
+            eyebrow: 'Study',
+            title: 'Tips y Recursos',
+            copy: 'Vuelve a tu playbook, guías y referencias cuando quieras refrescar conceptos.',
+            tab: 'recursos',
+            art: "url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Aphelios_0.jpg')",
+          },
+        ]
+        return `<div class="dashboard-shell">
+          <div class="card dashboard-hero">
+            <div class="dashboard-hero-copy">
+              <div class="title"><h2>Dashboard</h2><span>Tu centro de control</span></div>
+              <h1>Revisa tu progreso como si fueras tu propio coach.</h1>
+              <p>Todo lo importante de tu progreso queda resumido aquí: forma reciente, ritmo de juego, señales de tilt, progreso hacia tu meta y el campeón que más estás usando.</p>
+              <div class="dashboard-hero-actions">
+                <button class="btn cta" type="button" onclick="switchTab('partida')">Registrar partida</button>
+                <button class="soft" type="button" onclick="switchTab('historial')">Ver rendimiento</button>
+                <button class="soft" type="button" onclick="switchTab('forma')">Abrir forma</button>
+              </div>
+            </div>
+            <div class="dashboard-hero-meta">
+              <div class="dashboard-rank-card">
+                <img src="${rankImg(data.profile.rank)}" alt="${escapeHtml(RANK_LABEL[data.profile.rank] || data.profile.rank)}">
+                <div>
+                  <strong>Cuenta activa</strong>
+                  <h3>${escapeHtml(data.profile.gameName)}#${escapeHtml(data.profile.tagLine)}</h3>
+                  <span>${escapeHtml(RANK_LABEL[data.profile.rank] || data.profile.rank)}${data.profile.division && data.profile.division !== '--' ? ` ${escapeHtml(data.profile.division)}` : ''}</span>
+                </div>
+              </div>
+              <div class="dashboard-rank-card">
+                <div>
+                  <strong>Meta actual</strong>
+                  <h3>${escapeHtml(RANK_LABEL[data.profile.goal] || data.profile.goal || 'Master')}</h3>
+                  <span>${myGames().length} partida${myGames().length !== 1 ? 's' : ''} registradas en este perfil</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card landing-section-card">
+            <div class="title"><h2>Todo tu flujo en un solo lugar</h2><span>Accesos rápidos a lo que más usas</span></div>
+            <div class="dashboard-quick-grid">${quickCards
+              .map(
+                (card) =>
+                  `<button type="button" class="showcase-card" style="--showcase-art:${card.art}" onclick="switchTab('${card.tab}')"><span class="showcase-card-top">${escapeHtml(card.eyebrow)}</span><div class="showcase-card-body"><h3>${escapeHtml(card.title)}</h3><p>${escapeHtml(card.copy)}</p></div></button>`
+              )
+              .join('')}</div>
+          </div>
+          <div id="tiltBanner"></div>
+          <div class="dashboard-kpi-grid">
+            <div class="kpi"><div class="v" id="kpiWins" style="color:var(--green)">--</div><div class="l" data-i18n="kpi_wins">${T('kpi_wins')}</div></div>
+            <div class="kpi"><div class="v" id="kpiLosses" style="color:var(--red)">--</div><div class="l" data-i18n="kpi_losses">${T('kpi_losses')}</div></div>
+            <div class="kpi"><div class="v" id="kpiWR" style="color:var(--green)">--</div><div class="l" data-i18n="kpi_wr">${T('kpi_wr')}</div></div>
+            <div class="kpi"><div class="v" id="kpiGames">--</div><div class="l" data-i18n="kpi_games">${T('kpi_games')}</div></div>
+            <div class="kpi"><div class="v" id="kpiStreak">--</div><div class="l" id="kpiStreakLabel" data-i18n="kpi_streak">${T('kpi_streak')}</div></div>
+            <div class="kpi"><div class="v" id="kpiLast20" style="font-size:22px">--</div><div class="l" data-i18n="kpi_last20">${T('kpi_last20')}</div></div>
+          </div>
+          <div id="streakBanner"></div>
+          <div id="sessionRow" class="session-row hidden"><div class="kpi"><div class="v" id="sessGames" style="font-size:20px">0V 0D</div><div class="l" data-i18n="kpi_today">${T('kpi_today')}</div></div><div class="kpi"><div class="v" id="sessWR" style="font-size:20px">0%</div><div class="l" data-i18n="kpi_today_wr">${T('kpi_today_wr')}</div></div><div class="kpi"><div class="v" id="sessLP" style="font-size:20px">+0</div><div class="l" data-i18n="kpi_today_lp">${T('kpi_today_lp')}</div></div></div>
+          <div id="sessionEmpty" class="session-empty hidden">Sin sesión activa hoy</div>
+          <div id="dashboardSecondary" class="dashboard-secondary"></div>
+          <div id="lpChartSection" class="card hidden"><div class="title"><h2>Progreso LP</h2><span id="lpChartLabel" style="color:var(--muted);font-size:12px"></span></div><div class="lp-chart-wrap" id="lpChartWrap"></div></div>
+          <div class="card" id="goalCard"><div class="title"><h2>Meta de rango</h2><span style="font-size:12px;color:var(--muted)">Editable en Cuenta</span></div><div id="goalContent"></div></div>
+        </div>`
       }
       function renderBase() {
-        const totalGames = hasActiveProfile() ? myGames().length : 0
-        const showHeroIntro = !hasActiveProfile() || totalGames < 5
-        $('tab-inicio').innerHTML = `
-    ${showHeroIntro ? `<div class="card hero"><div class="hero-grid"><div><div class="title"><span id="todayFocus">Conecta una cuenta y empieza a trackear</span></div><h3>Analiza tus ranked con más intención.</h3><p>Una herramienta para cualquier jugador que quiera revisar partidas, detectar patrones y construir progreso con criterio.</p><p class="small" style="margin-top:10px">${T('hero_sub')}</p><div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:14px">${hasActiveProfile() ? '' : `<button class="btn cta" onclick="switchTab('importar')">Conectar cuenta</button>`}</div></div></div></div>` : `<div id="todayFocus" class="hidden"></div>`}
-    ${hasActiveProfile() ? `<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px"><div class="kpi"><div class="v" id="kpiWins" style="color:var(--green)">--</div><div class="l" data-i18n="kpi_wins">${T('kpi_wins')}</div></div><div class="kpi"><div class="v" id="kpiLosses" style="color:var(--red)">--</div><div class="l" data-i18n="kpi_losses">${T('kpi_losses')}</div></div><div class="kpi"><div class="v" id="kpiWR" style="color:var(--green)">--</div><div class="l" data-i18n="kpi_wr">${T('kpi_wr')}</div></div><div class="kpi"><div class="v" id="kpiGames">--</div><div class="l" data-i18n="kpi_games">${T('kpi_games')}</div></div><div class="kpi" style="position:relative"><div class="v" id="kpiStreak">--</div><div class="l" id="kpiStreakLabel" data-i18n="kpi_streak">${T('kpi_streak')}</div></div><div class="kpi"><div class="v" id="kpiLast20" style="font-size:22px">--</div><div class="l" data-i18n="kpi_last20">${T('kpi_last20')}</div></div></div><div id="streakBanner"></div><div id="sessionRow" class="session-row hidden"><div class="kpi"><div class="v" id="sessGames" style="font-size:20px">0V 0D</div><div class="l" data-i18n="kpi_today">${T('kpi_today')}</div></div><div class="kpi"><div class="v" id="sessWR" style="font-size:20px">0%</div><div class="l" data-i18n="kpi_today_wr">${T('kpi_today_wr')}</div></div><div class="kpi"><div class="v" id="sessLP" style="font-size:20px">+0</div><div class="l" data-i18n="kpi_today_lp">${T('kpi_today_lp')}</div></div></div><div id="sessionEmpty" class="session-empty hidden">Sin sesión activa hoy</div><div id="lpChartSection" class="card hidden" style="margin-top:14px"><div class="title"><h2>Progreso LP</h2><span id="lpChartLabel" style="color:var(--muted);font-size:12px"></span></div><div class="lp-chart-wrap" id="lpChartWrap"></div></div>` : ''}
-    ${hasActiveProfile() ? `<div class="card" style="margin-top:14px" id="goalCard"><div class="title"><h2>Meta de rango</h2><span style="font-size:12px;color:var(--muted)">Editable en Cuenta</span></div><div id="goalContent"></div></div>` : ''}
-        `
+        const accountLocked = !hasActiveProfile()
+        $('tab-inicio').innerHTML = hasActiveProfile()
+          ? renderDashboardHome()
+          : renderPublicLanding()
         const checkHtml = Object.entries(CHECKS)
           .map(
             ([k, items]) =>
               `<div class="checkGroup"><h4>${CHECK_LABELS[k]}</h4>${items.map(([id, l, d]) => `<div class="check ${form.checks[id] ? 'on' : ''}" onclick="toggleCheck('${id}')"><div class="dot">${form.checks[id] ? '✓' : ''}</div><div><b>${l}</b><span>${d}</span></div></div>`).join('')}</div>`
           )
           .join('')
-        $('tab-partida').innerHTML =
-          `<div class="card"><div class="title"><h2>Registrar partida</h2></div><div class="seg" style="margin-bottom:14px"><button id="btnWin" onclick="setResult('win')">Victoria</button><button id="btnLoss" onclick="setResult('loss')">Derrota</button></div><div class="form"><div class="f s3"><label>Fecha</label><input id="gDate" type="date"></div><div class="f s3"><label>Mood inicial</label><select id="gMoodStart">${createOptions(MOODS)}</select></div><div class="f s3"><label>Mood final</label><select id="gMoodEnd">${createOptions(MOODS)}</select></div><div class="f s3"><label>Rol</label><select id="gRole"><option value="TOP">TOP</option><option value="JUNGLE">JG</option><option value="MIDDLE">MID</option><option value="BOTTOM">ADC</option><option value="UTILITY">SUP</option></select></div><div class="f s6 champ-f"><label>Mi campeón</label><div class="champ-row"><select id="gChamp" onchange="updateChampionPreview()"></select><img id="gChampPreview" class="champ-preview" src="https://res.cloudinary.com/dfr9zlu8d/image/upload/v1777329733/supro-logo_rvavuy.jpg" alt=""></div></div><div class="f s6 champ-f"><label>Campeón enemigo</label><div class="champ-row"><select id="gEnemy" onchange="updateChampionPreview()"></select><img id="gEnemyPreview" class="champ-preview" src="https://res.cloudinary.com/dfr9zlu8d/image/upload/v1777329733/supro-logo_rvavuy.jpg" alt=""></div></div><div class="f s4 compact-field"><label>Elo</label><select id="gTier" onchange="updateTierFields()">${RANKS.map((r) => `<option value="${r}">${RANK_LABEL[r]}</option>`).join('')}</select></div><div class="f s4 compact-field" id="gDivisionWrap"><label>División</label><select id="gDivision"><option value="I">I</option><option value="II">II</option><option value="III">III</option><option value="IV">IV</option><option value="--">--</option></select></div><div class="f s4 compact-field"><label>LP</label><input id="gLp" type="number" min="0" max="60" placeholder="55"></div><div class="f s2 compact-field game-stat-field"><label>Kills</label><input id="gKills" type="number" min="0"></div><div class="f s2 compact-field game-stat-field"><label>Deaths</label><input id="gDeaths" type="number" min="0"></div><div class="f s2 compact-field game-stat-field"><label>Assists</label><input id="gAssists" type="number" min="0"></div><div class="f s2 compact-field game-stat-field"><label>CS/min</label><input id="gCs" type="number" min="0" step="0.1"></div><div class="f s2 compact-field game-stat-field"><label>Wards</label><input id="gWards" type="number" min="0"></div><div class="f s2 compact-field game-stat-field"><label>Pinks</label><input id="gPinks" type="number" min="0"></div><div class="f s4 compact-field"><label>Duración mm:ss</label><input id="gDuration" type="text" inputmode="numeric" placeholder="38:56"></div></div><div class="title" style="margin-top:16px"><h2>Autoevaluación rápida</h2></div><div class="toggles"><div class="toggle" id="qFlow"><div class="q">¿Estabas en flow?</div><div class="toggle-actions"><button type="button" class="toggle-btn yes" data-key="flow" data-value="yes" onclick="setQuick('flow', true)">Sí</button><button type="button" class="toggle-btn no" data-key="flow" data-value="no" onclick="setQuick('flow', false)">No</button></div></div><div class="toggle" id="qAuto"><div class="q">¿Jugaste en autopilot?</div><div class="toggle-actions"><button type="button" class="toggle-btn yes" data-key="autopilot" data-value="yes" onclick="setQuick('autopilot', true)">Sí</button><button type="button" class="toggle-btn no" data-key="autopilot" data-value="no" onclick="setQuick('autopilot', false)">No</button></div></div><div class="toggle" id="qJg"><div class="q">¿Trackeaste bien al rival más importante?</div><div class="toggle-actions"><button type="button" class="toggle-btn yes" data-key="jg" data-value="yes" onclick="setQuick('jg', true)">Sí</button><button type="button" class="toggle-btn no" data-key="jg" data-value="no" onclick="setQuick('jg', false)">No</button></div></div><div class="toggle" id="qMap"><div class="q">¿Miraste el mapa cada 5s?</div><div class="toggle-actions"><button type="button" class="toggle-btn yes" data-key="map" data-value="yes" onclick="setQuick('map', true)">Sí</button><button type="button" class="toggle-btn no" data-key="map" data-value="no" onclick="setQuick('map', false)">No</button></div></div></div><div class="title" style="margin-top:16px"><h2>Checklist post-partida</h2></div><div class="checks">${checkHtml}</div><div class="title" style="margin-top:16px"><h2>Errores y notas</h2></div><div class="form"><div class="f s6"><label>Error recurrente detectado</label><select id="gRecurring"><option value="">Selecciona un error</option>${data.recurringErrors.map((e) => `<option>${e}</option>`).join('')}</select></div><div class="f s6"><label>Agregar errores nuevos</label><input id="gNewRecurring" placeholder="Escribe uno y presiona Enter" onkeydown="handleRecurringErrorKeydown(event)"><div id="pendingRecurringErrors" class="sheet-pills" style="margin-top:8px"></div></div><div class="f s12"><label>Ajuste para la próxima sesión</label><textarea id="gImprove"></textarea></div><div class="f s12"><label>Comentarios</label><textarea id="gComments"></textarea></div><div class="f s12"><label>Coach video / VOD</label><input id="gCoach" placeholder="URL"></div></div><div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:14px"><button class="btn" onclick="saveGame()">Guardar partida</button><button class="soft" onclick="resetForm()">Limpiar</button></div></div>`
+        $('tab-partida').innerHTML = accountLocked
+          ? renderSectionLock('Partida')
+          : `<div id="todayFocusMount"></div><div class="card"><div class="title"><h2>Registrar partida</h2></div><div class="seg" style="margin-bottom:14px"><button id="btnWin" onclick="setResult('win')">Victoria</button><button id="btnLoss" onclick="setResult('loss')">Derrota</button></div><div class="form"><div class="f s3"><label>Fecha</label><input id="gDate" type="date"></div><div class="f s3"><label>Mood inicial</label><select id="gMoodStart">${createOptions(MOODS)}</select></div><div class="f s3"><label>Mood final</label><select id="gMoodEnd">${createOptions(MOODS)}</select></div><div class="f s3"><label>Rol</label><select id="gRole"><option value="TOP">TOP</option><option value="JUNGLE">JG</option><option value="MIDDLE">MID</option><option value="BOTTOM">ADC</option><option value="UTILITY">SUP</option></select></div><div class="f s6 champ-f"><label>Mi campeón</label><div class="champ-row"><select id="gChamp" onchange="updateChampionPreview()"></select><img id="gChampPreview" class="champ-preview" src="https://res.cloudinary.com/dfr9zlu8d/image/upload/v1777329733/supro-logo_rvavuy.jpg" alt=""></div></div><div class="f s6 champ-f"><label>Campeón enemigo</label><div class="champ-row"><select id="gEnemy" onchange="updateChampionPreview()"></select><img id="gEnemyPreview" class="champ-preview" src="https://res.cloudinary.com/dfr9zlu8d/image/upload/v1777329733/supro-logo_rvavuy.jpg" alt=""></div></div><div class="f s4 compact-field"><label>Elo</label><select id="gTier" onchange="updateTierFields()">${RANKS.map((r) => `<option value="${r}">${RANK_LABEL[r]}</option>`).join('')}</select></div><div class="f s4 compact-field" id="gDivisionWrap"><label>División</label><select id="gDivision"><option value="I">I</option><option value="II">II</option><option value="III">III</option><option value="IV">IV</option><option value="--">--</option></select></div><div class="f s4 compact-field"><label>LP</label><input id="gLp" type="number" min="0" max="60" placeholder="55"></div><div class="f s2 compact-field game-stat-field"><label>Kills</label><input id="gKills" type="number" min="0"></div><div class="f s2 compact-field game-stat-field"><label>Deaths</label><input id="gDeaths" type="number" min="0"></div><div class="f s2 compact-field game-stat-field"><label>Assists</label><input id="gAssists" type="number" min="0"></div><div class="f s2 compact-field game-stat-field"><label>CS/min</label><input id="gCs" type="number" min="0" step="0.1"></div><div class="f s2 compact-field game-stat-field"><label>Wards</label><input id="gWards" type="number" min="0"></div><div class="f s2 compact-field game-stat-field"><label>Pinks</label><input id="gPinks" type="number" min="0"></div><div class="f s4 compact-field"><label>Duración mm:ss</label><input id="gDuration" type="text" inputmode="numeric" placeholder="38:56"></div></div><div class="title" style="margin-top:16px"><h2>Autoevaluación rápida</h2></div><div class="toggles"><div class="toggle" id="qFlow"><div class="q">¿Estabas en flow?</div><div class="toggle-actions"><button type="button" class="toggle-btn yes" data-key="flow" data-value="yes" onclick="setQuick('flow', true)">Sí</button><button type="button" class="toggle-btn no" data-key="flow" data-value="no" onclick="setQuick('flow', false)">No</button></div></div><div class="toggle" id="qAuto"><div class="q">¿Jugaste en autopilot?</div><div class="toggle-actions"><button type="button" class="toggle-btn yes" data-key="autopilot" data-value="yes" onclick="setQuick('autopilot', true)">Sí</button><button type="button" class="toggle-btn no" data-key="autopilot" data-value="no" onclick="setQuick('autopilot', false)">No</button></div></div><div class="toggle" id="qJg"><div class="q">¿Trackeaste bien al rival más importante?</div><div class="toggle-actions"><button type="button" class="toggle-btn yes" data-key="jg" data-value="yes" onclick="setQuick('jg', true)">Sí</button><button type="button" class="toggle-btn no" data-key="jg" data-value="no" onclick="setQuick('jg', false)">No</button></div></div><div class="toggle" id="qMap"><div class="q">¿Miraste el mapa cada 5s?</div><div class="toggle-actions"><button type="button" class="toggle-btn yes" data-key="map" data-value="yes" onclick="setQuick('map', true)">Sí</button><button type="button" class="toggle-btn no" data-key="map" data-value="no" onclick="setQuick('map', false)">No</button></div></div></div><div class="title" style="margin-top:16px"><h2>Checklist post-partida</h2></div><div class="checks">${checkHtml}</div><div class="title" style="margin-top:16px"><h2>Errores y notas</h2></div><div class="form"><div class="f s6"><label>Error recurrente detectado</label><select id="gRecurring"><option value="">Selecciona un error</option>${data.recurringErrors.map((e) => `<option>${e}</option>`).join('')}</select></div><div class="f s6"><label>Agregar errores nuevos</label><input id="gNewRecurring" placeholder="Escribe uno y presiona Enter" onkeydown="handleRecurringErrorKeydown(event)"><div id="pendingRecurringErrors" class="sheet-pills" style="margin-top:8px"></div></div><div class="f s12"><label>Ajuste para la próxima sesión</label><textarea id="gImprove"></textarea></div><div class="f s12"><label>Comentarios</label><textarea id="gComments"></textarea></div><div class="f s12"><label>Coach video / VOD</label><input id="gCoach" placeholder="URL"></div></div><div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:14px"><button class="btn" onclick="saveGame()">Guardar partida</button><button class="soft" onclick="resetForm()">Limpiar</button></div></div>`
         $('tab-importar').innerHTML =
-          `<div class="grid g2"><div class="card"><div class="title"><h2>Conexión de Cuenta</h2><span>Cuenta local</span></div><div class="form"><div class="f s4"><label>Nombre</label><input id="pGameName"></div><div class="f s2"><label>Tag</label><input id="pTagLine"></div><div class="f s3"><label>Servidor</label><select id="pServer">${SERVERS.map((s) => `<option value="${s}">${s}</option>`).join('')}</select></div><div class="f s4 compact-field"><label>Rango actual</label><select id="pRank" onchange="updateAccountPreview()">${RANKS.map((r) => `<option value="${r}">${RANK_LABEL[r]}</option>`).join('')}</select></div><div class="f s4 compact-field" id="pDivisionWrap"><label>División</label><select id="pDivision"><option value="I">I</option><option value="II">II</option><option value="III">III</option><option value="IV">IV</option><option value="--">--</option></select></div><div class="f s4 compact-field"><label>Meta de rango</label><select id="pGoalRank">${RANKS.map((r) => `<option value="${r}">${RANK_LABEL[r]}</option>`).join('')}</select></div><div class="f s6" style="display:grid;place-items:center"><label>Emblema actual</label><img id="accountRankPreview" class="rank-badge" src="${rankImg(data.profile.rank)}" alt=""></div></div><div class="note" style="margin-top:12px">Esto funciona como sesión local. Puedes guardar varias cuentas, cambiar entre perfiles y abrir tu cuenta en OPGG cuando haya una activa.</div><div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:12px"><button class="btn cta" onclick="saveProfile()">Guardar / Conectar</button></div></div><div class="card"><div class="title"><h2>Cuentas Guardadas</h2><span>Switch rápido</span></div><div class="list" id="accountsBox"></div></div></div>`
-        $('tab-historial').innerHTML =
-          `<div class="card"><div class="title"><h2>Historial de partidas</h2><span>Todas tus partidas</span></div><div class="filters"><select class="select-pill" id="hFilter" onchange="renderHistory()"><option value="all">Todos</option><option value="win">Victorias</option><option value="loss">Derrotas</option></select><select class="select-pill" id="hChampFilter" onchange="renderHistory()"><option value="all">Todos los campeones</option>${data.champions.map((c) => `<option value="${c}">${c}</option>`).join('')}</select><select class="select-pill" id="hRoleFilter" onchange="renderHistory()"><option value="all">Todos los roles</option><option value="TOP">Top</option><option value="JUNGLE">Jungla</option><option value="MIDDLE">Mid</option><option value="BOTTOM">Bot</option><option value="UTILITY">Support</option></select><input class="select-pill" id="hDateFrom" type="date" onchange="renderHistory()"><input class="select-pill" id="hDateTo" type="date" onchange="renderHistory()"><div style="margin-left:auto;display:flex;gap:8px;flex-shrink:0"><button class="soft outline-red" onclick="exportHistoryWorkbook()">Exportar</button><button class="danger" onclick="clearAll()">Limpiar historial</button></div></div><div class="list" id="historyBox"></div></div>`
-        $('tab-stats').innerHTML = `<div id="statsContent"><div class="card"><div class="small" style="text-align:center;padding:40px;color:var(--muted)">Cargando estadísticas...</div></div></div>`
-        $('tab-matchups').innerHTML = `<div class="card"><div class="title"><h2>Matchups</h2><span>Tu base de conocimiento</span></div>
+          `<div class="grid g2" style="align-items:start"><div class="card" style="align-self:start"><div class="title"><h2>Conexión de Cuenta</h2><span>Cuenta local</span></div><div class="form"><div class="f s4"><label>Nombre</label><input id="pGameName"></div><div class="f s2"><label>Tag</label><input id="pTagLine"></div><div class="f s3"><label>Servidor</label><select id="pServer">${SERVERS.map((s) => `<option value="${s}">${s}</option>`).join('')}</select></div><div class="f s4 compact-field"><label>Rango actual</label><select id="pRank" onchange="updateAccountPreview()">${RANKS.map((r) => `<option value="${r}">${RANK_LABEL[r]}</option>`).join('')}</select></div><div class="f s4 compact-field" id="pDivisionWrap"><label>División</label><select id="pDivision"><option value="I">I</option><option value="II">II</option><option value="III">III</option><option value="IV">IV</option><option value="--">--</option></select></div><div class="f s4 compact-field"><label>Meta de rango</label><select id="pGoalRank">${RANKS.map((r) => `<option value="${r}">${RANK_LABEL[r]}</option>`).join('')}</select></div><div class="f s6" style="display:grid;place-items:center"><label>Emblema actual</label><img id="accountRankPreview" class="rank-badge" src="${rankImg(data.profile.rank)}" alt=""></div></div><div class="note" style="margin-top:12px">Esto funciona como sesión local. Puedes guardar varias cuentas, cambiar entre perfiles y abrir tu cuenta en OPGG cuando haya una activa.</div><div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:12px"><button class="btn cta" onclick="saveProfile()">Guardar / Conectar</button></div></div><div class="card"><div class="title"><h2>Cuentas Guardadas</h2><span>Switch rápido</span></div><div class="list" id="accountsBox"></div></div></div>`
+        $('tab-historial').innerHTML = accountLocked
+          ? renderSectionLock('Rendimiento')
+          : `<div class="card"><div class="title"><h2>Historial de partidas</h2><span>Todas tus partidas</span></div><div class="filters"><select class="select-pill" id="hFilter" onchange="renderHistory()"><option value="all">Todos</option><option value="win">Victorias</option><option value="loss">Derrotas</option></select><select class="select-pill" id="hChampFilter" onchange="renderHistory()"><option value="all">Todos los campeones</option>${data.champions.map((c) => `<option value="${c}">${c}</option>`).join('')}</select><select class="select-pill" id="hRoleFilter" onchange="renderHistory()"><option value="all">Todos los roles</option><option value="TOP">Top</option><option value="JUNGLE">Jungla</option><option value="MIDDLE">Mid</option><option value="BOTTOM">Bot</option><option value="UTILITY">Support</option></select><input class="select-pill" id="hDateFrom" type="date" onchange="renderHistory()"><input class="select-pill" id="hDateTo" type="date" onchange="renderHistory()"><div style="margin-left:auto;display:flex;gap:8px;flex-shrink:0"><button class="soft outline-red" onclick="exportHistoryWorkbook()">Exportar</button><button class="danger" onclick="clearAll()">Limpiar historial</button></div></div><div class="list" id="historyBox"></div></div>`
+        $('tab-stats').innerHTML = accountLocked
+          ? renderSectionLock('Stats')
+          : `<div id="statsContent"><div class="card"><div class="small" style="text-align:center;padding:40px;color:var(--muted)">Cargando estadísticas...</div></div></div>`
+        $('tab-forma').innerHTML = accountLocked
+          ? renderSectionLock('Forma')
+          : `<div id="formaContent"></div>`
+        $('tab-matchups').innerHTML = accountLocked
+          ? renderSectionLock('Matchups')
+          : `<div class="card"><div class="title"><h2>Matchups</h2><span>Tu base de conocimiento</span></div>
           <div style="background:rgba(255,138,76,.06);border:1px solid rgba(255,138,76,.2);border-radius:14px;padding:14px 16px;margin-bottom:14px;display:flex;gap:12px;align-items:flex-start">
             <span style="font-size:20px;flex-shrink:0">💡</span>
             <div>
@@ -3283,10 +4606,20 @@
           <div id="matchupContent"></div>
         </div>`
         renderChampionExplorer()
-        $('tab-tips').innerHTML = renderTips()
-        $('tab-recursos').innerHTML = renderResourcesTab()
-        $('tab-guias').innerHTML = `<div class="card"><div class="title"><h2>Guías</h2><span>Videos y recursos por categoría</span></div><div class="form" style="margin-bottom:0"><div class="f s8"><label>URL del video (YouTube u otro)</label><input id="guideUrl" type="url" placeholder="https://youtube.com/watch?v=..." oninput="onGuideUrlInput()"></div><div class="f s4"><label>Categoría</label><select id="guideCat">${GUIDE_CATEGORIES.map((c) => `<option value="${c.key}">${c.label}</option>`).join('')}</select></div><div class="f s8"><label>Título</label><input id="guideTitle" placeholder="Nombre de la guía o video"></div><div class="f s4" style="display:flex;align-items:end"><button class="btn" style="width:100%;height:38px" onclick="saveGuide()">Guardar</button></div><div class="f s12"><label>Notas (opcional)</label><input id="guideNotes" placeholder="Concepto clave o para qué sirve esta guía"></div></div><div id="guideUrlPreview" class="guide-url-preview"></div><div style="margin-top:16px;padding-top:14px;border-top:1px solid var(--line)" id="guidesContent"></div></div>`
-        renderGuides()
+        $('tab-tips').innerHTML = accountLocked
+          ? renderSectionLock('Tips')
+          : renderTips()
+        $('tab-recursos').innerHTML = accountLocked
+          ? renderSectionLock('Recursos')
+          : renderResourcesTab()
+        $('tab-guias').innerHTML = accountLocked
+          ? renderSectionLock('Guías')
+          : `<div class="card"><div class="title"><h2>Guías</h2><span>Videos y recursos por categoría</span></div><div class="form" style="margin-bottom:0"><div class="f s8"><label>URL del video (YouTube u otro)</label><input id="guideUrl" type="url" placeholder="https://youtube.com/watch?v=..." oninput="onGuideUrlInput()"></div><div class="f s4"><label>Categoría</label><select id="guideCat">${GUIDE_CATEGORIES.map((c) => `<option value="${c.key}">${c.label}</option>`).join('')}</select></div><div class="f s8"><label>Título</label><input id="guideTitle" placeholder="Nombre de la guía o video"></div><div class="f s4" style="display:flex;align-items:end"><button class="btn" style="width:100%;height:38px" onclick="saveGuide()">Guardar</button></div><div class="f s12"><label>Notas (opcional)</label><input id="guideNotes" placeholder="Concepto clave o para qué sirve esta guía"></div></div><div id="guideUrlPreview" class="guide-url-preview"></div><div style="margin-top:16px;padding-top:14px;border-top:1px solid var(--line)" id="guidesContent"></div></div>`
+        renderTodayFocusBlock()
+        if (!accountLocked) {
+          renderGuides()
+          renderForma()
+        }
       }
       function saveProfile() {
         const gameName = $('pGameName').value.trim()
@@ -3454,6 +4787,9 @@
           wins = games.filter((g) => g.result === 'win').length,
           flows = games.filter((g) => g.flow === true).length,
           csAvg = avg(games.map((g) => g.csMin).filter(Boolean))
+        const { current: currentDayStreak } = getRegisteredDayStats(games)
+        const mostPlayed = getMostPlayedChampion(games)
+        const lossStreakCount = getLossStreakCount(games)
         $('kpiGames').textContent = games.length || '--'
         $('kpiWins').textContent = games.length ? wins : '--'
         $('kpiLosses').textContent = games.length ? games.length - wins : '--'
@@ -3490,6 +4826,21 @@
             l20El.innerHTML = `${last20WR}%<span class="trend-pill ${trendCls}">${trendArrow} ${Math.abs(diff)}%</span>`
           } else {
             l20El.textContent = '--'
+          }
+        }
+        const tiltEl = $('tiltBanner')
+        if (tiltEl) {
+          const dismissedAt = Number(data.ui?.dismissedTiltLossCount) || 0
+          const dismissedAnchorId = String(data.ui?.dismissedTiltAnchorId || '')
+          const currentAnchorId = String(games?.[0]?.id || '')
+          const isDismissedCurrentRun =
+            dismissedAnchorId &&
+            dismissedAnchorId === currentAnchorId &&
+            lossStreakCount <= dismissedAt
+          if (lossStreakCount >= 2 && !isDismissedCurrentRun) {
+            tiltEl.innerHTML = `<div class="tilt-banner"><div><strong>🔴 Llevas ${lossStreakCount} derrotas seguidas</strong><span>Considera tomar un descanso antes de la próxima partida.</span></div><button class="tilt-close" type="button" onclick="dismissTiltBanner(${lossStreakCount})">✕</button></div>`
+          } else {
+            tiltEl.innerHTML = ''
           }
         }
         // Streak banner
@@ -3546,7 +4897,18 @@
             chartSec.classList.add('hidden')
           }
         }
-        $('todayFocus').textContent = ''
+        if ($('todayFocus')) $('todayFocus').textContent = ''
+        const secondaryEl = $('dashboardSecondary')
+        if (secondaryEl) {
+          const streakCopy = currentDayStreak
+            ? `${currentDayStreak} día${currentDayStreak !== 1 ? 's' : ''} seguidos registrando partidas.`
+            : 'Registra una partida hoy para empezar tu racha.'
+          secondaryEl.innerHTML = `<div class="streak-mini-card"><strong>Racha de registro</strong><div class="streak-mini-main">${currentDayStreak ? `${currentDayStreak} 🔥` : '0'}</div><div class="streak-mini-copy">${streakCopy}</div></div>${
+            mostPlayed
+              ? `<div class="most-played-card"><strong>Campeón más jugado</strong><div class="most-played-main"><img src="${champImg(mostPlayed.champ)}" alt="${escapeHtml(mostPlayed.champ)}"><div><h4>${escapeHtml(mostPlayed.champ)}</h4><span>${mostPlayed.games} partida${mostPlayed.games !== 1 ? 's' : ''}</span><span>${pct(mostPlayed.wins, mostPlayed.games)}% WR</span></div></div></div>`
+              : ''
+          }`
+        }
         // Goal progress
         const goalEl = $('goalContent')
         if (goalEl) {
@@ -3598,6 +4960,96 @@
           }
         }
         updateNavVisibility()
+      }
+      function renderForma() {
+        const box = $('formaContent')
+        if (!box) return
+        if (!hasActiveProfile()) {
+          box.innerHTML = renderSectionLock('Forma')
+          return
+        }
+        const games = myGames()
+        if (!games.length) {
+          box.innerHTML = `<div class="card"><div class="forma-head"><h2>Forma</h2><p>Tu rendimiento reciente</p></div><div class="small" style="padding:16px 0">Registra tu primera partida para ver tu forma.</div></div>`
+          return
+        }
+        const gamesByDay = games.reduce((acc, game) => {
+          const day = game.date || ''
+          if (!day) return acc
+          acc[day] ??= []
+          acc[day].push(game)
+          return acc
+        }, {})
+        const days = Array.from({ length: 30 }, (_, index) => {
+          const date = new Date(`${todayIso()}T12:00:00`)
+          date.setDate(date.getDate() - index)
+          return date.toISOString().slice(0, 10)
+        })
+        const orderedGames = [...games].sort((a, b) =>
+          b.date !== a.date ? b.date.localeCompare(a.date) : (b.id || 0) - (a.id || 0)
+        )
+        if (!formaSelectedGameId && orderedGames[0]) {
+          formaSelectedGameId = String(orderedGames[0].id)
+        }
+        const selectedGame =
+          orderedGames.find((game) => String(game.id) === String(formaSelectedGameId)) ||
+          orderedGames[0]
+        if (selectedGame) formaSelectedGameId = String(selectedGame.id)
+        const { current, best } = getRegisteredDayStats(games)
+        const last7Start = days[6]
+        const prevWindowEnd = days[6]
+        const prevWindowStart = days[13] || days[days.length - 1]
+        const last7 = orderedGames.filter((game) => game.date >= last7Start)
+        const prev7 = orderedGames.filter(
+          (game) => game.date < prevWindowEnd && game.date >= prevWindowStart
+        )
+        const last7Wr = last7.length
+          ? pct(last7.filter((game) => game.result === 'win').length, last7.length)
+          : 0
+        const prev7Wr = prev7.length
+          ? pct(prev7.filter((game) => game.result === 'win').length, prev7.length)
+          : 0
+        const trendDiff = last7Wr - prev7Wr
+        const trendLabel =
+          trendDiff > 0
+            ? `↑ +${trendDiff}%`
+            : trendDiff < 0
+            ? `↓ ${trendDiff}%`
+            : '→ Estable'
+        const trendClass =
+          trendDiff > 0 ? 'forma-trend-up' : trendDiff < 0 ? 'forma-trend-down' : 'forma-trend-flat'
+        box.innerHTML = `<div class="card forma-shell">
+          <div class="forma-head"><h2>Forma</h2><p>Tu rendimiento reciente</p></div>
+          <div class="forma-grid-wrap"><div class="forma-grid">${days
+            .map((day) => {
+              const dayGames = [...(gamesByDay[day] || [])].sort((a, b) => (b.id || 0) - (a.id || 0))
+              const cells = dayGames.length
+                ? dayGames
+                    .map(
+                      (game) =>
+                        `<button type="button" class="forma-cell ${game.result} ${String(game.id) === String(formaSelectedGameId) ? 'active' : ''}" onclick="selectFormaGame('${game.id}')"></button>`
+                    )
+                    .join('')
+                : '<div class="forma-cell empty"></div>'
+              return `<div class="forma-day"><div class="forma-date">${formatFormaDate(day)}</div><div class="forma-stack">${cells}</div></div>`
+            })
+            .join('')}</div></div>
+          ${
+            selectedGame
+              ? `<div class="card"><div class="forma-detail"><img src="${champImg(selectedGame.champ)}" alt="${escapeHtml(selectedGame.champ)}"><div><h4>${escapeHtml(selectedGame.champ)}</h4><p>${selectedGame.result === 'win' ? 'Victoria' : 'Derrota'} · ${selectedGame.kills}/${selectedGame.deaths}/${selectedGame.assists} · ${selectedGame.result === 'win' ? '+' : '-'}${Math.abs(Number(selectedGame.lp) || 0)} LP · ${ROLE_LABEL[selectedGame.role] || selectedGame.role}</p></div></div></div>`
+              : ''
+          }
+          <div class="forma-metrics">
+            <div class="forma-metric"><strong>Racha actual</strong><span>${current ? `${current} 🔥` : '0'}</span></div>
+            <div class="forma-metric"><strong>Mejor racha</strong><span>${best ? `${best} 🔥` : '0'}</span></div>
+            <div class="forma-metric"><strong>WR últimos 7 días</strong><span>${last7.length ? `${last7Wr}%` : '0%'}</span></div>
+            <div class="forma-metric"><strong>Tendencia</strong><span class="${trendClass}">${trendLabel}</span></div>
+          </div>
+        </div>`
+      }
+      function selectFormaGame(id) {
+        formaSelectedGameId = String(id)
+        renderForma()
       }
       function renderAccounts() {
         if (!$('accountsBox')) return
@@ -4499,6 +5951,7 @@
         const wins = games.filter((g) => g.result === 'win').length
         const losses = games.length - wins
         const wr = Math.round((wins / games.length) * 100)
+        const hasEnoughSplitData = games.length >= 3
 
         // LP progression data (last 40 games, chronological)
         const lpGames = [...games].slice(-40)
@@ -4561,16 +6014,24 @@
             </div>
             <div class="card">
               <div class="title"><h2>WR por rol</h2></div>
-              <div style="position:relative;height:200px"><canvas id="chartRole"></canvas></div>
+              ${
+                hasEnoughSplitData
+                  ? `<div style="position:relative;height:200px"><canvas id="chartRole"></canvas></div>`
+                  : `<div class="small" style="text-align:center;padding:74px 12px;color:var(--muted)">Necesitas al menos 3 partidas para ver esta estadística</div>`
+              }
             </div>
             ${champLabels.length ? `<div class="card">
               <div class="title"><h2>WR por campeón</h2><span>mín. 2 partidas</span></div>
               <div style="position:relative;height:${Math.max(180, champLabels.length * 36)}px"><canvas id="chartChamp"></canvas></div>
             </div>` : ''}
-            ${moods.some((m) => games.some((g) => g.moodStart === m)) ? `<div class="card">
+            <div class="card">
               <div class="title"><h2>WR por mood inicial</h2></div>
-              <div style="position:relative;height:200px"><canvas id="chartMood"></canvas></div>
-            </div>` : ''}
+              ${
+                hasEnoughSplitData
+                  ? `<div style="position:relative;height:200px"><canvas id="chartMood"></canvas></div>`
+                  : `<div class="small" style="text-align:center;padding:74px 12px;color:var(--muted)">Necesitas al menos 3 partidas para ver esta estadística</div>`
+              }
+            </div>
             ${errLabels.length ? `<div class="card" style="grid-column:1/-1">
               <div class="title"><h2>Errores más frecuentes</h2></div>
               <div style="position:relative;height:${Math.max(160, errLabels.length * 38)}px"><canvas id="chartErr"></canvas></div>
@@ -4652,7 +6113,7 @@
         }
 
         // WR by role bar
-        if ($('chartRole')) {
+        if (hasEnoughSplitData && $('chartRole')) {
           const filteredRoles = roles.filter((_, i) => roleWRs[i] !== null)
           const filteredLabels = filteredRoles.map((r) => ROLE_LABEL[r] || r)
           const filteredWRs = filteredRoles.map((r) => {
@@ -4710,7 +6171,7 @@
         }
 
         // WR by mood
-        if ($('chartMood')) {
+        if (hasEnoughSplitData && $('chartMood')) {
           const filteredMoods = moods.filter((m) => games.some((g) => g.moodStart === m))
           const filteredMoodWRs = filteredMoods.map((m) => {
             const mg = games.filter((g) => g.moodStart === m)
@@ -4787,8 +6248,10 @@
         const headers = visibleIndices.map((index) => rawHeaders[index])
         const rows = bodyRows.map((row) => visibleIndices.map((index) => row?.[index] ?? ''))
         const headerKeys = headers.map(normalize)
+        const champIndex = headerKeys.findIndex((k) => k.includes('champ') || k.includes('campeon') || k.includes('nombre'))
         const laneIndex = headerKeys.findIndex((k) => k.includes('linea') || k.includes('lane') || k.includes('rol'))
         const diffIndex = headerKeys.findIndex((k) => k.includes('dific') || k.includes('difficulty') || k.includes('nivel'))
+        const noteIndex = headerKeys.findIndex((k) => k.includes('note') || k.includes('nota'))
         const query = data.matchupFilters?.query || ''
         const laneFilter = data.matchupFilters?.lane || 'all'
         const diffFilter = data.matchupFilters?.diff || 'all'
@@ -4811,10 +6274,13 @@
           if (key.includes('dific') || key.includes('difficulty') || key.includes('nivel')) {
             const n = Number.parseFloat(text) || 1
             const lvl = Math.max(1, Math.min(10, Math.ceil(n)))
-            return `<span class="matchup-pill diff-${lvl}">${text}</span>`
+            return `<div class="matchup-center"><span class="matchup-pill diff-${lvl}">${text}</span></div>`
           }
           if (key.includes('linea') || key.includes('lane') || key.includes('rol')) {
-            return `<span class="matchup-pill lane-${text.toLowerCase()}">${text}</span>`
+            return `<div class="matchup-center"><span class="matchup-pill lane-${text.toLowerCase()}">${text}</span></div>`
+          }
+          if (key.includes('note') || key.includes('nota')) {
+            return `<div class="matchup-notes">${text}</div>`
           }
           return `<div style="max-width:340px;line-height:1.7;white-space:pre-wrap;font-size:13px">${text}</div>`
         }
@@ -4833,11 +6299,24 @@
               ${diffOptions.map((d) => `<option value="${d}" ${diffFilter === d ? 'selected' : ''}>${d}</option>`).join('')}
             </select>`
           : ''
+        const useMatchupGrid =
+          champIndex >= 0 && diffIndex >= 0 && noteIndex >= 0
         const tableHtml = filteredRows.length === 0
           ? '<div class="small" style="padding:24px;text-align:center;color:var(--muted)">No hay resultados para esa búsqueda.</div>'
-          : `<div class="table-wrap"><table class="sheet-table">
-              <thead><tr>${headers.map((h) => `<th>${h ?? '—'}</th>`).join('')}</tr></thead>
-              <tbody>${filteredRows.map((row) => `<tr>${headers.map((_, i) => `<td>${renderCell(headerKeys[i], row?.[i])}</td>`).join('')}</tr>`).join('')}</tbody>
+          : `<div class="table-wrap"><table class="sheet-table${useMatchupGrid ? ' matchup-grid-table' : ''}">
+              <thead><tr>${(useMatchupGrid ? ['Campeón', 'Dificultad', 'Notes'] : headers).map((h) => `<th>${h ?? '—'}</th>`).join('')}</tr></thead>
+              <tbody>${
+                useMatchupGrid
+                  ? filteredRows
+                      .map(
+                        (row) =>
+                          `<tr><td>${renderCell(headerKeys[champIndex], row?.[champIndex])}</td><td>${renderCell(headerKeys[diffIndex], row?.[diffIndex])}</td><td>${renderCell(headerKeys[noteIndex], row?.[noteIndex])}</td></tr>`
+                      )
+                      .join('')
+                  : filteredRows
+                      .map((row) => `<tr>${headers.map((_, i) => `<td>${renderCell(headerKeys[i], row?.[i])}</td>`).join('')}</tr>`)
+                      .join('')
+              }</tbody>
             </table></div>`
         box.innerHTML = sheetTabs + `<div class="matchup-filters">
           <input class="select-pill" id="matchupSearch" placeholder="🔍 Buscar en la tabla..." value="${query.replace(/"/g, '&quot;')}" oninput="setMatchupSearch(this.value)" style="flex:1;min-width:160px">
@@ -4958,14 +6437,13 @@
         toast('Campos autollenados')
       }
       function switchTab(tab) {
-        if ((tab === 'partida' || tab === 'historial') && !hasActiveProfile())
-          tab = 'importar'
         ;[
           'inicio',
           'partida',
           'importar',
           'historial',
           'stats',
+          'forma',
           'matchups',
           'campeones',
           'tips',
@@ -4986,6 +6464,7 @@
         if (tab === 'historial') renderHistory()
         if (tab === 'importar') renderImported()
         if (tab === 'stats') renderStats()
+        if (tab === 'forma') renderForma()
         if (tab === 'matchups') renderMatchups()
         if (tab === 'campeones') renderChampionExplorer()
         if (tab === 'guias') renderGuides()
@@ -5018,13 +6497,6 @@
           }
         }
         if (logoutBtn) logoutBtn.classList.toggle('show', hasActiveProfile())
-        document.querySelectorAll('.mobile-nav-btn').forEach((btn) => {
-          const blocked =
-            !hasActiveProfile() &&
-            (btn.dataset.mobileTab === 'partida' ||
-              btn.dataset.mobileTab === 'historial')
-          btn.style.display = blocked ? 'none' : 'flex'
-        })
       }
       function init() {
         load()
@@ -5036,6 +6508,7 @@
         renderHistory()
         renderProgress()
         renderStats()
+        renderForma()
         renderMatchups()
         renderAccounts()
         updateNavVisibility()
