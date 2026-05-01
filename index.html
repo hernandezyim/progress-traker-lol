@@ -6265,11 +6265,11 @@
         })
         const laneOptions = [...new Set(rows.map((r) => String(laneIndex >= 0 ? (r?.[laneIndex] ?? '') : '').trim()).filter(Boolean))]
         const diffOptions = [...new Set(rows.map((r) => String(diffIndex >= 0 ? (r?.[diffIndex] ?? '') : '').trim()).filter(Boolean))].sort()
-        const renderCell = (key, value) => {
+          const renderCell = (key, value) => {
           const text = String(value ?? '').trim()
           if (!text) return '<span style="color:rgba(255,255,255,.2)">—</span>'
           if (key.includes('champ') || key.includes('campeon') || key.includes('nombre')) {
-            return `<div class="matchup-champ" title="${text}"><img src="${champImg(text)}" alt="${text}" onerror="this.src='https://res.cloudinary.com/dfr9zlu8d/image/upload/v1777329733/supro-logo_rvavuy.jpg'"><div style="font-size:11px;color:var(--muted);margin-top:4px;text-align:center;max-width:72px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${text}</div></div>`
+            return `<div class="matchup-champ" title="${text}"><img src="${champImg(text)}" alt="${text}" onerror="this.src='https://res.cloudinary.com/dfr9zlu8d/image/upload/v1777329733/supro-logo_rvavuy.jpg'"></div>`
           }
           if (key.includes('dific') || key.includes('difficulty') || key.includes('nivel')) {
             const n = Number.parseFloat(text) || 1
